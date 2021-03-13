@@ -1,0 +1,12 @@
+entity Lamborghini of type vehicle
+
+    property speed = 150
+    property protection = 120
+
+end
+
+entity MG11 of type weapon 
+
+    
+
+end

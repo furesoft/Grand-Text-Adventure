@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC000D1A-74AD-4022-A8CC-4C11A873B03A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		sampleEntity.efl = sampleEntity.efl
 	EndProjectSection
 EndProject
 Global
