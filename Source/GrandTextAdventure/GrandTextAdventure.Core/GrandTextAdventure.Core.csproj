@@ -6,11 +6,6 @@
 
   <ItemGroup>
     <Folder Include="CommandProcessing\" />
-    <Folder Include="Entities\NPCs\" />
-    <Folder Include="Entities\Shops\" />
-    <Folder Include="Entities\Vehicles\" />
-    <Folder Include="Entities\Weapons\" />
-    <Folder Include="Parsing\" />
   </ItemGroup>
 
 </Project>
