@@ -7,7 +7,7 @@ namespace UnitTests
     [TestClass]
     public class ParserTests
     {
-        private DefinitionParser _parser = new();
+        private EflDefinitionParser _parser = new();
         private string modelSrc = "entitymodel \"hello\" property key = 12 property awsner = 42 end";
 
         [TestMethod]

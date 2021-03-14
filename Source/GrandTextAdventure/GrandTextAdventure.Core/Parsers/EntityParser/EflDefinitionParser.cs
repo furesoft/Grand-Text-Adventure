@@ -6,7 +6,7 @@ using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parsers.EntityParser
 {
-    public partial class DefinitionParser : BaseParser<SyntaxNode>
+    public partial class EflDefinitionParser : BaseParser<SyntaxNode>
     {
         public SyntaxNode ParseBlock()
         {
