@@ -6,19 +6,19 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
     {
         protected override void InitTokenizer()
         {
-            _tokenizer.AddDefinition(SyntaxKind.EndToken, "end", 1);
-            _tokenizer.AddDefinition(SyntaxKind.PropertyToken, "property", 1);
-            _tokenizer.AddDefinition(SyntaxKind.EntityModelToken, "entitymodel", 1);
-            _tokenizer.AddDefinition(SyntaxKind.EntityToken, "entity", 1);
-            _tokenizer.AddDefinition(SyntaxKind.IsToken, "is", 1);
-            _tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "appylmodel", 1);
+            Tokenizer.AddDefinition(SyntaxKind.EndToken, "end", 1);
+            Tokenizer.AddDefinition(SyntaxKind.PropertyToken, "property", 1);
+            Tokenizer.AddDefinition(SyntaxKind.EntityModelToken, "entitymodel", 1);
+            Tokenizer.AddDefinition(SyntaxKind.EntityToken, "entity", 1);
+            Tokenizer.AddDefinition(SyntaxKind.IsToken, "is", 1);
+            Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "appylmodel", 1);
 
-            _tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 1);
-            _tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, @"'.*?'", 1);
-            _tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
-            _tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 1);
+            Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 1);
+            Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, @"'.*?'", 1);
+            Tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
+            Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 1);
 
-            _tokenizer.AddDefinition(SyntaxKind.EqualsToken, "=", 1);
+            Tokenizer.AddDefinition(SyntaxKind.EqualsToken, "=", 1);
         }
 
         protected override SyntaxNode InternalParse()

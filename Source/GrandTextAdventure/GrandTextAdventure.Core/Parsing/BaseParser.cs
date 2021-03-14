@@ -7,7 +7,7 @@ namespace GrandTextAdventure.Core.Parsing
 {
     public abstract class BaseParser<ReturnType>
     {
-        protected readonly PrecedenceBasedRegexTokenizer _tokenizer = new();
+        protected readonly PrecedenceBasedRegexTokenizer Tokenizer = new();
         protected int _position;
         protected ImmutableArray<Token> _tokens;
         public Token Current => Peek(0);
@@ -34,7 +34,7 @@ namespace GrandTextAdventure.Core.Parsing
         {
             InitTokenizer();
 
-            _tokens = _tokenizer.Tokenize(src).ToImmutableArray();
+            _tokens = Tokenizer.Tokenize(src).ToImmutableArray();
 
             return InternalParse();
         }
