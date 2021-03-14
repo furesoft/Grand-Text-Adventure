@@ -43,7 +43,7 @@ namespace GrandTextAdventure.Core
 
                 foreach (var entityConfiguration in files)
                 {
-                    AddDefinition(File.ReadAllText(entityConfiguration));
+                    AddDefinitions(File.ReadAllText(entityConfiguration));
                 }
             }
         }
@@ -58,24 +58,20 @@ namespace GrandTextAdventure.Core
 
                 var strReader = new StreamReader(ressourceStream);
 
-                AddDefinition(strReader.ReadToEnd());
+                AddDefinitions(strReader.ReadToEnd());
 
                 strReader.Close();
             }
         }
 
-        private static void AddDefinition(string entityConfiguration)
+        private static void AddDefinitions(string entityConfiguration)
         {
-            var entityParser = new EntityDefinitionParser();
+            var resultObjects = GameObjectDefinitionLoader.LoadDefinitions(entityConfiguration);
 
-            var entityDefinitionAST = entityParser.Parse(entityConfiguration);
-            var entityDefinitionVisitor = new EntityDefinitionVisitor();
-
-            entityDefinitionAST.Accept(entityDefinitionVisitor);
-
-            var resultObject = entityDefinitionVisitor.Result;
-
-            s_objects.Add(resultObject.Name, resultObject);
+            foreach (var obj in resultObjects)
+            {
+                s_objects.Add(obj.Name, obj);
+            }
         }
     }
 }
