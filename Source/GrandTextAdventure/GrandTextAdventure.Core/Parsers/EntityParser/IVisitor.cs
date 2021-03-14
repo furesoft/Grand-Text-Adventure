@@ -7,5 +7,9 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
         void Visit(BlockNode block);
 
         void Visit(EntityDefinitionNode definitionNode);
+
+        void Visit(EntityModelDefinitionNode definitionNode);
+
+        void Visit(PropertyDefinitionNode definitionNode);
     }
 }
