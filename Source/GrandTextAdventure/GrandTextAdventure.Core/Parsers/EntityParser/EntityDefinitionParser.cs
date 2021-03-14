@@ -62,7 +62,9 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
 
             var properties = ParseProperties();
 
-            return new EntityModelDefinitionNode(keywordToken, nameToken, new BlockNode(properties));
+            var endToken = MatchToken(SyntaxKind.EndToken);
+
+            return new EntityModelDefinitionNode(keywordToken, nameToken, new BlockNode(properties), endToken);
         }
 
         private SyntaxNode ParseMember()
@@ -81,8 +83,6 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
                 Diagnostics.ReportUnexpectedDeclaration(Current.Span, Current);
                 return null;
             }
-
-            MatchToken(SyntaxKind.EndToken);
 
             return node;
         }

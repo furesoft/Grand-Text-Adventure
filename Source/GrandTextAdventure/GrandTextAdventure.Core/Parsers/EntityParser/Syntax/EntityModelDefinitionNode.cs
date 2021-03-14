@@ -1,11 +1,11 @@
-﻿using GrandTextAdventure.Core.Parsing;
-using GrandTextAdventure.Core.Parsing.Tokenizer;
+﻿using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parsers.EntityParser.Syntax
 {
-    public class EntityModelDefinitionNode : SyntaxNode
+    public class EntityModelDefinitionNode : DeclarationNode
     {
-        public EntityModelDefinitionNode(Token keywordToken, Token nameToken, BlockNode properties)
+        public EntityModelDefinitionNode(Token keywordToken, Token nameToken, BlockNode properties, Token endToken)
+            : base(endToken)
         {
             KeywordToken = keywordToken;
             NameToken = nameToken;
