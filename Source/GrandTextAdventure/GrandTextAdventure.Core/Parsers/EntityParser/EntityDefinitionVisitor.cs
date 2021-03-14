@@ -31,5 +31,10 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
         {
             throw new NotImplementedException();
         }
+
+        public void Visit(PropertyDefinitionNode definitionNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
