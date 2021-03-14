@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using GrandTextAdventure.Core.Parsers.EntityParser;
 
 namespace GrandTextAdventure.Core
@@ -25,6 +27,14 @@ namespace GrandTextAdventure.Core
             }
         }
 
+        public static IEnumerable<T> GetDefinitionsOfType<T>()
+                    where T : GameObject
+        {
+            return from obj in s_objects
+                   where obj is T
+                   select (T)obj.Value;
+        }
+
         public static void Load(string directory)
         {
             if (Directory.Exists(directory))
@@ -33,18 +43,39 @@ namespace GrandTextAdventure.Core
 
                 foreach (var entityConfiguration in files)
                 {
-                    var entityParser = new EntityDefinitionParser();
-
-                    var entityDefinitionAST = entityParser.Parse(File.ReadAllText(entityConfiguration));
-                    var entityDefinitionVisitor = new EntityDefinitionVisitor();
-
-                    entityDefinitionAST.Accept(entityDefinitionVisitor);
-
-                    var resultObject = entityDefinitionVisitor.Result;
-
-                    s_objects.Add(resultObject.Name, resultObject);
+                    AddDefinition(File.ReadAllText(entityConfiguration));
                 }
             }
+        }
+
+        public static void Load(Assembly assembly)
+        {
+            var resourceNames = assembly.GetManifestResourceNames().Where(_ => _.EndsWith(".efl"));
+
+            foreach (var ressource in resourceNames)
+            {
+                var ressourceStream = assembly.GetManifestResourceStream(ressource);
+
+                var strReader = new StreamReader(ressourceStream);
+
+                AddDefinition(strReader.ReadToEnd());
+
+                strReader.Close();
+            }
+        }
+
+        private static void AddDefinition(string entityConfiguration)
+        {
+            var entityParser = new EntityDefinitionParser();
+
+            var entityDefinitionAST = entityParser.Parse(entityConfiguration);
+            var entityDefinitionVisitor = new EntityDefinitionVisitor();
+
+            entityDefinitionAST.Accept(entityDefinitionVisitor);
+
+            var resultObject = entityDefinitionVisitor.Result;
+
+            s_objects.Add(resultObject.Name, resultObject);
         }
     }
 }
