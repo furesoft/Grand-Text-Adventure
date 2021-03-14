@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using GrandTextAdventure.Core.Parsers.EntityParser;
 using GrandTextAdventure.Core.Parsing.Text;
+using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parsing.Diagnostics
 {
     public sealed class DiagnosticBag : IEnumerable<Diagnostic>
     {
-        private readonly List<Diagnostic> _diagnostics = new List<Diagnostic>();
+        private readonly List<Diagnostic> _diagnostics = new();
 
         public void AddRange(DiagnosticBag diagnostics)
         {
@@ -20,6 +21,12 @@ namespace GrandTextAdventure.Core.Parsing.Diagnostics
         {
             var message = $"Bad character input: '{character}'.";
             Report(location, message);
+        }
+
+        public void ReportUnexpectedDeclaration(TextSpan span, Token current)
+        {
+            var message = $"Unexpected Declaration: '{current.Kind}'";
+            Report(span, message);
         }
 
         public void ReportUnexpectedToken(TextSpan span, SyntaxKind actualKind, SyntaxKind expectedKind)
