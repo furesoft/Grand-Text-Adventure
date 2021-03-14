@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GrandTextAdventure.Core.Parsers.EntityParser;
+using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parsing.Text;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 

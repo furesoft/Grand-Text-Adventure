@@ -1,6 +1,6 @@
-﻿using GrandTextAdventure.Core.Parsers.EntityParser.Syntax;
+﻿using GrandTextAdventure.Core.Parser.Syntax;
 
-namespace GrandTextAdventure.Core.Parsers.EntityParser
+namespace GrandTextAdventure.Core.Parser
 {
     public interface IScriptVisitor
     {

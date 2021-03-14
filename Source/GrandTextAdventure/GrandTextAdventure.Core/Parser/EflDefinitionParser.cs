@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using GrandTextAdventure.Core.Parsers.EntityParser.Syntax;
+using GrandTextAdventure.Core.Parser.Syntax;
 using GrandTextAdventure.Core.Parsing;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 
-namespace GrandTextAdventure.Core.Parsers.EntityParser
+namespace GrandTextAdventure.Core.Parser
 {
     public partial class EflDefinitionParser : BaseParser<SyntaxNode>
     {

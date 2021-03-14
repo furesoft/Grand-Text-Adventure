@@ -1,20 +1,22 @@
 ﻿using GrandTextAdventure.Core.Parsing.Tokenizer;
 
-namespace GrandTextAdventure.Core.Parsers.EntityParser.Syntax
+namespace GrandTextAdventure.Core.Parser.Syntax
 {
-    public class EntityModelDefinitionNode : DeclarationNode
+    public class EntityDefinitionNode : DeclarationNode
     {
-        public EntityModelDefinitionNode(Token keywordToken, Token nameToken, BlockNode properties, Token endToken)
+        public EntityDefinitionNode(Token keywordToken, Token nameToken, Token typeToken, BlockNode properties, Token endToken)
             : base(endToken)
         {
             KeywordToken = keywordToken;
             NameToken = nameToken;
+            TypeToken = typeToken;
             Properties = properties;
         }
 
         public Token KeywordToken { get; }
         public Token NameToken { get; }
         public BlockNode Properties { get; }
+        public Token TypeToken { get; }
 
         public override void Accept(IScriptVisitor visitor)
         {

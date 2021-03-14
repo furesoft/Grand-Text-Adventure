@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using GrandTextAdventure.Core.Parsers.EntityParser;
-using GrandTextAdventure.Core.Parsers.EntityParser.Syntax;
+using GrandTextAdventure.Core.Parser;
+using GrandTextAdventure.Core.Parser.Syntax;
 using GrandTextAdventure.Core.Parsing.Text;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 

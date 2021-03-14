@@ -1,4 +1,4 @@
-using GrandTextAdventure.Core.Parsers.EntityParser;
+using GrandTextAdventure.Core.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -15,8 +15,11 @@ namespace UnitTests
         {
             var ast = _parser.Parse(modelSrc);
 
+            EntityDefinitionVisitor visitor = new EntityDefinitionVisitor();
+            ast.Accept(visitor);
+
             Assert.IsNotNull(ast);
-            Assert.IsTrue(_parser.Diagnostics.Count() == 0);
+            Assert.IsTrue(_parser.Diagnostics.Any());
         }
     }
 }

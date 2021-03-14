@@ -1,8 +1,7 @@
-﻿using System;
-using GrandTextAdventure.Core.Parsing;
+﻿using GrandTextAdventure.Core.Parsing;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 
-namespace GrandTextAdventure.Core.Parsers.EntityParser.Syntax
+namespace GrandTextAdventure.Core.Parser.Syntax
 {
     public class PropertyDefinitionNode : SyntaxNode
     {

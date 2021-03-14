@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GrandTextAdventure.Core.Parsing;
 
-namespace GrandTextAdventure.Core.Parsers.EntityParser.Syntax
+namespace GrandTextAdventure.Core.Parser.Syntax
 {
     public class BlockNode : SyntaxNode, IEnumerable<SyntaxNode>
     {

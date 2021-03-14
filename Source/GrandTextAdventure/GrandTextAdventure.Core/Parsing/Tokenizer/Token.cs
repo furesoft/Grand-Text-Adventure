@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using GrandTextAdventure.Core.Parsers.EntityParser;
+using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parsing.Text;
 
 namespace GrandTextAdventure.Core.Parsing.Tokenizer

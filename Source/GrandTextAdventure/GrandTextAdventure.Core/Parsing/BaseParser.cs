@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using GrandTextAdventure.Core.Parsers.EntityParser;
+using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parsing.Diagnostics;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 

@@ -1,4 +1,4 @@
-﻿namespace GrandTextAdventure.Core.Parsers.EntityParser
+﻿namespace GrandTextAdventure.Core.Parser
 {
     /// <summary>
     ///  Represent the TokenType
