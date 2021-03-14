@@ -7,33 +7,25 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
 {
     public sealed class Token
     {
-        private readonly Type _returnType;
-
         public Token(SyntaxKind kind, string text, int start, int end, Type returnType)
         {
             Kind = kind;
             Text = text;
             Start = start;
             End = end;
-            _returnType = returnType;
+            ReturnType = returnType;
             Length = end - start;
-        }
-
-        public Token(SyntaxKind kind, string text)
-        {
-            Kind = kind;
-            Text = text;
-            Length = text.Length;
         }
 
         public static Token EndOfFile
         {
-            get { return new Token(SyntaxKind.EndOfFile, ""); }
+            get { return new Token(SyntaxKind.EndOfFile, "", 0, 0, null); }
         }
 
         public int End { get; }
         public SyntaxKind Kind { get; private set; }
         public int Length { get; set; }
+        public Type ReturnType { get; }
 
         public TextSpan Span
         {
@@ -50,21 +42,15 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
         {
             get
             {
-                if (_returnType != null)
+                if (ReturnType != null)
                 {
-                    var typeConverter = TypeDescriptor.GetConverter(_returnType);
+                    var typeConverter = TypeDescriptor.GetConverter(ReturnType);
 
                     return typeConverter.ConvertFromString(Text);
                 }
 
                 return Text;
             }
-        }
-
-        public static bool IsTrivia(SyntaxKind kind)
-        {
-            return kind == SyntaxKind.Whitespace
-                || kind == SyntaxKind.Comment;
         }
 
         public override string ToString()

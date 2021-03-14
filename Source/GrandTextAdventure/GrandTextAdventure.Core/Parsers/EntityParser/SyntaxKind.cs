@@ -5,35 +5,15 @@
     /// </summary>
     public enum SyntaxKind
     {
-        /// <summary>
-        ///  EndOfFile Token
-        /// </summary>
-        EOF,
+        Comment,
 
-        /// <summary>
-        ///  Identifier Token
-        /// </summary>
-        Keyword,
-
-        /// <summary>
-        ///  String Token
-        /// </summary>
-        String,
-
-        /// <summary>
-        ///  Number Token
-        /// </summary>
         Number,
 
         BadToken,
-        Whitespace,
+
         EndToken,
-        Boolean,
-        Symbol,
-        OpenSquare,
-        CloseSquare,
+
         Comma,
-        Comment,
         EndOfFile,
         PropertyToken,
         EntityModelToken,

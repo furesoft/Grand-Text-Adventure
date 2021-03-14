@@ -39,7 +39,7 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
                 lastMatch = bestMatch;
             }
 
-            yield return new Token(SyntaxKind.EndOfFile, string.Empty);
+            yield return new Token(SyntaxKind.EndOfFile, string.Empty, 0, 0, null);
         }
 
         private List<TokenMatch> FindTokenMatches(string src)
