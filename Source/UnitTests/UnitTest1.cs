@@ -7,15 +7,15 @@ namespace UnitTests
     [TestClass]
     public class ParserTests
     {
-        private EflDefinitionParser _parser = new();
-        private string modelSrc = "entitymodel \"hello\" property key = 12 property awsner = 42 end";
+        private readonly EflDefinitionParser _parser = new();
+        private readonly string modelSrc = "entitymodel \"hello\" property key = 12 property awsner = 42 end";
 
         [TestMethod]
         public void ParseEntityModel_Should_Pass()
         {
             var ast = _parser.Parse(modelSrc);
 
-            EntityDefinitionVisitor visitor = new EntityDefinitionVisitor();
+            var visitor = new EntityDefinitionVisitor();
             ast.Accept(visitor);
 
             Assert.IsNotNull(ast);

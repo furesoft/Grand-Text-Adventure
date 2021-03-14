@@ -30,10 +30,11 @@ namespace GrandTextAdventure.Core.Parser
 
         public void Visit(EntityModelDefinitionNode modelDefinitionNode)
         {
-            var model = new EntityModel();
-
-            model.Name = modelDefinitionNode.NameToken.Text;
-            model.Properties = ConvertToDictionary(modelDefinitionNode.Properties);
+            var model = new EntityModel
+            {
+                Name = modelDefinitionNode.NameToken.Text,
+                Properties = ConvertToDictionary(modelDefinitionNode.Properties)
+            };
 
             GameObjectDefinitionLoader.AddModel(model);
         }
@@ -43,7 +44,7 @@ namespace GrandTextAdventure.Core.Parser
             throw new NotImplementedException();
         }
 
-        private Dictionary<string, object> ConvertToDictionary(BlockNode properties)
+        private static Dictionary<string, object> ConvertToDictionary(BlockNode properties)
         {
             var res = new Dictionary<string, object>();
 
