@@ -4,6 +4,7 @@ using System.Reflection;
 using GrandTextAdventure.Core.Parsers.EntityParser;
 using GrandTextAdventure.Core.Parsers.EntityParser.Syntax;
 using GrandTextAdventure.Core.Parsing.Text;
+using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parsing
 {
@@ -62,6 +63,12 @@ namespace GrandTextAdventure.Core.Parsing
                         if (child != null)
                             result.Add(child);
                     }
+                }
+                else if (typeof(Token).IsAssignableFrom(property.PropertyType))
+                {
+                    var child = (Token)property.GetValue(this);
+
+                    result.Add(new TokenNode(child));
                 }
             }
 

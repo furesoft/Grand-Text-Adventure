@@ -20,7 +20,7 @@ namespace GrandTextAdventure.Core.Parsing
 
             if (Current.Kind.CompareTo(kind) != 0) Diagnostics.ReportUnexpectedToken(Current.Span, Current.Kind, kind);
 
-            return new Token(kind, null, 0, 0, null);
+            return new Token(SyntaxKind.Invalid, null, 0, 0, null);
         }
 
         public Token NextToken()

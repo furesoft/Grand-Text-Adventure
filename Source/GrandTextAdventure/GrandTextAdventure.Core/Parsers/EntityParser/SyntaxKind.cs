@@ -25,5 +25,6 @@
         IdentifierToken,
         IsToken,
         ApplyModelToken,
+        Invalid,
     }
 }
