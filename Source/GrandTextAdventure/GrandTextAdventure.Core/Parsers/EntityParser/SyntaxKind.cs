@@ -35,5 +35,15 @@
         Comma,
         Comment,
         EndOfFile,
+        PropertyToken,
+        EntityModelToken,
+        IntLiteralToken,
+        StringLiteralToken,
+        CommentToken,
+        EntityToken,
+        EqualsToken,
+        IdentifierToken,
+        IsToken,
+        ApplyModelToken,
     }
 }
