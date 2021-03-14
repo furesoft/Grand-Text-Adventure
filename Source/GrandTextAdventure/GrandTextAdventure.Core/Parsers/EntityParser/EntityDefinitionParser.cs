@@ -60,9 +60,9 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
 
             nameToken = RemoveStringCharakter(nameToken);
 
-            var properties = new BlockNode(null);
+            var properties = ParseProperties();
 
-            return new EntityModelDefinitionNode(keywordToken, nameToken, properties);
+            return new EntityModelDefinitionNode(keywordToken, nameToken, new BlockNode(properties));
         }
 
         private SyntaxNode ParseMember()
@@ -120,6 +120,53 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
             }
 
             return members;
+        }
+
+        private IEnumerable<SyntaxNode> ParseProperties()
+        {
+            var properties = new List<SyntaxNode>();
+
+            while (Current.Kind != SyntaxKind.EndToken)
+            {
+                var startToken = Current;
+                var property = ParseProperty();
+
+                if (property is BlockNode bn)
+                {
+                    properties.AddRange(bn.Children);
+                }
+                else
+                {
+                    if (property != null)
+                    {
+                        properties.Add(property);
+                    }
+                }
+
+                // If ParseMember() did not consume any tokens,
+                // we need to skip the current token and continue
+                // in order to avoid an infinite loop.
+                //
+                // We don't need to report an error, because we'll
+                // already tried to parse an expression statement
+                // and reported one.
+                if (Current == startToken)
+                    NextToken();
+            }
+
+            return properties;
+        }
+
+        private SyntaxNode ParseProperty()
+        {
+            var keywordToken = MatchToken(SyntaxKind.PropertyToken);
+
+            var identifierToken = MatchToken(SyntaxKind.IdentifierToken);
+            var equalsToken = MatchToken(SyntaxKind.EqualsToken);
+
+            var valueToken = MatchToken(SyntaxKind.IntLiteralToken); //ToDo: Replace with ParseLiteral Method
+
+            return new PropertyDefinitionNode(keywordToken, identifierToken, equalsToken, valueToken);
         }
     }
 }

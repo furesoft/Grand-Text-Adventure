@@ -6,16 +6,18 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser.Syntax
 {
     public class PropertyDefinitionNode : SyntaxNode
     {
-        public PropertyDefinitionNode(Token keywordToken, Token nameToken, SyntaxNode value)
+        public PropertyDefinitionNode(Token keywordToken, Token nameToken, Token equalsToken, Token valueToken)
         {
             KeywordToken = keywordToken;
             NameToken = nameToken;
-            Value = value;
+            EqualsToken = equalsToken;
+            Value = valueToken;
         }
 
+        public Token EqualsToken { get; }
         public Token KeywordToken { get; }
         public Token NameToken { get; }
-        public SyntaxNode Value { get; }
+        public Token Value { get; }
 
         public override void Accept(IScriptVisitor visitor)
         {
