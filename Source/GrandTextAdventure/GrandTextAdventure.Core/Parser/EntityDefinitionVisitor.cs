@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GrandTextAdventure.Core.Parser.Syntax;
 
 namespace GrandTextAdventure.Core.Parser
@@ -29,12 +30,29 @@ namespace GrandTextAdventure.Core.Parser
 
         public void Visit(EntityModelDefinitionNode modelDefinitionNode)
         {
-            throw new NotImplementedException();
+            var model = new EntityModel();
+
+            model.Name = modelDefinitionNode.NameToken.Text;
+            model.Properties = ConvertToDictionary(modelDefinitionNode.Properties);
+
+            GameObjectDefinitionLoader.AddModel(model);
         }
 
         public void Visit(PropertyDefinitionNode definitionNode)
         {
             throw new NotImplementedException();
+        }
+
+        private Dictionary<string, object> ConvertToDictionary(BlockNode properties)
+        {
+            var res = new Dictionary<string, object>();
+
+            foreach (PropertyDefinitionNode item in properties)
+            {
+                res.Add(item.NameToken.Text, item.Value.Value);
+            }
+
+            return res;
         }
     }
 }
