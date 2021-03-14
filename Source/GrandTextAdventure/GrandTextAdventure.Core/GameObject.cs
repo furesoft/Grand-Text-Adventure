@@ -5,8 +5,14 @@ namespace GrandTextAdventure.Core
 {
     public class GameObject
     {
-        public virtual int ID { get; set; }
+        public int ID
+        {
+            get { return GetValue<int>("ID"); }
+            set { SetOrAddValue("ID", value); }
+        }
+
         public virtual string Name { get; set; }
+
         public Dictionary<string, object> Properties { get; set; } = new();
 
         public void Apply(GameObject parent)
@@ -14,6 +20,28 @@ namespace GrandTextAdventure.Core
             Name = parent.Name;
 
             Properties = parent.Properties.ToDictionary(entry => entry.Key, entry => entry.Value); // Clone Properties Dictionary
+        }
+
+        public T GetValue<T>(string name)
+        {
+            if (Properties.ContainsKey(name))
+            {
+                return (T)Properties[name];
+            }
+
+            return default;
+        }
+
+        public void SetOrAddValue(string name, object value)
+        {
+            if (Properties.ContainsKey(name))
+            {
+                Properties[name] = value;
+            }
+            else
+            {
+                Properties.Add(name, value);
+            }
         }
     }
 }
