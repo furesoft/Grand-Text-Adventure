@@ -10,6 +10,8 @@ namespace GrandTextAdventure.Core
     {
         private static readonly Dictionary<string, GameObject> s_objects = new();
 
+        private static int s_idCounter = 1;
+
         public static TObject CreateInstance<TObject>(string name)
             where TObject : GameObject, new()
         {
@@ -18,6 +20,11 @@ namespace GrandTextAdventure.Core
                 var instance = new TObject();
 
                 instance.Apply(s_objects[name]);
+
+                if (instance.ID == 0)
+                {
+                    instance.ID = s_idCounter++;
+                }
 
                 return instance;
             }

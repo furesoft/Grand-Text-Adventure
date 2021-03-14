@@ -5,8 +5,8 @@ namespace GrandTextAdventure.Core
 {
     public class GameObject
     {
+        public virtual int ID { get; set; }
         public virtual string Name { get; set; }
-
         public Dictionary<string, object> Properties { get; set; } = new();
 
         public void Apply(GameObject parent)
