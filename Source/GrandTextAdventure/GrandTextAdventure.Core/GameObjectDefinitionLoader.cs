@@ -18,7 +18,7 @@ namespace GrandTextAdventure.Core
 
         public static IEnumerable<GameObject> LoadDefinitions(string entityConfiguration)
         {
-            var entityParser = new EntityDefinitionParser();
+            var entityParser = new DefinitionParser();
 
             var entityDefinitionAST = entityParser.Parse(entityConfiguration);
             var entityDefinitionVisitor = new EntityDefinitionVisitor();
