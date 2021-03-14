@@ -1,16 +1,21 @@
-﻿using GrandTextAdventure.Core.Parsers.EntityParser;
+﻿using System;
+using System.ComponentModel;
+using GrandTextAdventure.Core.Parsers.EntityParser;
 using GrandTextAdventure.Core.Parsing.Text;
 
 namespace GrandTextAdventure.Core.Parsing.Tokenizer
 {
     public sealed class Token
     {
-        public Token(SyntaxKind kind, string text, int start, int end)
+        private readonly Type _returnType;
+
+        public Token(SyntaxKind kind, string text, int start, int end, Type returnType)
         {
             Kind = kind;
             Text = text;
             Start = start;
             End = end;
+            _returnType = returnType;
             Length = end - start;
         }
 
@@ -40,6 +45,21 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
 
         public int Start { get; }
         public string Text { get; private set; }
+
+        public object Value
+        {
+            get
+            {
+                if (_returnType != null)
+                {
+                    var typeConverter = TypeDescriptor.GetConverter(_returnType);
+
+                    return typeConverter.ConvertFromString(Text);
+                }
+
+                return Text;
+            }
+        }
 
         public static bool IsTrivia(SyntaxKind kind)
         {

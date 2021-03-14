@@ -1,4 +1,5 @@
-﻿using GrandTextAdventure.Core.Parsers.EntityParser;
+﻿using System;
+using GrandTextAdventure.Core.Parsers.EntityParser;
 
 namespace GrandTextAdventure.Core.Parsing.Tokenizer
 {
@@ -9,5 +10,6 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
         public int StartIndex { get; set; }
         public SyntaxKind TokenType { get; set; }
         public string Value { get; set; }
+        public Type ReturnType { get; internal set; }
     }
 }

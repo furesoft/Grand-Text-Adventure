@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using GrandTextAdventure.Core.Parsers.EntityParser;
 
@@ -9,12 +10,14 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
         private readonly int _precedence;
         private readonly Regex _regex;
         private readonly SyntaxKind _returnsToken;
+        private readonly Type _returnType;
 
-        public TokenDefinition(SyntaxKind returnsToken, string regexPattern, int precedence)
+        public TokenDefinition(SyntaxKind returnsToken, string regexPattern, int precedence, Type returnType = null)
         {
             _regex = new Regex(regexPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
             _returnsToken = returnsToken;
             _precedence = precedence;
+            _returnType = returnType;
         }
 
         public IEnumerable<TokenMatch> FindMatches(string inputString)
@@ -28,7 +31,8 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
                     EndIndex = matches[i].Index + matches[i].Length,
                     TokenType = _returnsToken,
                     Value = matches[i].Value,
-                    Precedence = _precedence
+                    Precedence = _precedence,
+                    ReturnType = _returnType,
                 };
             }
         }

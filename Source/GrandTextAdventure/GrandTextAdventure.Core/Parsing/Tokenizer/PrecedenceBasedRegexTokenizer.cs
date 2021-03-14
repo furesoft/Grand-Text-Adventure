@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GrandTextAdventure.Core.Parsers.EntityParser;
 
@@ -13,9 +14,9 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
             _tokenDefinitions = new List<TokenDefinition>();
         }
 
-        public void AddDefinition(SyntaxKind kind, string pattern, int precedence = 1)
+        public void AddDefinition(SyntaxKind kind, string pattern, int precedence = 1, Type returnType = null)
         {
-            _tokenDefinitions.Add(new TokenDefinition(kind, pattern, precedence));
+            _tokenDefinitions.Add(new TokenDefinition(kind, pattern, precedence, returnType));
         }
 
         public IEnumerable<Token> Tokenize(string src)
@@ -33,7 +34,7 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
                 if (lastMatch != null && bestMatch.StartIndex < lastMatch.EndIndex)
                     continue;
 
-                yield return new Token(bestMatch.TokenType, bestMatch.Value, bestMatch.StartIndex, bestMatch.EndIndex);
+                yield return new Token(bestMatch.TokenType, bestMatch.Value, bestMatch.StartIndex, bestMatch.EndIndex, bestMatch.ReturnType);
 
                 lastMatch = bestMatch;
             }

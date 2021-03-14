@@ -13,7 +13,7 @@ namespace GrandTextAdventure.Core.Parsers.EntityParser
             Tokenizer.AddDefinition(SyntaxKind.IsToken, "is", 1);
             Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "appylmodel", 1);
 
-            Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 1);
+            Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 1, typeof(int));
             Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, @"'.*?'", 1);
             Tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
             Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 1);
