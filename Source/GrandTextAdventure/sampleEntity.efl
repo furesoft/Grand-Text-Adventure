@@ -1,4 +1,4 @@
-entitymodel baseVehicle /* define a property model for a vehicle */
+entitymodel "baseVehicle" /* define a property model for a vehicle */
 
     property speed = 100
     property protection = 50
@@ -6,18 +6,18 @@ entitymodel baseVehicle /* define a property model for a vehicle */
 end
 
 
-entity Lamborghini of type vehicle
-    applymodel baseVehicle /* apply all propertys from baseVehicle model */
+entity "Lamborghini" is vehicle
+    applymodel "baseVehicle" /* apply all propertys from baseVehicle model */
 
     property speed = 150
 
 end
 
-entity FordFiesta of type vehicle 
-    applymodel baseVehicle
+entity "Ford Fiesta" is vehicle 
+    applymodel "baseVehicle""
 end
 
-entity MG11 of type weapon 
+entity "MG11" is weapon 
 
     property power = 10
 
