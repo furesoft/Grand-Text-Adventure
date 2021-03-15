@@ -20,12 +20,12 @@ namespace GrandTextAdventure.Core.Parser
             Tokenizer.AddDefinition(SyntaxKind.EntityModelToken, "entitymodel", 1);
             Tokenizer.AddDefinition(SyntaxKind.EntityToken, "entity", 1);
             Tokenizer.AddDefinition(SyntaxKind.IsToken, "is", 1);
-            Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "appylmodel", 1);
+            Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "applymodel", 1);
 
             Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 2, typeof(int));
             Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, "\".*?\"", 2, typeof(StringTokenConverter));
             Tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
-            Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 1);
+            Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 2);
 
             Tokenizer.AddDefinition(SyntaxKind.EqualsToken, "=", 1);
         }
@@ -41,7 +41,7 @@ namespace GrandTextAdventure.Core.Parser
 
         private SyntaxNode ParseApplyModel()
         {
-            var keywordToken = MatchToken(SyntaxKind.IdentifierToken); //ToDo: Need to Fix applymodelToken
+            var keywordToken = MatchToken(SyntaxKind.ApplyModelToken); //ToDo: Need to Fix applymodelToken
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
 
             return new ApplyModelDefinition(keywordToken, nameToken);
@@ -69,7 +69,7 @@ namespace GrandTextAdventure.Core.Parser
             {
                 node = ParseProperty();
             }
-            else if (Current.Kind == SyntaxKind.IdentifierToken && Current.Text == "applymodel")
+            else if (Current.Kind == SyntaxKind.ApplyModelToken)
             {
                 node = ParseApplyModel();
             }
