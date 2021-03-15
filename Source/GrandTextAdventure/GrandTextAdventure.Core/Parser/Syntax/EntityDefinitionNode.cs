@@ -11,13 +11,13 @@ namespace GrandTextAdventure.Core.Parser.Syntax
             NameToken = nameToken;
             IsToken = isToken;
             TypeToken = typeToken;
-            Properties = properties;
+            Children = properties;
         }
 
         public Token IsToken { get; }
         public Token KeywordToken { get; }
         public Token NameToken { get; }
-        public BlockNode Properties { get; }
+        public BlockNode Children { get; }
         public Token TypeToken { get; }
 
         public override void Accept(IScriptVisitor visitor)

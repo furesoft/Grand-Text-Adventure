@@ -18,8 +18,11 @@ namespace UnitTests
             var visitor = new EntityDefinitionVisitor();
             ast.Accept(visitor);
 
+            var textVisitor = new PrintVisitor();
+            ast.Accept(textVisitor);
+
             Assert.IsNotNull(ast);
-            Assert.IsTrue(_parser.Diagnostics.Any());
+            Assert.IsFalse(_parser.Diagnostics.Any());
         }
     }
 }
