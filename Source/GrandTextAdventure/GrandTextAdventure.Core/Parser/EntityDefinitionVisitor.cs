@@ -44,6 +44,11 @@ namespace GrandTextAdventure.Core.Parser
             throw new NotImplementedException();
         }
 
+        public void Visit(ApplyModelDefinition applyModelDefinition)
+        {
+            throw new NotImplementedException();
+        }
+
         private static Dictionary<string, object> ConvertToDictionary(BlockNode properties)
         {
             var res = new Dictionary<string, object>();

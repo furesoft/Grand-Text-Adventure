@@ -48,9 +48,82 @@ namespace GrandTextAdventure.Core.Parser
             return new Token(token.Kind, content, token.Start, token.End, token.ReturnType);
         }
 
+        private SyntaxNode ParseApplyModel()
+        {
+            var keywordToken = MatchToken(SyntaxKind.ApplyModelToken);
+            var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
+
+            return new ApplyModelDefinition(keywordToken, nameToken);
+        }
+
         private SyntaxNode ParseEntityDefinition()
         {
-            throw new NotImplementedException();
+            var keywordToken = NextToken();
+            var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
+
+            var isKeyword = MatchToken(SyntaxKind.IsToken);
+            var typeId = MatchToken(SyntaxKind.IdentifierToken);
+
+            var members = ParseEntityMembers();
+
+            var endToken = MatchToken(SyntaxKind.EndToken);
+
+            return new EntityDefinitionNode(keywordToken, nameToken, isKeyword, typeId, new BlockNode(members), endToken);
+        }
+
+        private SyntaxNode ParseEntityMember()
+        {
+            SyntaxNode node;
+            if (Current.Kind == SyntaxKind.PropertyToken)
+            {
+                node = ParseProperty();
+            }
+            else if (Current.Kind == SyntaxKind.ApplyModelToken)
+            {
+                node = ParseApplyModel();
+            }
+            else
+            {
+                Diagnostics.ReportUnexpectedDeclaration(Current.Span, Current);
+                return null;
+            }
+
+            return node;
+        }
+
+        private IEnumerable<SyntaxNode> ParseEntityMembers()
+        {
+            var members = new List<SyntaxNode>();
+
+            while (Current.Kind != SyntaxKind.EndOfFile)
+            {
+                var startToken = Current;
+                var member = ParseEntityMember();
+
+                if (member is BlockNode bn)
+                {
+                    members.AddRange(bn.Children);
+                }
+                else
+                {
+                    if (member != null)
+                    {
+                        members.Add(member);
+                    }
+                }
+
+                // If ParseMember() did not consume any tokens,
+                // we need to skip the current token and continue
+                // in order to avoid an infinite loop.
+                //
+                // We don't need to report an error, because we'll
+                // already tried to parse an expression statement
+                // and reported one.
+                if (Current == startToken)
+                    NextToken();
+            }
+
+            return members;
         }
 
         private SyntaxNode ParseEntityModelDefinition()
