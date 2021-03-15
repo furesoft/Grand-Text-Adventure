@@ -43,7 +43,7 @@ namespace GrandTextAdventure.Core.Parser
             {
                 if (item is PropertyDefinitionNode propDef)
                 {
-                    _tempObject.Properties.Add(propDef.NameToken.Text, propDef.Value.Value);
+                    _tempObject.Properties.AddOrUpdate(propDef.NameToken.Text, propDef.Value.Value);
                 }
                 else if (item is ApplyModelDefinition applyModelDef)
                 {
@@ -56,7 +56,7 @@ namespace GrandTextAdventure.Core.Parser
 
                     foreach (var prop in model.Properties)
                     {
-                        _tempObject.Properties.Add(prop.Key, prop.Value);
+                        _tempObject.Properties.AddOrUpdate(prop.Key, prop.Value);
                     }
                 }
             }
