@@ -40,7 +40,7 @@ namespace GrandTextAdventure.Core.Parser
                 }
                 else if (item is ApplyModelDefinition applyModelDef)
                 {
-                    var model = GameObjectDefinitionLoader.GetModel(applyModelDef.NameToken.Text);
+                    var model = GameObjectDefinitionLoader.GetModel(applyModelDef.NameToken.Value.ToString());
 
                     if (model == null)
                     {
@@ -54,7 +54,7 @@ namespace GrandTextAdventure.Core.Parser
                 }
             }
 
-            tempObject.Name = definitionNode.NameToken.Text;
+            tempObject.Name = definitionNode.NameToken.Value.ToString();
 
             Result.Add(tempObject);
         }
@@ -63,7 +63,7 @@ namespace GrandTextAdventure.Core.Parser
         {
             var model = new EntityModel
             {
-                Name = modelDefinitionNode.NameToken.Text,
+                Name = modelDefinitionNode.NameToken.Value.ToString(),
                 Properties = ConvertToDictionary(modelDefinitionNode.Properties)
             };
 
