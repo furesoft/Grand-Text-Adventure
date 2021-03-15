@@ -41,7 +41,7 @@ namespace GrandTextAdventure.Core.Parser
 
         private SyntaxNode ParseApplyModel()
         {
-            var keywordToken = MatchToken(SyntaxKind.ApplyModelToken); //ToDo: Need to Fix applymodelToken
+            var keywordToken = MatchToken(SyntaxKind.ApplyModelToken);
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
 
             return new ApplyModelDefinition(keywordToken, nameToken);

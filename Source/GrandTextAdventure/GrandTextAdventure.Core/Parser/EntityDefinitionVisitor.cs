@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Parser.Syntax;
 
 namespace GrandTextAdventure.Core.Parser
 {
     public class EntityDefinitionVisitor : IScriptVisitor
     {
-        private GameObject tempObject;
+        private GameObject _tempObject;
+
+        public EntityDefinitionVisitor()
+        {
+            GameObjectTable.Init();
+        }
+
         public List<GameObject> Result { get; private set; } = new();
 
         public void Visit(BlockNode block)
@@ -27,16 +32,18 @@ namespace GrandTextAdventure.Core.Parser
 
         public void Visit(EntityDefinitionNode definitionNode)
         {
-            if (definitionNode.TypeToken.Text == "vehicle")
+            _tempObject = GameObjectTable.GetEntity(definitionNode.TypeToken.Text);
+
+            if (_tempObject == null)
             {
-                tempObject = new Vehicle();
+                return;
             }
 
             foreach (var item in definitionNode.Children)
             {
                 if (item is PropertyDefinitionNode propDef)
                 {
-                    tempObject.Properties.Add(propDef.NameToken.Text, propDef.Value.Value);
+                    _tempObject.Properties.Add(propDef.NameToken.Text, propDef.Value.Value);
                 }
                 else if (item is ApplyModelDefinition applyModelDef)
                 {
@@ -49,14 +56,14 @@ namespace GrandTextAdventure.Core.Parser
 
                     foreach (var prop in model.Properties)
                     {
-                        tempObject.Properties.Add(prop.Key, prop.Value);
+                        _tempObject.Properties.Add(prop.Key, prop.Value);
                     }
                 }
             }
 
-            tempObject.Name = definitionNode.NameToken.Value.ToString();
+            _tempObject.Name = definitionNode.NameToken.Value.ToString();
 
-            Result.Add(tempObject);
+            Result.Add(_tempObject);
         }
 
         public void Visit(EntityModelDefinitionNode modelDefinitionNode)

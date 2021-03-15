@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,8 +8,8 @@ namespace GrandTextAdventure.Core
 {
     public static class GameObjectTable
     {
+        private static readonly Dictionary<string, Type> s_instanceBuilders = new();
         private static readonly Dictionary<string, GameObject> s_objects = new();
-
         private static int s_idCounter = 1;
 
         public static TObject CreateInstance<TObject>(string name)
@@ -39,6 +40,31 @@ namespace GrandTextAdventure.Core
             return from obj in s_objects
                    where obj is T
                    select (T)obj.Value;
+        }
+
+        public static GameObject GetEntity(string name)
+        {
+            if (s_instanceBuilders.ContainsKey(name))
+            {
+                return (GameObject)Activator.CreateInstance(s_instanceBuilders[name]);
+            }
+
+            return null;
+        }
+
+        public static void Init()
+        {
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(_ => typeof(GameObject).IsAssignableFrom(_));
+
+            foreach (var type in types)
+            {
+                var attr = type.GetCustomAttribute<EntityInstance>();
+
+                if (attr != null)
+                {
+                    s_instanceBuilders.Add(type.Name.ToLower(), type);
+                }
+            }
         }
 
         public static void Load(string directory)
