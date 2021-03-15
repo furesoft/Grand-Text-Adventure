@@ -61,6 +61,8 @@ namespace GrandTextAdventure.Core.Parser
             var keywordToken = NextToken();
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
 
+            nameToken = RemoveStringCharakter(nameToken);
+
             var isKeyword = MatchToken(SyntaxKind.IsToken);
             var typeId = MatchToken(SyntaxKind.IdentifierToken);
 
@@ -78,7 +80,7 @@ namespace GrandTextAdventure.Core.Parser
             {
                 node = ParseProperty();
             }
-            else if (Current.Kind == SyntaxKind.ApplyModelToken)
+            else if (Current.Kind == SyntaxKind.IdentifierToken && Current.Text == "applymodel")
             {
                 node = ParseApplyModel();
             }
@@ -95,7 +97,7 @@ namespace GrandTextAdventure.Core.Parser
         {
             var members = new List<SyntaxNode>();
 
-            while (Current.Kind != SyntaxKind.EndOfFile)
+            while (Current.Kind != SyntaxKind.EndToken)
             {
                 var startToken = Current;
                 var member = ParseEntityMember();

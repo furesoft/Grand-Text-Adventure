@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Parser.Syntax;
 
 namespace GrandTextAdventure.Core.Parser
 {
     public class EntityDefinitionVisitor : IScriptVisitor
     {
-        public GameObject[] Result { get; private set; }
+        private GameObject tempObject;
+        public List<GameObject> Result { get; private set; } = new();
 
         public void Visit(BlockNode block)
         {
@@ -25,7 +27,36 @@ namespace GrandTextAdventure.Core.Parser
 
         public void Visit(EntityDefinitionNode definitionNode)
         {
-            throw new NotImplementedException();
+            if (definitionNode.TypeToken.Text == "vehicle")
+            {
+                tempObject = new Vehicle();
+            }
+
+            foreach (var item in definitionNode.Children)
+            {
+                if (item is PropertyDefinitionNode propDef)
+                {
+                    tempObject.Properties.Add(propDef.NameToken.Text, propDef.Value.Value);
+                }
+                else if (item is ApplyModelDefinition applyModelDef)
+                {
+                    var model = GameObjectDefinitionLoader.GetModel(applyModelDef.NameToken.Text);
+
+                    if (model == null)
+                    {
+                        return;
+                    }
+
+                    foreach (var prop in model.Properties)
+                    {
+                        tempObject.Properties.Add(prop.Key, prop.Value);
+                    }
+                }
+            }
+
+            tempObject.Name = definitionNode.NameToken.Text;
+
+            Result.Add(tempObject);
         }
 
         public void Visit(EntityModelDefinitionNode modelDefinitionNode)
