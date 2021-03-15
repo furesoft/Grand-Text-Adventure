@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GrandTextAdventure.Core.Parser.Syntax;
 using GrandTextAdventure.Core.Parsing;
-using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parser
 {
@@ -25,7 +23,7 @@ namespace GrandTextAdventure.Core.Parser
             Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "appylmodel", 1);
 
             Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 2, typeof(int));
-            Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, "\".*?\"", 2);
+            Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, "\".*?\"", 2, typeof(StringTokenConverter));
             Tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
             Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 1);
 
@@ -41,16 +39,9 @@ namespace GrandTextAdventure.Core.Parser
             return block;
         }
 
-        private static Token RemoveStringCharakter(Token token)
-        {
-            var content = token.Text.Substring(1, token.Length - 2);
-
-            return new Token(token.Kind, content, token.Start, token.End, token.ReturnType);
-        }
-
         private SyntaxNode ParseApplyModel()
         {
-            var keywordToken = MatchToken(SyntaxKind.ApplyModelToken);
+            var keywordToken = MatchToken(SyntaxKind.IdentifierToken); //ToDo: Need to Fix applymodelToken
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
 
             return new ApplyModelDefinition(keywordToken, nameToken);
@@ -60,8 +51,6 @@ namespace GrandTextAdventure.Core.Parser
         {
             var keywordToken = NextToken();
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
-
-            nameToken = RemoveStringCharakter(nameToken);
 
             var isKeyword = MatchToken(SyntaxKind.IsToken);
             var typeId = MatchToken(SyntaxKind.IdentifierToken);
@@ -132,8 +121,6 @@ namespace GrandTextAdventure.Core.Parser
         {
             var keywordToken = NextToken();
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
-
-            nameToken = RemoveStringCharakter(nameToken);
 
             var properties = ParseProperties();
 
