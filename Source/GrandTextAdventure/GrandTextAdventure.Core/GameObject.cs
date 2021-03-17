@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 namespace GrandTextAdventure.Core
 {
-    public class GameObject
+    public class GameObject : DynamicObject
     {
         public int ID
         {
@@ -42,6 +43,20 @@ namespace GrandTextAdventure.Core
             {
                 Properties.Add(name, value);
             }
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            result = GetValue<object>(binder.Name);
+
+            return true;
+        }
+
+        public override bool TrySetMember(SetMemberBinder binder, object value)
+        {
+            SetOrAddValue(binder.Name, value);
+
+            return true;
         }
     }
 }
