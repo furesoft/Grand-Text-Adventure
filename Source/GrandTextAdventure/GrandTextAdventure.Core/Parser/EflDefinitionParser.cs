@@ -205,13 +205,9 @@ namespace GrandTextAdventure.Core.Parser
                     }
                 }
 
-                // If ParseMember() did not consume any tokens,
+                // If we did not consume any tokens,
                 // we need to skip the current token and continue
                 // in order to avoid an infinite loop.
-                //
-                // We don't need to report an error, because we'll
-                // already tried to parse an expression statement
-                // and reported one.
                 if (Current == startToken)
                     NextToken();
             }
