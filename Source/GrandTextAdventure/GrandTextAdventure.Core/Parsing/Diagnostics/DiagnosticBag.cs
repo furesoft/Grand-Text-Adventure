@@ -29,7 +29,7 @@ namespace GrandTextAdventure.Core.Parsing.Diagnostics
             Report(span, message);
         }
 
-        public void ReportUnexpectedToken(TextSpan span, SyntaxKind actualKind, SyntaxKind expectedKind)
+        public void ReportUnexpectedToken(TextSpan span, object actualKind, object expectedKind)
         {
             var message = $"Unexpected token <{actualKind}>, expected <{expectedKind}>.";
             Report(span, message);

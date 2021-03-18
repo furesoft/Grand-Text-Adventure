@@ -7,7 +7,7 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
 {
     public sealed class Token
     {
-        public Token(SyntaxKind kind, string text, int start, int end, Type returnType)
+        public Token(object kind, string text, int start, int end, Type returnType)
         {
             Kind = kind;
             Text = text;
@@ -23,8 +23,11 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
         }
 
         public int End { get; }
-        public SyntaxKind Kind { get; private set; }
+
+        public object Kind { get; private set; }
+
         public int Length { get; set; }
+
         public Type ReturnType { get; }
 
         public TextSpan Span
@@ -36,6 +39,7 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
         }
 
         public int Start { get; }
+
         public string Text { get; private set; }
 
         public object Value
@@ -51,6 +55,11 @@ namespace GrandTextAdventure.Core.Parsing.Tokenizer
 
                 return Text;
             }
+        }
+
+        public T TokenKind<T>()
+        {
+            return (T)this.Kind;
         }
 
         public override string ToString()

@@ -4,7 +4,7 @@ using GrandTextAdventure.Core.Parsing;
 
 namespace GrandTextAdventure.Core.Parser
 {
-    public partial class EflDefinitionParser : BaseParser<SyntaxNode>
+    public partial class EflDefinitionParser : BaseParser<SyntaxNode, SyntaxKind>
     {
         public SyntaxNode ParseBlock()
         {
@@ -65,11 +65,11 @@ namespace GrandTextAdventure.Core.Parser
         private SyntaxNode ParseEntityMember()
         {
             SyntaxNode node;
-            if (Current.Kind == SyntaxKind.PropertyToken)
+            if (Current.TokenKind<SyntaxKind>() == SyntaxKind.PropertyToken)
             {
                 node = ParseProperty();
             }
-            else if (Current.Kind == SyntaxKind.ApplyModelToken)
+            else if (Current.TokenKind<SyntaxKind>() == SyntaxKind.ApplyModelToken)
             {
                 node = ParseApplyModel();
             }
@@ -86,7 +86,7 @@ namespace GrandTextAdventure.Core.Parser
         {
             var members = new List<SyntaxNode>();
 
-            while (Current.Kind != SyntaxKind.EndToken)
+            while (Current.TokenKind<SyntaxKind>() != SyntaxKind.EndToken)
             {
                 var startToken = Current;
                 var member = ParseEntityMember();
@@ -132,11 +132,11 @@ namespace GrandTextAdventure.Core.Parser
         private SyntaxNode ParseMember()
         {
             SyntaxNode node;
-            if (Current.Kind == SyntaxKind.EntityModelToken)
+            if (Current.TokenKind<SyntaxKind>() == SyntaxKind.EntityModelToken)
             {
                 node = ParseEntityModelDefinition();
             }
-            else if (Current.Kind == SyntaxKind.EntityToken)
+            else if (Current.TokenKind<SyntaxKind>() == SyntaxKind.EntityToken)
             {
                 node = ParseEntityDefinition();
             }
@@ -153,7 +153,7 @@ namespace GrandTextAdventure.Core.Parser
         {
             var members = new List<SyntaxNode>();
 
-            while (Current.Kind != SyntaxKind.EndOfFile)
+            while (Current.TokenKind<SyntaxKind>() != SyntaxKind.EndOfFile)
             {
                 var startToken = Current;
                 var member = ParseMember();
@@ -188,7 +188,7 @@ namespace GrandTextAdventure.Core.Parser
         {
             var properties = new List<SyntaxNode>();
 
-            while (Current.Kind != SyntaxKind.EndToken)
+            while (Current.TokenKind<SyntaxKind>() != SyntaxKind.EndToken)
             {
                 var startToken = Current;
                 var property = ParseProperty();

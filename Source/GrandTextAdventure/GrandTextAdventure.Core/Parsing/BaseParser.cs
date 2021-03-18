@@ -1,11 +1,13 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Immutable;
 using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parsing.Diagnostics;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
 
 namespace GrandTextAdventure.Core.Parsing
 {
-    public abstract class BaseParser<ReturnType>
+    public abstract class BaseParser<ReturnType, TokenType>
+        where TokenType : IComparable
     {
         protected readonly PrecedenceBasedRegexTokenizer Tokenizer = new();
         protected int _position;
@@ -15,10 +17,10 @@ namespace GrandTextAdventure.Core.Parsing
 
         public Token MatchToken(SyntaxKind kind)
         {
-            if (Current.Kind.CompareTo(kind) == 0)
+            if (Current.TokenKind<TokenType>().CompareTo(kind) == 0)
                 return NextToken();
 
-            if (Current.Kind.CompareTo(kind) != 0) Diagnostics.ReportUnexpectedToken(Current.Span, Current.Kind, kind);
+            if (Current.TokenKind<TokenType>().CompareTo(kind) != 0) Diagnostics.ReportUnexpectedToken(Current.Span, Current.Kind, kind);
 
             return new Token(SyntaxKind.Invalid, null, 0, 0, null);
         }
