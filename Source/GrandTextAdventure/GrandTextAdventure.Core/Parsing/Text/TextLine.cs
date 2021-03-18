@@ -13,8 +13,8 @@
         public int End => Start + Length;
         public int Length { get; }
         public int LengthIncludingLineBreak { get; }
-        public TextSpan Span => new TextSpan(Start, Length);
-        public TextSpan SpanIncludingLineBreak => new TextSpan(Start, LengthIncludingLineBreak);
+        public TextSpan Span => new(Start, Length);
+        public TextSpan SpanIncludingLineBreak => new(Start, LengthIncludingLineBreak);
         public int Start { get; }
         public SourceText Text { get; }
 
