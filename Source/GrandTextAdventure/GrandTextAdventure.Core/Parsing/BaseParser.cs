@@ -15,7 +15,7 @@ namespace GrandTextAdventure.Core.Parsing
         public Token Current => Peek(0);
         public DiagnosticBag Diagnostics { get; } = new();
 
-        public Token MatchToken(SyntaxKind kind)
+        public Token MatchToken(TokenType kind)
         {
             if (Current.TokenKind<TokenType>().CompareTo(kind) == 0)
                 return NextToken();
