@@ -25,6 +25,8 @@ namespace GrandTextAdventure.Core
             _file.AddSection(new ElfStringTable());
         }
 
+        public bool IsClosed { get; set; }
+
         public void Close()
         {
             _codeSection = new ElfBinarySection(_codeStream).ConfigureAs(ElfSectionSpecialType.Text);
@@ -38,7 +40,11 @@ namespace GrandTextAdventure.Core
 
             _file.Write(_outputStream);
             _outputStream.Flush();
+
             _outputStream.Close();
+            _codeStream.Close();
+
+            IsClosed = true;
         }
 
         public void WriteObject(GameObject obj)
@@ -46,20 +52,23 @@ namespace GrandTextAdventure.Core
             // append properties to index section
             // write object to Objects Section with index instead of propertyname
 
-            foreach (var prop in obj.Properties)
+            if (!IsClosed)
             {
-                AddSymbol(prop.Key);
-            }
+                foreach (var prop in obj.Properties)
+                {
+                    AddSymbol(prop.Key);
+                }
 
-            var bw = new BinaryWriter(_codeStream);
+                var bw = new BinaryWriter(_codeStream);
 
-            bw.Write((int)obj.Type);
-            bw.Write(obj.Name);
+                bw.Write((int)obj.Type);
+                bw.Write(obj.Name);
 
-            foreach (var prop in obj.Properties)
-            {
-                bw.Write(GetIndexOfSymbol(prop.Key));
-                bw.Write((int)prop.Value);
+                foreach (var prop in obj.Properties)
+                {
+                    bw.Write(GetIndexOfSymbol(prop.Key));
+                    bw.Write((int)prop.Value);
+                }
             }
         }
 
