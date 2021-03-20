@@ -2,5 +2,9 @@
 {
     public class Charackter : GameObject
     {
+        public Charackter()
+        {
+            Type = GameObjectType.Charackter;
+        }
     }
 }

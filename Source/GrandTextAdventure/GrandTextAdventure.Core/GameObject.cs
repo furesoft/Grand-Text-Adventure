@@ -15,6 +15,7 @@ namespace GrandTextAdventure.Core
         public virtual string Name { get; set; }
 
         public Dictionary<string, object> Properties { get; set; } = new();
+        public GameObjectType Type { get; internal set; }
 
         public void Apply(GameObject parent)
         {

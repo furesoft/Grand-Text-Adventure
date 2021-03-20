@@ -3,5 +3,9 @@
     [EntityInstance]
     public class Building : GameObject
     {
+        public Building()
+        {
+            Type = GameObjectType.Building;
+        }
     }
 }
