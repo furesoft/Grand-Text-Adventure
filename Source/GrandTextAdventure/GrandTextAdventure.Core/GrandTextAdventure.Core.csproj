@@ -8,4 +8,8 @@
     <Folder Include="CommandProcessing\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="LibObjectFile" Version="0.3.5" />
+  </ItemGroup>
+
 </Project>
