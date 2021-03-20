@@ -15,6 +15,8 @@ namespace UnitTests
             while (reader.HasUnloadedObject)
             {
                 var obj = reader.ReadObject();
+
+                Assert.IsNotNull(obj.Name);
             }
 
             reader.Close();

@@ -19,8 +19,10 @@ namespace UnitTests
             lambo.SetOrAddValue("speed", 42);
             lambo.SetOrAddValue("protection", 100);
 
-            var mg11 = new Weapon();
-            mg11.Name = "mg11";
+            var mg11 = new Weapon
+            {
+                Name = "mg11"
+            };
 
             mg11.SetOrAddValue("speed", 12);
             mg11.SetOrAddValue("protection", 0);
