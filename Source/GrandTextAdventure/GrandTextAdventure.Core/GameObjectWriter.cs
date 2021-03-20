@@ -14,7 +14,7 @@ namespace GrandTextAdventure.Core
         private readonly Stream _outputStream;
         private readonly ElfSymbolTable _symbolTable = new();
         private ElfBinarySection _codeSection;
-        private ulong _lastPropertyIndex = 0;
+        private ulong _lastPropertyIndex = 1;
 
         public GameObjectWriter(Stream outputStream)
         {
@@ -64,11 +64,15 @@ namespace GrandTextAdventure.Core
                 bw.Write((int)obj.Type);
                 bw.Write(obj.Name);
 
+                bw.Write(obj.Properties.Count);
+
                 foreach (var prop in obj.Properties)
                 {
                     bw.Write(GetIndexOfSymbol(prop.Key));
                     bw.Write((int)prop.Value);
                 }
+
+                _file.EntryPointAddress++;
             }
         }
 
@@ -88,8 +92,7 @@ namespace GrandTextAdventure.Core
                     Bind = ElfSymbolBind.Global,
                     Name = name,
                     Value = _lastPropertyIndex++,
-                    Type = ElfSymbolType.Object,
-                    //Size = sizeof(int)
+                    Type = ElfSymbolType.Common
                 });
         }
 
