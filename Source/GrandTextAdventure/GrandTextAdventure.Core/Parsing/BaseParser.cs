@@ -29,6 +29,10 @@ namespace GrandTextAdventure.Core.Parsing
         {
             var current = Current;
             _position++;
+
+            if (Current.TokenKind<int>().CompareTo(0) == 0)
+                return NextToken();
+
             return current;
         }
 
@@ -45,7 +49,9 @@ namespace GrandTextAdventure.Core.Parsing
         {
             var index = _position + offset;
             if (index >= _tokens.Length)
+            {
                 return _tokens[^1];
+            }
 
             return _tokens[index];
         }

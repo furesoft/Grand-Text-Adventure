@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		sampleEntity.efl = sampleEntity.efl
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{C0BEA652-1EF4-47A1-8136-2B983F407413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{C0BEA652-1EF4-47A1-8136-2B983F407413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EflCompiler", "EflCompiler\EflCompiler.csproj", "{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
