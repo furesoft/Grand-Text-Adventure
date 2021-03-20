@@ -21,7 +21,7 @@ namespace UnitTests
 
             reader.Close();
 
-            Assert.AreSame(reader.Count, 2);
+            Assert.AreEqual(reader.Count, 2);
         }
     }
 }

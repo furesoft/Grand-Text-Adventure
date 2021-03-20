@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GrandTextAdventure.Core.Parser.Syntax;
 using GrandTextAdventure.Core.Parsing;
 
@@ -6,13 +6,6 @@ namespace GrandTextAdventure.Core.Parser
 {
     public partial class EflDefinitionParser : BaseParser<SyntaxNode, SyntaxKind>
     {
-        public SyntaxNode ParseBlock()
-        {
-            var members = ParseMembers();
-
-            return new BlockNode(members);
-        }
-
         protected override void InitTokenizer()
         {
             Tokenizer.AddDefinition(SyntaxKind.EndToken, "end", 1);
@@ -45,6 +38,13 @@ namespace GrandTextAdventure.Core.Parser
             var nameToken = MatchToken(SyntaxKind.StringLiteralToken);
 
             return new ApplyModelDefinition(keywordToken, nameToken);
+        }
+
+        private SyntaxNode ParseBlock()
+        {
+            var members = ParseMembers();
+
+            return new BlockNode(members);
         }
 
         private SyntaxNode ParseEntityDefinition()
