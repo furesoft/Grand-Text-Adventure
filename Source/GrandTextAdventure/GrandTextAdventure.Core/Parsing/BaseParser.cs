@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Linq;
 using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parsing.Diagnostics;
 using GrandTextAdventure.Core.Parsing.Tokenizer;
@@ -40,7 +41,7 @@ namespace GrandTextAdventure.Core.Parsing
         {
             InitTokenizer();
 
-            _tokens = Tokenizer.Tokenize(src).ToImmutableArray();
+            _tokens = Tokenizer.Tokenize(src).Where(_ => ((int)_.Kind).CompareTo(0) != 0).ToImmutableArray();
 
             return InternalParse();
         }
