@@ -12,7 +12,14 @@ namespace UnitTests
         {
             var reader = new GameObjectReader(File.OpenRead("test.ced"));
 
+            while (reader.HasUnloadedObject)
+            {
+                var obj = reader.ReadObject();
+            }
+
             reader.Close();
+
+            Assert.AreSame(reader.Count, 2);
         }
     }
 }
