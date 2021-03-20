@@ -25,7 +25,7 @@ namespace UnitTests
             mg11.SetOrAddValue("speed", 12);
             mg11.SetOrAddValue("protection", 0);
 
-            var strm = File.OpenWrite("test.ced");
+            var strm = File.Open("test.ced", FileMode.OpenOrCreate);
             var writer = new GameObjectWriter(strm);
 
             writer.WriteObject(lambo);
