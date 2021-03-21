@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{C0BEA652-1EF4-47A1-8136-2B983F407413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EflCompiler", "EflCompiler\EflCompiler.csproj", "{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EflCompiler", "EflCompiler\EflCompiler.csproj", "{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{29D1AE5C-F0ED-479A-A275-A17058E90051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189} = {29D1AE5C-F0ED-479A-A275-A17058E90051}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401ADFFB-CCD0-48D5-9202-608812851A12}

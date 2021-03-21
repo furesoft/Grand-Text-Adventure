@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GrandTextAdventure.Core.Parser;
+using GrandTextAdventure.Core.Parser.Visitors;
 
 namespace GrandTextAdventure.Core
 {

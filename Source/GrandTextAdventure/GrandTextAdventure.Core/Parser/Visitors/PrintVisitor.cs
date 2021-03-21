@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GrandTextAdventure.Core.Parser.Syntax;
 
-namespace GrandTextAdventure.Core.Parser
+namespace GrandTextAdventure.Core.Parser.Visitors
 {
     public class PrintVisitor : IScriptVisitor
     {

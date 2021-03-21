@@ -1,4 +1,5 @@
 using GrandTextAdventure.Core.Parser;
+using GrandTextAdventure.Core.Parser.Visitors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 

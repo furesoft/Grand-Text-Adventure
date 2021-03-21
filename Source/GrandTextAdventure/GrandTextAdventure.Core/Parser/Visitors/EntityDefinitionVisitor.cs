@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GrandTextAdventure.Core.Parser.Syntax;
 
-namespace GrandTextAdventure.Core.Parser
+namespace GrandTextAdventure.Core.Parser.Visitors
 {
     public class EntityDefinitionVisitor : IScriptVisitor
     {
