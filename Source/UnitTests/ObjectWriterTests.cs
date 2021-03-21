@@ -11,24 +11,24 @@ namespace UnitTests
         [TestMethod]
         public void Write_Should_Pass()
         {
-            var lambo = new Vehicle
+            dynamic lambo = new Vehicle
             {
                 Name = "Lamborghini"
             };
 
-            lambo.SetOrAddValue("speed", 42);
-            lambo.SetOrAddValue("protection", 100);
+            lambo.speed = 42;
+            lambo.protection = 100;
 
-            var mg11 = new Weapon
+            dynamic mg11 = new Weapon
             {
                 Name = "mg11"
             };
 
-            mg11.SetOrAddValue("wrap", 3.14);
-            mg11.SetOrAddValue("speed", 12);
-            mg11.SetOrAddValue("protection", 0);
+            mg11.wrap = 3.14;
+            mg11.speed = 12;
+            mg11.protection = 0;
 
-            mg11.SetOrAddValue("blub", "hello world");
+            mg11.blub = "hello world";
 
             var strm = File.Open("test.ced", FileMode.OpenOrCreate);
             var writer = new GameObjectWriter(strm);
