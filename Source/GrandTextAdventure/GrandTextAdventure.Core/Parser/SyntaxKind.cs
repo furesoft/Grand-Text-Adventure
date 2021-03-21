@@ -26,5 +26,7 @@
         IsToken,
         ApplyModelToken,
         Invalid,
+        BoolToken,
+        FloatLiteralToken,
     }
 }

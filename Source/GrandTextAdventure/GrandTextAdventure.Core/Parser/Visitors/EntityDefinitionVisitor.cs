@@ -87,6 +87,11 @@ namespace GrandTextAdventure.Core.Parser.Visitors
             throw new NotImplementedException();
         }
 
+        public void Visit(LiteralNode literalNode)
+        {
+            throw new NotImplementedException();
+        }
+
         private static Dictionary<string, object> ConvertToDictionary(BlockNode properties)
         {
             var res = new Dictionary<string, object>();

@@ -59,12 +59,17 @@ namespace GrandTextAdventure.Core.Parser.Visitors
 
         public void Visit(PropertyDefinitionNode definitionNode)
         {
-            _stringBuilder.AppendLine($"(property ({definitionNode.NameToken.Value} {definitionNode.Value.Text}))");
+            _stringBuilder.AppendLine($"(property ({definitionNode.NameToken.Value} {definitionNode.Value.Value}))");
         }
 
         public void Visit(ApplyModelDefinition applyModelDefinition)
         {
             _stringBuilder.AppendLine($"(applymodel {applyModelDefinition.NameToken.Text})");
+        }
+
+        public void Visit(LiteralNode literalNode)
+        {
+            throw new NotImplementedException();
         }
     }
 }

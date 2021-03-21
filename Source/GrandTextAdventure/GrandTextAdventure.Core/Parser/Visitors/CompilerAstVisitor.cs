@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using GrandTextAdventure.Core;
-using GrandTextAdventure.Core.Parser;
 using GrandTextAdventure.Core.Parser.Syntax;
 
 namespace GrandTextAdventure.Core.Parser.Visitors
 {
     internal class CompilerAstVisitor : IScriptVisitor
     {
+        private readonly GameObjectWriter _writer;
         private GameObject _tempObject;
-        private GameObjectWriter _writer;
 
         public CompilerAstVisitor(GameObjectWriter writer)
         {
@@ -86,6 +84,11 @@ namespace GrandTextAdventure.Core.Parser.Visitors
         }
 
         public void Visit(ApplyModelDefinition applyModelDefinition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Visit(LiteralNode literalNode)
         {
             throw new NotImplementedException();
         }

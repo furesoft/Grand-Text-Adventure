@@ -24,14 +24,17 @@ namespace UnitTests
                 Name = "mg11"
             };
 
+            mg11.SetOrAddValue("wrap", 3.14);
             mg11.SetOrAddValue("speed", 12);
             mg11.SetOrAddValue("protection", 0);
+
+            mg11.SetOrAddValue("blub", "hello world");
 
             var strm = File.Open("test.ced", FileMode.OpenOrCreate);
             var writer = new GameObjectWriter(strm);
 
-            writer.WriteObject(lambo);
             writer.WriteObject(mg11);
+            writer.WriteObject(lambo);
 
             writer.Close();
         }

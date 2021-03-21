@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using GrandTextAdventure.Core.Parser.Syntax;
 using GrandTextAdventure.Core.Parsing;
 
@@ -15,8 +16,11 @@ namespace GrandTextAdventure.Core.Parser
             Tokenizer.AddDefinition(SyntaxKind.IsToken, "is", 1);
             Tokenizer.AddDefinition(SyntaxKind.ApplyModelToken, "applymodel", 1);
 
+            Tokenizer.AddDefinition(SyntaxKind.BoolToken, "[Tt]rue|[Ff]alse", 1, typeof(bool));
             Tokenizer.AddDefinition(SyntaxKind.IntLiteralToken, "[0-9]+", 2, typeof(int));
+            Tokenizer.AddDefinition(SyntaxKind.FloatLiteralToken, "[0-9]+\\.[0-9]+", 1);
             Tokenizer.AddDefinition(SyntaxKind.StringLiteralToken, "\".*?\"", 2, typeof(StringTokenConverter));
+
             Tokenizer.AddDefinition(SyntaxKind.CommentToken, @"/\\*.*?\\*/", 1);
             Tokenizer.AddDefinition(SyntaxKind.IdentifierToken, "[a-zA-Z_][0-9a-zA-F_]*", 2);
 
@@ -129,6 +133,30 @@ namespace GrandTextAdventure.Core.Parser
             return new EntityModelDefinitionNode(keywordToken, nameToken, new BlockNode(properties), endToken);
         }
 
+        private LiteralNode ParseLiteral()
+        {
+            var token = NextToken();
+
+            switch (token.TokenKind<SyntaxKind>())
+            {
+                case SyntaxKind.IntLiteralToken:
+                    return new LiteralNode(token.Value);
+
+                case SyntaxKind.FloatLiteralToken:
+                    return new LiteralNode(float.Parse(token.Text, NumberStyles.Any, CultureInfo.InvariantCulture));
+
+                case SyntaxKind.StringLiteralToken:
+                    return new LiteralNode(token.Value);
+
+                case SyntaxKind.BoolToken:
+                    return new LiteralNode(token.Value);
+
+                default:
+                    Diagnostics.ReportUnexpectedLiteral(token);
+                    return null;
+            }
+        }
+
         private SyntaxNode ParseMember()
         {
             SyntaxNode node;
@@ -222,9 +250,9 @@ namespace GrandTextAdventure.Core.Parser
             var identifierToken = MatchToken(SyntaxKind.IdentifierToken);
             var equalsToken = MatchToken(SyntaxKind.EqualsToken);
 
-            var valueToken = MatchToken(SyntaxKind.IntLiteralToken); //ToDo: Replace with ParseLiteral Method
+            var value = ParseLiteral();
 
-            return new PropertyDefinitionNode(keywordToken, identifierToken, equalsToken, valueToken);
+            return new PropertyDefinitionNode(keywordToken, identifierToken, equalsToken, value);
         }
     }
 }

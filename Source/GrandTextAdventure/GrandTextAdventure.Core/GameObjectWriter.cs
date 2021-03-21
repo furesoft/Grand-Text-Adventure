@@ -12,6 +12,7 @@ namespace GrandTextAdventure.Core
         private readonly MemoryStream _codeStream = new();
         private readonly ElfObjectFile _file = new(ElfArch.ARM);
         private readonly Stream _outputStream;
+        private readonly ElfStringTable _strTable = new();
         private readonly ElfSymbolTable _symbolTable = new();
         private ElfBinarySection _codeSection;
         private ulong _lastPropertyIndex = 1;
@@ -22,7 +23,7 @@ namespace GrandTextAdventure.Core
 
             _file.FileClass = ElfFileClass.Is32;
 
-            _file.AddSection(new ElfStringTable());
+            _file.AddSection(_strTable);
         }
 
         public bool IsClosed { get; set; }
@@ -69,7 +70,30 @@ namespace GrandTextAdventure.Core
                 foreach (var prop in obj.Properties)
                 {
                     bw.Write(GetIndexOfSymbol(prop.Key));
-                    bw.Write((int)prop.Value);
+
+                    bw.Write((byte)Type.GetTypeCode(prop.Value.GetType()));
+
+                    switch (prop.Value)
+                    {
+                        case int intValue:
+                            bw.Write(intValue);
+                            break;
+
+                        case bool bValue:
+                            bw.Write(bValue);
+                            break;
+
+                        case double fValue:
+                            bw.Write(fValue);
+                            break;
+
+                        case string strValue:
+                            {
+                                var index = _strTable.GetOrCreateIndex(strValue);
+                                bw.Write(index);
+                                break;
+                            }
+                    }
                 }
 
                 _file.EntryPointAddress++;

@@ -12,5 +12,6 @@ namespace GrandTextAdventure.Core.Parser
 
         void Visit(PropertyDefinitionNode definitionNode);
         void Visit(ApplyModelDefinition applyModelDefinition);
+        void Visit(LiteralNode literalNode);
     }
 }

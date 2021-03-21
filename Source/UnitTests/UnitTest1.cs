@@ -9,7 +9,7 @@ namespace UnitTests
     public class ParserTests
     {
         private readonly EflDefinitionParser _parser = new();
-        private readonly string modelSrc = "entitymodel \"baseVehicle\" property key = 12 property awsner = 42 end entity \"hello\" is vehicle applymodel \"baseVehicle\" end";
+        private readonly string modelSrc = "entitymodel \"baseVehicle\" property key = 3.14 property awsner = 42 property str = \"hello\" end entity \"hello\" is vehicle applymodel \"baseVehicle\" end";
 
         [TestMethod]
         public void ParseEntityModel_Should_Pass()

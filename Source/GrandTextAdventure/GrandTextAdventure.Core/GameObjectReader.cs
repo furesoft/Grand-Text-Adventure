@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GrandTextAdventure.Core.Entities;
@@ -12,6 +13,7 @@ namespace GrandTextAdventure.Core
         private readonly ulong _objectCount;
         private readonly BinaryReader _objectReader;
         private readonly Stream _strm;
+        private readonly ElfStringTable _strTable;
         private readonly ElfSymbolTable _symTable;
         private ElfObjectFile _file;
         private ulong _objectIndex;
@@ -22,6 +24,7 @@ namespace GrandTextAdventure.Core
             _strm = strm;
 
             _symTable = (ElfSymbolTable)_file.Sections.FirstOrDefault(_ => _ is ElfSymbolTable);
+            _strTable = (ElfStringTable)_file.Sections.FirstOrDefault(_ => _ is ElfStringTable);
             _codeSection = (ElfBinarySection)_file.Sections.FirstOrDefault(_ => _ is ElfBinarySection);
 
             _objectReader = new(_codeSection.Stream);
@@ -57,7 +60,8 @@ namespace GrandTextAdventure.Core
                         var symbolIndex = _objectReader.ReadUInt64();
                         var symbol = GetSymbolByIndex(symbolIndex);
 
-                        var value = _objectReader.ReadInt32();
+                        var propTypeCode = (TypeCode)_objectReader.ReadByte();
+                        var value = GetValue(propTypeCode);
 
                         instance.Properties.Add(symbol, value);
                     }
@@ -93,6 +97,30 @@ namespace GrandTextAdventure.Core
             }
 
             throw new KeyNotFoundException("Symbol not found");
+        }
+
+        private object GetValue(TypeCode propTypeCode)
+        {
+            switch (propTypeCode)
+            {
+                case TypeCode.Boolean:
+                    return _objectReader.ReadBoolean();
+
+                case TypeCode.Int32:
+                    return _objectReader.ReadInt32();
+
+                case TypeCode.Double:
+                    return _objectReader.ReadDouble();
+
+                case TypeCode.String:
+                    var index = _objectReader.ReadUInt32();
+                    _strTable.TryFind(index, out var strVal);
+
+                    return strVal;
+
+                default:
+                    return _objectReader.ReadInt32();
+            }
         }
     }
 }

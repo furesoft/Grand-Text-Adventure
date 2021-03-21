@@ -29,6 +29,11 @@ namespace GrandTextAdventure.Core.Parsing.Diagnostics
             Report(span, message);
         }
 
+        public void ReportUnexpectedLiteral(Token token)
+        {
+            Report(token.Span, "Unexpected Literal");
+        }
+
         public void ReportUnexpectedToken(TextSpan span, object actualKind, object expectedKind)
         {
             var message = $"Unexpected token <{actualKind}>, expected <{expectedKind}>.";
