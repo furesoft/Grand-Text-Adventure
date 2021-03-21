@@ -4,7 +4,7 @@ using GrandTextAdventure.Core.Parser.Syntax;
 
 namespace GrandTextAdventure.Core.Parser.Visitors
 {
-    internal class CompilerAstVisitor : IScriptVisitor
+    public class CompilerAstVisitor : IScriptVisitor
     {
         private readonly GameObjectWriter _writer;
         private GameObject _tempObject;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using GrandTextAdventure.Core;
+using GrandTextAdventure.Core.Parser.Visitors;
 
 namespace EflCompiler
 {

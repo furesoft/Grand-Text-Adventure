@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EflCompiler": {
+      "commandName": "Project",
+      "commandLineArgs": "-f \"C:\\Users\\filmee24\\Documents\\Projekte\\Grand-Text-Adventure\\Source\\GrandTextAdventure\\sampleEntity.efl\" -o samples"
+    }
+  }
+}
