@@ -1,6 +1,8 @@
 ﻿using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace UnitTests
@@ -8,6 +10,50 @@ namespace UnitTests
     [TestClass]
     public class ObjectWriterTests
     {
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            var ow = new GameObjectWriter(File.OpenWrite("many.ced"));
+            for (int i = 1; i < 10000000; i++)
+            {
+                dynamic n = new Vehicle();
+                n.Name = "Vehicle " + i;
+
+                n.hello = "world";
+
+                ow.WriteObject(n);
+            }
+            for (int i = 1; i < 10000000; i++)
+            {
+                dynamic n = new Weapon();
+                n.Name = "Weapon " + i;
+
+                n.hello = "world";
+
+                ow.WriteObject(n);
+            }
+            for (int i = 1; i < 10000000; i++)
+            {
+                dynamic n = new Vehicle();
+                n.Name = "Vehicle " + i;
+
+                n.hello = "world";
+
+                ow.WriteObject(n);
+            }
+            for (int i = 1; i < 10000000; i++)
+            {
+                dynamic n = new Weapon();
+                n.Name = "Weapon " + i;
+
+                n.hello = "world";
+
+                ow.WriteObject(n);
+            }
+
+            ow.Close();
+        }
+
         [TestMethod]
         public void Write_Should_Pass()
         {

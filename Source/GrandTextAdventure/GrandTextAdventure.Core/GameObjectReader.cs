@@ -9,14 +9,14 @@ namespace GrandTextAdventure.Core
 {
     public class GameObjectReader
     {
-        private readonly ElfBinarySection _codeSection;
         private readonly ulong _objectCount;
-        private readonly BinaryReader _objectReader;
-        private readonly Stream _strm;
-        private readonly ElfStringTable _strTable;
-        private readonly ElfSymbolTable _symTable;
+        private ElfBinarySection _codeSection;
         private ElfObjectFile _file;
         private ulong _objectIndex;
+        private BinaryReader _objectReader;
+        private Stream _strm;
+        private ElfStringTable _strTable;
+        private ElfSymbolTable _symTable;
 
         public GameObjectReader(Stream strm)
         {
@@ -38,9 +38,14 @@ namespace GrandTextAdventure.Core
 
         public void Close()
         {
-            _strm.Close();
+            _objectReader.Close();
             _file = null;
             IsClosed = true;
+            _symTable = null;
+            _strTable = null;
+            _strm = null;
+            _codeSection = null;
+            _objectReader = null;
         }
 
         public GameObject ReadObject()

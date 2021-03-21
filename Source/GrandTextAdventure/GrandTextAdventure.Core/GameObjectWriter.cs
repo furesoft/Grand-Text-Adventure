@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using LibObjectFile;
 using LibObjectFile.Elf;
 
 namespace GrandTextAdventure.Core
@@ -32,7 +31,7 @@ namespace GrandTextAdventure.Core
         {
             _codeSection = new ElfBinarySection(_codeStream).ConfigureAs(ElfSectionSpecialType.Text);
 
-            _symbolTable.Link = _file.Sections.FirstOrDefault(_ => _ is ElfStringTable);
+            _symbolTable.Link = _strTable;
 
             _file.AddSection(_symbolTable);
             _file.AddSection(_codeSection);
