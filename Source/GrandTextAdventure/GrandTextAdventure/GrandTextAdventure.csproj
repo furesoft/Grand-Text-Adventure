@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Actress" Version="0.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GrandTextAdventure.Core\GrandTextAdventure.Core.csproj" />
   </ItemGroup>
 
