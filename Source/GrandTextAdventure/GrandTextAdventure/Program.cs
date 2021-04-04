@@ -10,7 +10,7 @@ namespace GrandTextAdventure
     internal class Program
     {
         public static MailboxProcessor<GameMessage> Mailbox;
-        private static GameState s_state = new();
+        private static readonly GameState s_state = new();
 
         private static async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
         {
