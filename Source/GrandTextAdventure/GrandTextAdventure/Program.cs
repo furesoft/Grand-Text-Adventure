@@ -1,12 +1,46 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Actress;
+using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure
 {
     internal class Program
     {
+        private static async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
+        {
+            while (true)
+            {
+                var msg = await inbox.Receive();
+
+                if (msg is EndGameMessage)
+                {
+                    Console.WriteLine("The Game will exit soon...");
+                    await Task.Delay(2000);
+                    Environment.Exit(0);
+                }
+                else if (msg is LoadMessage ldMsg)
+                {
+                    Console.WriteLine("Game loaded");
+                }
+                else if (msg is SaveMessage savMsg)
+                {
+                    Console.WriteLine("Game saved");
+                }
+            }
+        }
+
         private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+
+            while (true)
+            {
+                Console.Write("> ");
+                var input = Console.ReadLine();
+
+                mailbox.Post(new SaveMessage());
+            }
         }
     }
 }

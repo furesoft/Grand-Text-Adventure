@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GrandTextAdventure.Core\GrandTextAdventure.Core.csproj" />
+    <ProjectReference Include="..\GrandTextAdventure.Messages\GrandTextAdventure.Messages.csproj" />
   </ItemGroup>
 
 </Project>
