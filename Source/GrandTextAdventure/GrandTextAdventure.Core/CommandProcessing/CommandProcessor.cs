@@ -19,8 +19,11 @@ namespace GrandTextAdventure.Core.CommandProcessing
                 {
                     //ToDo:  argumente rausziehen
                     pattern.Value.Invoke(match);
+                    return;
                 }
             }
+
+            Console.WriteLine("Can't understand what you meant to do");
         }
 
         public static void Register<T>()
