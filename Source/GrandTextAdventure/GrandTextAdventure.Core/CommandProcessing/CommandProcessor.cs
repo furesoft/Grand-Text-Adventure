@@ -10,6 +10,14 @@ namespace GrandTextAdventure.Core.CommandProcessing
     {
         private static readonly Dictionary<string, ICommand> s_commands = new();
 
+        public static void DisplayCommands()
+        {
+            foreach (var p in s_commands)
+            {
+                Console.WriteLine(p.Key);
+            }
+        }
+
         public static void Invoke(string src)
         {
             foreach (var pattern in s_commands)
