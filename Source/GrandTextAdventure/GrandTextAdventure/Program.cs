@@ -63,9 +63,7 @@ namespace GrandTextAdventure
         {
             Mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
 
-            Core.CommandProcessing.CommandProcessor.Register<LookCommand>();
-            Core.CommandProcessing.CommandProcessor.Register<CloseCommand>();
-            Core.CommandProcessing.CommandProcessor.Register<WhoAmICommand>();
+            Core.CommandProcessing.CommandProcessor.ScanForCommands(typeof(WhoAmICommand).Assembly);
 
             while (true)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -38,6 +39,23 @@ namespace GrandTextAdventure.Core.CommandProcessing
             foreach (var pattern in attrs)
             {
                 s_commands.Add(pattern.Pattern, instance);
+            }
+        }
+
+        public static void ScanForCommands(Assembly assembly)
+        {
+            var types = assembly.GetTypes().Where(_ => typeof(ICommand).IsAssignableFrom(_));
+
+            foreach (var type in types)
+            {
+                var attrs = type.GetCustomAttributes<CommandPattern>(true);
+
+                var instance = (ICommand)Activator.CreateInstance(type);
+
+                foreach (var pattern in attrs)
+                {
+                    s_commands.Add(pattern.Pattern, instance);
+                }
             }
         }
     }
