@@ -7,6 +7,8 @@ namespace GrandTextAdventure
 {
     internal class Program
     {
+        private static MailboxProcessor<GameMessage> s_mailbox;
+
         private static async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
         {
             while (true)
@@ -32,14 +34,14 @@ namespace GrandTextAdventure
 
         private static void Main()
         {
-            var mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+            s_mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
 
             while (true)
             {
                 Console.Write("> ");
                 var input = Console.ReadLine();
 
-                mailbox.Post(new SaveMessage());
+                s_mailbox.Post(new SaveMessage());
             }
         }
     }
