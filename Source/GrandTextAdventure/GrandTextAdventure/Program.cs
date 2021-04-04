@@ -35,6 +35,7 @@ namespace GrandTextAdventure
                 }
                 else if (msg is ChangeStateMessage csMsg)
                 {
+                    SetState(csMsg.Path, csMsg.Value);
                 }
                 else if (msg is GetStateMessage gsMsg)
                 {
@@ -69,6 +70,7 @@ namespace GrandTextAdventure
             {
                 Console.Write("> ");
                 var input = Console.ReadLine();
+
                 Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
         }
@@ -76,6 +78,16 @@ namespace GrandTextAdventure
         private static string[] ParsePath(string path)
         {
             return path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static void SetState(string path, object value)
+        {
+            var segments = ParsePath(path);
+
+            if (segments[0] == "player")
+            {
+                s_state.Player.SetOrAddValue(segments[1], value);
+            }
         }
     }
 }
