@@ -19,6 +19,7 @@ namespace GrandTextAdventure
                 {
                     Console.WriteLine("The Game will exit soon...");
                     await Task.Delay(2000);
+
                     Environment.Exit(0);
                 }
                 else if (msg is LoadMessage ldMsg)
