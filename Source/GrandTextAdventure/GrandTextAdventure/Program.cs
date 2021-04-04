@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Actress;
 using GrandTextAdventure.Commands;
@@ -33,7 +33,30 @@ namespace GrandTextAdventure
                 {
                     Console.WriteLine("Game saved");
                 }
+                else if (msg is ChangeStateMessage csMsg)
+                {
+                }
+                else if (msg is GetStateMessage gsMsg)
+                {
+                    var value = GetState(gsMsg.Path);
+
+                    gsMsg.Value = value;
+
+                    gsMsg.Channel.Reply(gsMsg);
+                }
             }
+        }
+
+        private static object GetState(string path)
+        {
+            var segments = ParsePath(path);
+
+            if (segments[0] == "player")
+            {
+                return s_state.Player.GetValue<object>(segments[1]);
+            }
+
+            return null;
         }
 
         private static void Main()
@@ -42,6 +65,7 @@ namespace GrandTextAdventure
 
             Core.CommandProcessing.CommandProcessor.Register<LookCommand>();
             Core.CommandProcessing.CommandProcessor.Register<CloseCommand>();
+            Core.CommandProcessing.CommandProcessor.Register<WhoAmICommand>();
 
             while (true)
             {
@@ -49,6 +73,11 @@ namespace GrandTextAdventure
                 var input = Console.ReadLine();
                 Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
+        }
+
+        private static string[] ParsePath(string path)
+        {
+            return path.Split('/', StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
