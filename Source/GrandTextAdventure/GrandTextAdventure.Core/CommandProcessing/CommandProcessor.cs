@@ -13,7 +13,7 @@ namespace GrandTextAdventure.Core.CommandProcessing
         {
             foreach (var pattern in s_commands)
             {
-                var match = Regex.Match(src, pattern.Key);
+                var match = Regex.Match(src, pattern.Key, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
                 if (match.Success)
                 {
