@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using GrandTextAdventure.Core.CommandProcessing;
-using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("exit")]
-    public class CloseCommand : ICommand
+    [CommandPattern("look (south|west|east|south)")]
+    [CommandPattern("look (left|right|before|behind)")]
+    public class LookCommand : ICommand
     {
         public void Invoke(Match match)
         {
-            Program.Mailbox.Post(new EndGameMessage());
+            var direction = match.Groups[1];
         }
     }
 }

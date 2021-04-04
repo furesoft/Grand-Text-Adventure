@@ -1,7 +1,9 @@
-﻿namespace GrandTextAdventure.Core.CommandProcessing
+﻿using System.Text.RegularExpressions;
+
+namespace GrandTextAdventure.Core.CommandProcessing
 {
     public interface ICommand
     {
-        void Invoke(string[] args);
+        void Invoke(Match args);
     }
 }

@@ -18,7 +18,7 @@ namespace GrandTextAdventure.Core.CommandProcessing
                 if (match.Success)
                 {
                     //ToDo:  argumente rausziehen
-                    pattern.Value.Invoke(Array.Empty<string>());
+                    pattern.Value.Invoke(match);
                 }
             }
         }

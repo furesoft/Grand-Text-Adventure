@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Actress;
+using GrandTextAdventure.Commands;
 using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure
 {
     internal class Program
     {
-        private static MailboxProcessor<GameMessage> s_mailbox;
+        public static MailboxProcessor<GameMessage> Mailbox;
 
         private static async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
         {
@@ -35,14 +36,16 @@ namespace GrandTextAdventure
 
         private static void Main()
         {
-            s_mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+            Mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+
+            Core.CommandProcessing.CommandProcessor.Register<LookCommand>();
+            Core.CommandProcessing.CommandProcessor.Register<CloseCommand>();
 
             while (true)
             {
                 Console.Write("> ");
                 var input = Console.ReadLine();
-
-                s_mailbox.Post(new SaveMessage());
+                Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
         }
     }

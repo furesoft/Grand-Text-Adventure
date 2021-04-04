@@ -2,7 +2,7 @@
 
 namespace GrandTextAdventure.Core.CommandProcessing
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class CommandPattern : Attribute
     {
         public CommandPattern(string pattern)
