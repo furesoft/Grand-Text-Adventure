@@ -26,9 +26,11 @@ namespace GrandTextAdventure.Core
 
         public T GetValue<T>(string name)
         {
-            if (Properties.ContainsKey(name))
+            var lowerName = name.ToLower();
+
+            if (Properties.ContainsKey(lowerName))
             {
-                return (T)Properties[name];
+                return (T)Properties[lowerName];
             }
 
             return default;
@@ -36,13 +38,13 @@ namespace GrandTextAdventure.Core
 
         public void SetOrAddValue(string name, object value)
         {
-            if (Properties.ContainsKey(name))
+            if (Properties.ContainsKey(name.ToLower()))
             {
-                Properties[name] = value;
+                Properties[name.ToLower()] = value;
             }
             else
             {
-                Properties.Add(name, value);
+                Properties.Add(name.ToLower(), value);
             }
         }
 
