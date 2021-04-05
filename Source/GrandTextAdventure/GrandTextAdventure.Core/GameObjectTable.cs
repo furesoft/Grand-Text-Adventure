@@ -12,8 +12,13 @@ namespace GrandTextAdventure.Core
         private static readonly Dictionary<string, GameObject> s_objects = new();
         private static int s_idCounter = 1;
 
+        public static void Add(GameObject obj)
+        {
+            s_objects.Add(obj.Name, obj);
+        }
+
         public static TObject CreateInstance<TObject>(string name)
-            where TObject : GameObject, new()
+                    where TObject : GameObject, new()
         {
             if (s_objects.ContainsKey(name))
             {
@@ -71,7 +76,7 @@ namespace GrandTextAdventure.Core
         {
             if (Directory.Exists(directory))
             {
-                var files = Directory.GetFiles(directory, "*.entity");
+                var files = Directory.GetFiles(directory, "*.efl");
 
                 foreach (var entityConfiguration in files)
                 {

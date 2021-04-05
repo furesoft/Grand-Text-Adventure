@@ -14,4 +14,10 @@
     <ProjectReference Include="..\GrandTextAdventure.Messages\GrandTextAdventure.Messages.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="samples.ced">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
