@@ -10,7 +10,7 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Match match)
         {
-            Program.Mailbox.Post(new EndGameMessage());
+            GameEngine.Instance.Post(new EndGameMessage());
         }
     }
 }

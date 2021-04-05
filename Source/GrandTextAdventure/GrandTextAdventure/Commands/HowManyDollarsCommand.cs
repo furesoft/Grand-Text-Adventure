@@ -10,8 +10,7 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Match args)
         {
-            var msg = (GetStateMessage)Program.Mailbox.PostAndReply<GameMessage>((channel) => new GetStateMessage(channel, "/player/Money"));
-            var money = (Money)msg.Value;
+            var money = (Money)GameEngine.Instance.GetState("/player/Money");
 
             switch (args.Groups[1].Value)
             {

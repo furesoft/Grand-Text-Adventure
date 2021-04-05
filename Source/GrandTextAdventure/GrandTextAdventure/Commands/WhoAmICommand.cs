@@ -9,9 +9,9 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Match args)
         {
-            var msg = (GetStateMessage)Program.Mailbox.PostAndReply<GameMessage>((channel) => new GetStateMessage(channel, "/player/Name"));
+            var value = GameEngine.Instance.GetState("/player/Name");
 
-            System.Console.WriteLine("You are " + msg.Value);
+            System.Console.WriteLine("You are " + value);
         }
     }
 }
