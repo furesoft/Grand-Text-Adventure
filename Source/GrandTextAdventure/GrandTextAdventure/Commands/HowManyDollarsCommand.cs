@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.CommandProcessing;
-using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("How much (money|dollar|coins) do I have?")]
+    [CommandPattern(@"How much (money) do I have\?")]
+    [CommandPattern(@"How many (dollar[s]?|coins) do I have\?")]
     public class HowManyDollarsCommand : ICommand
     {
         public void Invoke(Match args)
@@ -18,6 +18,7 @@ namespace GrandTextAdventure.Commands
                     System.Console.WriteLine("You have {0} $ and {1} Pilzschaf-Coins", money.Dollar, money.PilzschafCoins);
                     break;
 
+                case "dollars":
                 case "dollar":
                     System.Console.WriteLine("You have {0} $", money.Dollar);
                     break;

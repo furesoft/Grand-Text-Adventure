@@ -1,10 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using GrandTextAdventure.Core.CommandProcessing;
-using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("Who am I?")]
+    [CommandPattern(@"Who am I\?")]
     public class WhoAmICommand : ICommand
     {
         public void Invoke(Match args)
