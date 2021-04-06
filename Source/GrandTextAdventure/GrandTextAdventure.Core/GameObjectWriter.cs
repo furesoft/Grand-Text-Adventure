@@ -86,6 +86,10 @@ namespace GrandTextAdventure.Core
                             bw.Write(fValue);
                             break;
 
+                        case float sValue:
+                            bw.Write(sValue);
+                            break;
+
                         case string strValue:
                             {
                                 var index = _strTable.GetOrCreateIndex(strValue);

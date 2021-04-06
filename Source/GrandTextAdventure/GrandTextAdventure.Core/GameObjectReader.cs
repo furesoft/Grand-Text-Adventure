@@ -117,6 +117,9 @@ namespace GrandTextAdventure.Core
                 case TypeCode.Double:
                     return _objectReader.ReadDouble();
 
+                case TypeCode.Single:
+                    return _objectReader.ReadSingle();
+
                 case TypeCode.String:
                     var index = _objectReader.ReadUInt32();
                     _strTable.TryFind(index, out var strVal);
