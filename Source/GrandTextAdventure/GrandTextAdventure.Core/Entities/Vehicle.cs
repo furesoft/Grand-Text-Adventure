@@ -7,5 +7,11 @@
         {
             Type = GameObjectType.Vehicle;
         }
+
+        public bool IsLocked
+        {
+            get { return GetValue<bool>(nameof(IsLocked)); }
+            set { SetOrAddValue(nameof(IsLocked), value); }
+        }
     }
 }
