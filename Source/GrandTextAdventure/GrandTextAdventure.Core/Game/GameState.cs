@@ -7,9 +7,10 @@ namespace GrandTextAdventure.Core.Game
         public GameState()
         {
             Player.SetOrAddValue("Money", new Money { PilzschafCoins = 1, Dollar = 500 });
+            CurrentMap = new Room { Name = "Baker Street" };
         }
 
-        public Map CurrentMap { get; set; }
+        public Room CurrentMap { get; set; }
         public Charackter Player { get; set; } = new Charackter();
     }
 }
