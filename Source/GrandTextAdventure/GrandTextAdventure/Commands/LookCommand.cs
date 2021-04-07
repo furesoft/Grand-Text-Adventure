@@ -5,7 +5,7 @@ using GrandTextAdventure.Core.Game;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("look (south|west|east|south)")]
+    [CommandPattern("look (north|west|east|south)")]
     [CommandPattern("look (left|right|before|behind)")]
     public class LookCommand : ICommand
     {
