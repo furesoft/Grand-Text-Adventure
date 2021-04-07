@@ -11,6 +11,5 @@
         }
 
         public bool IsDead => GetValue<int>("Health") <= 0;
-        public override string Name { get => GetValue<string>(nameof(Name)); set => SetOrAddValue(nameof(Name), value); }
     }
 }

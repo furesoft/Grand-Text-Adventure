@@ -12,7 +12,7 @@ namespace GrandTextAdventure.Core
             set { SetOrAddValue("ID", value); }
         }
 
-        public virtual string Name { get; set; }
+        public string Name { get => GetValue<string>(nameof(Name)); set => SetOrAddValue(nameof(Name), value); }
 
         public Dictionary<string, object> Properties { get; set; } = new();
         public GameObjectType Type { get; internal set; }
