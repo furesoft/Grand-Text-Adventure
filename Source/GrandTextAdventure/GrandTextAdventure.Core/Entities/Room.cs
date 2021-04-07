@@ -2,6 +2,6 @@
 {
     public class Room : GameObject
     {
-        public RoomExits Exits { get; set; }
+        public RoomExits Exits { get; set; } = new();
     }
 }

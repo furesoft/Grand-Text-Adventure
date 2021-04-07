@@ -92,19 +92,19 @@ namespace GrandTextAdventure
                         switch (crMsg.Direction)
                         {
                             case Direction.North:
-                                _state.CurrentMap = _state.CurrentMap.Exits.North.GetRoom();
+                                _state.CurrentMap = _state.CurrentMap.Exits.North;
                                 break;
 
                             case Direction.West:
-                                _state.CurrentMap = _state.CurrentMap.Exits.West.GetRoom();
+                                _state.CurrentMap = _state.CurrentMap.Exits.West;
                                 break;
 
                             case Direction.East:
-                                _state.CurrentMap = _state.CurrentMap.Exits.East.GetRoom();
+                                _state.CurrentMap = _state.CurrentMap.Exits.East;
                                 break;
 
                             case Direction.South:
-                                _state.CurrentMap = _state.CurrentMap.Exits.South.GetRoom();
+                                _state.CurrentMap = _state.CurrentMap.Exits.South;
                                 break;
                         }
 
