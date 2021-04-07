@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Actress;
 using GrandTextAdventure.Commands;
@@ -21,6 +20,11 @@ namespace GrandTextAdventure
             var msg = (GetStateMessage)_mailbox.PostAndReply<GameMessage>((channel) => new GetStateMessage(channel, path));
 
             return msg.Value;
+        }
+
+        public void Navigate(Direction direction)
+        {
+            _mailbox.Post(new ChangeRoomMessage { Direction = direction });
         }
 
         public void Post(GameMessage msg)
@@ -84,6 +88,27 @@ namespace GrandTextAdventure
                             gsMsg.Channel.Reply(gsMsg);
                             break;
                         }
+                    case ChangeRoomMessage crMsg:
+                        switch (crMsg.Direction)
+                        {
+                            case Direction.North:
+                                _state.CurrentMap = _state.CurrentMap.Exits.North.GetRoom();
+                                break;
+
+                            case Direction.West:
+                                _state.CurrentMap = _state.CurrentMap.Exits.West.GetRoom();
+                                break;
+
+                            case Direction.East:
+                                _state.CurrentMap = _state.CurrentMap.Exits.East.GetRoom();
+                                break;
+
+                            case Direction.South:
+                                _state.CurrentMap = _state.CurrentMap.Exits.South.GetRoom();
+                                break;
+                        }
+
+                        break;
                 }
             }
         }
@@ -92,9 +117,20 @@ namespace GrandTextAdventure
         {
             if (segments.Length == 2)
             {
-                if (segments[0] == "player")
+                switch (segments[0])
                 {
-                    return _state.Player;
+                    case "player":
+                        return _state.Player;
+
+                    case "CurrentMap":
+                        return _state.CurrentMap;
+                }
+            }
+            else if (segments.Length == 1)
+            {
+                if (segments[0] == "CurrentMap")
+                {
+                    return _state.CurrentMap;
                 }
             }
 
@@ -107,7 +143,14 @@ namespace GrandTextAdventure
 
             var obj = GetObjectBySegments(segments);
 
-            return obj.GetValue<object>(segments[^1]);
+            if (segments.Length > 1)
+            {
+                return obj.GetValue<object>(segments[^1]);
+            }
+            else
+            {
+                return obj;
+            }
         }
 
         private string[] ParsePath(string path)
@@ -120,7 +163,14 @@ namespace GrandTextAdventure
             var segments = ParsePath(path);
             var obj = GetObjectBySegments(segments);
 
-            obj.SetOrAddValue(segments[^1], value);
+            if (segments.Length > 1)
+            {
+                obj.SetOrAddValue(segments[^1], value);
+            }
+            else
+            {
+                obj.SetOrAddValue(segments[0], value);
+            }
         }
     }
 }
