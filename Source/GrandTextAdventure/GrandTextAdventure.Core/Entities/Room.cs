@@ -4,6 +4,7 @@ namespace GrandTextAdventure.Core.Entities
 {
     public class Room : GameObject
     {
+        public GameObject[] Entries { get; set; }
         public RoomExits Exits { get; set; } = new();
 
         public int Heigth
