@@ -10,7 +10,7 @@ namespace GrandTextAdventure
             // Use FigLet font for Banner
             var fontStream = Assembly.GetEntryAssembly().GetManifestResourceStream("GrandTextAdventure.font.flf");
             var font = new WenceyWang.FIGlet.FIGletFont(fontStream);
-            var text = new WenceyWang.FIGlet.AsciiArt("Grand Text Adventure", font: font, width: WenceyWang.FIGlet.CharacterWidth.Full);
+            var text = new WenceyWang.FIGlet.AsciiArt("Grand Text Adventure", font: font, width: WenceyWang.FIGlet.CharacterWidth.Smush);
             Console.WriteLine(text.ToString());
             Console.WriteLine();
 

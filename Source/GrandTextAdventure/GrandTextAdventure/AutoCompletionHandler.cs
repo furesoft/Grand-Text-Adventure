@@ -34,7 +34,7 @@ namespace GrandTextAdventure
                         posibilities.Add(withOption);
                     }
 
-                    return posibilities;
+                    return _;
                 }
                 else
                 {
