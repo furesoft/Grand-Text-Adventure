@@ -13,6 +13,16 @@ namespace GrandTextAdventure
             var text = new WenceyWang.FIGlet.AsciiArt("Grand Text Adventure", font: font, width: WenceyWang.FIGlet.CharacterWidth.Full);
             Console.WriteLine(text.ToString());
             Console.WriteLine();
+
+            Console.WriteLine("Grand Text Adventure is an omage to the classic Grand Theft Auto but as Text Adventure.");
+            Console.WriteLine("GTA can be extendet by script files for custom entities and custom maps");
+            Console.WriteLine();
+
+            Console.WriteLine("* Credits");
+            Console.WriteLine("Chris Anders (Furesoft) -> Developer");
+            Console.WriteLine("Lasse (CJ) -> Support");
+            Console.WriteLine("Cortex -> Idea");
+            Console.WriteLine();
         }
     }
 }
