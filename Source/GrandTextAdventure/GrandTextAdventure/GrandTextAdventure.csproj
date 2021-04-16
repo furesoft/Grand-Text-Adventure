@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Actress" Version="0.2.1" />
+    <PackageReference Include="FiGlet.Net" Version="1.1.2" />
     <PackageReference Include="ReadLine" Version="2.0.1" />
   </ItemGroup>
 
@@ -19,6 +20,10 @@
     <None Update="samples.ced">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="font.flf" />
   </ItemGroup>
 
 </Project>
