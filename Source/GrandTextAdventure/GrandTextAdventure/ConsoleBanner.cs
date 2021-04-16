@@ -18,7 +18,7 @@ namespace GrandTextAdventure
             Console.WriteLine("GTA can be extendet by script files for custom entities and custom maps");
             Console.WriteLine();
 
-            Console.WriteLine("* Credits");
+            Console.WriteLine("* Credits *");
             Console.WriteLine("Chris Anders (Furesoft) -> Developer");
             Console.WriteLine("Lasse (CJ) -> Support");
             Console.WriteLine("Cortex -> Idea");
