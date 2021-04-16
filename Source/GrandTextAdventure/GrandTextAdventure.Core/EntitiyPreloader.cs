@@ -9,17 +9,23 @@ namespace GrandTextAdventure.Core
             var files = Directory.GetFiles(path, "*.ced");
             foreach (var file in files)
             {
-                var reader = new GameObjectReader(File.OpenRead(file));
-
-                while (reader.HasUnloadedObject)
-                {
-                    var obj = reader.ReadObject();
-
-                    GameObjectTable.Add(obj);
-                }
-
-                reader.Close();
+                var fileStrm = File.OpenRead(file);
+                PreLoad(fileStrm);
             }
+        }
+
+        public static void PreLoad(Stream strm)
+        {
+            var reader = new GameObjectReader(strm);
+
+            while (reader.HasUnloadedObject)
+            {
+                var obj = reader.ReadObject();
+
+                GameObjectTable.Add(obj);
+            }
+
+            reader.Close();
         }
     }
 }
