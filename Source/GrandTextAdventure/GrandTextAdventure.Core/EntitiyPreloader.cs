@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 
 namespace GrandTextAdventure.Core
 {
@@ -26,6 +27,21 @@ namespace GrandTextAdventure.Core
             }
 
             reader.Close();
+        }
+
+        public static void PreLoadFromResources(Assembly assembly)
+        {
+            var names = assembly.GetManifestResourceNames();
+
+            foreach (var resName in names)
+            {
+                if (resName.EndsWith(".ced"))
+                {
+                    var resStrm = assembly.GetManifestResourceStream(resName);
+
+                    PreLoad(resStrm);
+                }
+            }
         }
     }
 }
