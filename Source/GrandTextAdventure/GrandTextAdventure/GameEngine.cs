@@ -49,6 +49,8 @@ namespace GrandTextAdventure
             {
                 var input = ReadLine.Read("> ");
 
+                ReadLine.AddHistory(input);
+
                 Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
         }
