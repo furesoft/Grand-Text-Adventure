@@ -70,11 +70,11 @@ namespace GrandTextAdventure
                         Environment.Exit(0);
                         break;
 
-                    case LoadMessage ldMsg:
+                    case LoadMessage:
                         Console.WriteLine("Game loaded");
                         break;
 
-                    case SaveMessage savMsg:
+                    case SaveMessage:
                         Console.WriteLine("Game saved");
                         break;
 
@@ -185,7 +185,7 @@ namespace GrandTextAdventure
             }
         }
 
-        private string[] ParsePath(string path)
+        private static string[] ParsePath(string path)
         {
             return path.Split('/', StringSplitOptions.RemoveEmptyEntries);
         }

@@ -7,22 +7,14 @@ namespace GrandTextAdventure.Core
         public static Position ApplyDirection(Position pos, Direction dir)
         {
             //ToDo: Add Bound Check for Navigating
-            switch (dir)
+            return dir switch
             {
-                case Direction.North:
-                    return new Position(pos.X, pos.Y - 1);
-
-                case Direction.West:
-                    return new Position(pos.X - 1, pos.Y);
-
-                case Direction.East:
-                    return new Position(pos.X + 1, pos.Y);
-
-                case Direction.South:
-                    return new Position(pos.X, pos.Y + 1);
-            }
-
-            return pos;
+                Direction.North => new Position(pos.X, pos.Y - 1),
+                Direction.West => new Position(pos.X - 1, pos.Y),
+                Direction.East => new Position(pos.X + 1, pos.Y),
+                Direction.South => new Position(pos.X, pos.Y + 1),
+                _ => pos,
+            };
         }
     }
 }

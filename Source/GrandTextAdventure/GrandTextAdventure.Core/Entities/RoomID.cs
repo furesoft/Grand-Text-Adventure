@@ -4,7 +4,7 @@ namespace GrandTextAdventure.Core.Entities
 {
     public struct RoomID
     {
-        public string ID;
+        public string ID { get; set; }
 
         public Room GetRoom()
         {

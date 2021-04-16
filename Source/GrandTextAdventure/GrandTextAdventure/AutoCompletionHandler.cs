@@ -1,6 +1,7 @@
 using System;
 
-namespace GrandTextAdventure {
+namespace GrandTextAdventure
+{
     class AutoCompletionHandler : IAutoCompleteHandler
     {
         // characters to start completion from
