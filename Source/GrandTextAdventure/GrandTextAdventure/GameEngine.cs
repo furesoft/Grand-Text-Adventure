@@ -43,10 +43,11 @@ namespace GrandTextAdventure
 
             Core.CommandProcessing.CommandProcessor.ScanForCommands(typeof(WhoAmICommand).Assembly);
 
+            ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
+
             while (true)
             {
-                Console.Write("> ");
-                var input = Console.ReadLine();
+                var input = ReadLine.Read("> ");
 
                 Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
