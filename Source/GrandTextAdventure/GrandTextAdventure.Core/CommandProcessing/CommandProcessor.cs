@@ -18,6 +18,11 @@ namespace GrandTextAdventure.Core.CommandProcessing
             }
         }
 
+        public static string[] GetCommandPatterns()
+        {
+            return s_commands.Keys.ToArray();
+        }
+
         public static void Invoke(string src)
         {
             foreach (var pattern in s_commands)
