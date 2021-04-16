@@ -92,19 +92,48 @@ namespace GrandTextAdventure
                         switch (crMsg.Direction)
                         {
                             case Direction.North:
-                                _state.CurrentMap = _state.CurrentMap.Exits.North;
+                                if (_state.CurrentMap.Exits.North != null)
+                                {
+                                    _state.CurrentMap = _state.CurrentMap.Exits.North;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You are at the End of the World");
+                                }
+
                                 break;
 
                             case Direction.West:
-                                _state.CurrentMap = _state.CurrentMap.Exits.West;
+                                if (_state.CurrentMap.Exits.West != null)
+                                {
+                                    _state.CurrentMap = _state.CurrentMap.Exits.West;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You are at the End of the World");
+                                }
                                 break;
 
                             case Direction.East:
-                                _state.CurrentMap = _state.CurrentMap.Exits.East;
+                                if (_state.CurrentMap.Exits.East != null)
+                                {
+                                    _state.CurrentMap = _state.CurrentMap.Exits.East;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You are at the End of the World");
+                                }
                                 break;
 
                             case Direction.South:
-                                _state.CurrentMap = _state.CurrentMap.Exits.South;
+                                if (_state.CurrentMap.Exits.South != null)
+                                {
+                                    _state.CurrentMap = _state.CurrentMap.Exits.South;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You are at the End of the World");
+                                }
                                 break;
                         }
 
