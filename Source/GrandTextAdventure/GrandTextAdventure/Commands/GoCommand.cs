@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using GrandTextAdventure.Core;
-using GrandTextAdventure.Core.CommandProcessing;
 using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
+using GrandTextAdventure.Core.TextProcessing;
+using GrandTextAdventure.Core.TextProcessing.Interfaces;
+using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("go (north|west|east|south)")]
-    [CommandPattern("go (left|right|before|behind)")]
-    public class GoCommand : ICommand
+    [CommandHandler(VerbCodes.Go)]
+    public class GoCommand : ICommandHandler
     {
-        public void Invoke(Match match)
+        public void Invoke(Command cmd)
         {
-            var directionGroup = match.Groups[1];
-            var direction = Enum.Parse<Direction>(directionGroup.Value, true);
+            var direction = Enum.Parse<Direction>(cmd.Noun, true);
 
             var pos = (Position)GameEngine.Instance.GetState("/player/Position");
             var newPos = Position.ApplyDirection(pos, direction);

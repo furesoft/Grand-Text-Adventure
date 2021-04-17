@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using GrandTextAdventure.Core.CommandProcessing;
 using GrandTextAdventure.Core.Game;
+using GrandTextAdventure.Core.TextProcessing;
+using GrandTextAdventure.Core.TextProcessing.Interfaces;
+using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
 namespace GrandTextAdventure.Commands
 {
-    [CommandPattern("look (north|west|east|south)")]
-    [CommandPattern("look (left|right|before|behind)")]
-    public class LookCommand : ICommand
+    [CommandHandler(VerbCodes.Look)]
+    public class LookCommand : ICommandHandler
     {
         public void Invoke(Match match)
         {
             var directionGroup = match.Groups[1];
             var direction = Enum.Parse<Direction>(directionGroup.Value, true);
+        }
+
+        public void Invoke(Command cmd)
+        {
+            throw new NotImplementedException();
         }
     }
 }

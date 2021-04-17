@@ -4,6 +4,7 @@ using Actress;
 using GrandTextAdventure.Commands;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Game;
+using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure
@@ -41,7 +42,8 @@ namespace GrandTextAdventure
         {
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
 
-            Core.CommandProcessing.CommandProcessor.ScanForCommands(typeof(WhoAmICommand).Assembly);
+            //Core.CommandProcessing.CommandProcessor.ScanForCommands(typeof(WhoAmICommand).Assembly);
+            CommandHandler.Collect();
 
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
@@ -51,7 +53,9 @@ namespace GrandTextAdventure
 
                 ReadLine.AddHistory(input);
 
-                Core.CommandProcessing.CommandProcessor.Invoke(input);
+                CommandHandler.Invoke(input);
+
+                //Core.CommandProcessing.CommandProcessor.Invoke(input);
             }
         }
 
