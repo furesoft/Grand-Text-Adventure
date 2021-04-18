@@ -19,6 +19,6 @@ namespace GrandTextAdventure.Core.Game
         }
 
         public Room CurrentMap { get; set; }
-        public Charackter Player { get; set; } = new Charackter();
+        public PlayerCharackter Player { get; set; } = new();
     }
 }

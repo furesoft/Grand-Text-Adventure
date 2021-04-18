@@ -13,5 +13,11 @@
             get { return GetValue<bool>(nameof(IsLocked)); }
             set { SetOrAddValue(nameof(IsLocked), value); }
         }
+
+        public bool IsDriving
+        {
+            get { return GetValue<bool>(nameof(IsDriving)); }
+            set { SetOrAddValue(nameof(IsDriving), value); }
+        }
     }
 }
