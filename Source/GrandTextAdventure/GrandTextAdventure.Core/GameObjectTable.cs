@@ -47,6 +47,11 @@ namespace GrandTextAdventure.Core
                    select (T)obj.Value;
         }
 
+        public static IEnumerable<GameObject> GetAll()
+        {
+            return s_objects.Values;
+        }
+
         public static GameObject GetEntity(string name)
         {
             if (s_instanceBuilders.ContainsKey(name))
@@ -70,6 +75,11 @@ namespace GrandTextAdventure.Core
                     s_instanceBuilders.Add(type.Name.ToLower(), type);
                 }
             }
+        }
+
+        public static void Remove(string name)
+        {
+            s_objects.Remove(name);
         }
 
         public static void Load(string directory)
