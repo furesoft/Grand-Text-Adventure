@@ -16,14 +16,15 @@ namespace GrandTextAdventure.Commands
         {
             var direction = Enum.Parse<Direction>(cmd.Noun, true);
 
-            var pos = (Position)GameEngine.Instance.GetState("/player/Position");
+            var gameState = GameEngine.Instance.GetState();
+            var pos = gameState.Player.Position;
             var newPos = Position.ApplyDirection(pos, direction);
 
-            var currentRoom = (Room)GameEngine.Instance.GetState("/CurrentMap");
+            var currentRoom = gameState.CurrentMap;
 
             if (currentRoom.IsInBounds(newPos))
             {
-                GameEngine.Instance.SetState("/player/Position", newPos);
+                gameState.Player.Position = newPos;
             }
             else
             {

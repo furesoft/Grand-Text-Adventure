@@ -1,17 +1,16 @@
 ﻿using Actress;
+using GrandTextAdventure.Core.Game;
 
 namespace GrandTextAdventure.Messages
 {
     public class GetStateMessage : GameMessage
     {
-        public GetStateMessage(IReplyChannel<GameMessage> channel, string path)
+        public GetStateMessage(IReplyChannel<GameMessage> channel)
         {
             Channel = channel;
-            Path = path;
         }
 
         public IReplyChannel<GameMessage> Channel { get; }
-        public string Path { get; set; }
-        public object Value { get; set; }
+        public GameState State { get; set; }
     }
 }

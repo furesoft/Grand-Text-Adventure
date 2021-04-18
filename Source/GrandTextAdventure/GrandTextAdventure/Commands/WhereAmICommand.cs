@@ -11,7 +11,7 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Command cmd)
         {
-            var value = (Room)GameEngine.Instance.GetState("/CurrentMap");
+            var value = GameEngine.Instance.GetState().CurrentMap;
 
             System.Console.WriteLine("You are at " + value.Name);
         }

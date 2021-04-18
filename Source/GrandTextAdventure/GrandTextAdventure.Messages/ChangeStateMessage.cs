@@ -1,8 +1,10 @@
-﻿namespace GrandTextAdventure.Messages
+﻿using System;
+using GrandTextAdventure.Core.Game;
+
+namespace GrandTextAdventure.Messages
 {
     public class ChangeStateMessage : GameMessage
     {
-        public string Path { get; set; }
-        public object Value { get; set; }
+        public GameState State { get; set; }
     }
 }
