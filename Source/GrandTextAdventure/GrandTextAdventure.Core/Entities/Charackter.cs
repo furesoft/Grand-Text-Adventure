@@ -40,5 +40,12 @@ namespace GrandTextAdventure.Core.Entities
             get { return GetValue<Gender>(nameof(Gender)); }
             set { SetOrAddValue(nameof(Gender), value); }
         }
+
+        public override void Deinit()
+        {
+            base.Deinit();
+
+            OnDead = null;
+        }
     }
 }

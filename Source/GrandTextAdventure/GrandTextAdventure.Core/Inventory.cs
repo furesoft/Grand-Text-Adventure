@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GrandTextAdventure.Core
@@ -75,9 +76,14 @@ namespace GrandTextAdventure.Core
 
         public void Transfer(Inventory inventory)
         {
-            foreach (var item in _items)
+            if (_items.Count > 0)
             {
-                inventory.Add(item.Key, item.Value);
+                foreach (var item in _items)
+                {
+                    inventory.Add(item.Key, item.Value);
+                }
+
+                Console.WriteLine("Transfered Items to your Inventory");
             }
         }
     }
