@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GrandTextAdventure.Core
 {
-    public class GameObject : DynamicObject
+    public class GameObject
     {
         public delegate void GameObjectEventHandler(string property, object value);
 
@@ -52,20 +52,6 @@ namespace GrandTextAdventure.Core
             }
 
             OnPropertyChanged?.Invoke(name, value);
-        }
-
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            result = GetValue<object>(binder.Name);
-
-            return true;
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            SetOrAddValue(binder.Name, value);
-
-            return true;
         }
     }
 }
