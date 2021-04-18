@@ -6,14 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Actress" Version="0.2.1" />
     <PackageReference Include="FiGlet.Net" Version="1.1.2" />
-    <PackageReference Include="ReadLine" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GrandTextAdventure.Core\GrandTextAdventure.Core.csproj" />
-    <ProjectReference Include="..\GrandTextAdventure.Messages\GrandTextAdventure.Messages.csproj" />
   </ItemGroup>
 
   <ItemGroup>

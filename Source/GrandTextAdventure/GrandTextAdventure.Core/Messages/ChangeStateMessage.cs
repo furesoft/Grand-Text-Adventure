@@ -1,7 +1,7 @@
 ﻿using System;
 using GrandTextAdventure.Core.Game;
 
-namespace GrandTextAdventure.Messages
+namespace GrandTextAdventure.Core.Messages
 {
     public class ChangeStateMessage : GameMessage
     {

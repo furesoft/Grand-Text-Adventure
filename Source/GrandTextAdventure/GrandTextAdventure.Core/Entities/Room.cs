@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace GrandTextAdventure.Core.Entities
 {
@@ -23,6 +23,18 @@ namespace GrandTextAdventure.Core.Entities
         {
             return newPos.X >= 0 && newPos.X < Width
                  && newPos.Y >= 0 && newPos.Y < Heigth;
+        }
+
+        public Dictionary<Position, GameObject> PlacingItems { get; set; }
+
+        public override void Init()
+        {
+            var state = GameEngine.Instance.GetState();
+
+            foreach (var item in PlacingItems)
+            {
+
+            }
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using GrandTextAdventure.Core;
-using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;

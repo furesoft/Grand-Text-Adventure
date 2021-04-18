@@ -14,6 +14,8 @@ namespace GrandTextAdventure.Core
             set { SetOrAddValue("ID", value); }
         }
 
+        public virtual void Init() { }
+
         public event GameObjectEventHandler OnPropertyChanged;
 
         public string Name { get => GetValue<string>(nameof(Name)); set => SetOrAddValue(nameof(Name), value); }

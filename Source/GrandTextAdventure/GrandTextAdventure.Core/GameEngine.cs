@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Actress;
 using GrandTextAdventure.Core.Game;
+using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
-using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure
 {

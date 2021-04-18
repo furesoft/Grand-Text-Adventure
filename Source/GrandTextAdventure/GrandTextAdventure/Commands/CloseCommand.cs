@@ -1,7 +1,7 @@
-﻿using GrandTextAdventure.Core.TextProcessing;
+﻿using GrandTextAdventure.Core.Messages;
+using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
 using GrandTextAdventure.Core.TextProcessing.Synonyms;
-using GrandTextAdventure.Messages;
 
 namespace GrandTextAdventure.Commands
 {

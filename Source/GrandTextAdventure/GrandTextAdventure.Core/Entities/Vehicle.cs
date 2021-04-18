@@ -20,9 +20,9 @@
             set { SetOrAddValue(nameof(IsDriving), value); }
         }
 
-        public bool Speed
+        public byte Speed
         {
-            get { return GetValue<bool>(nameof(Speed)); }
+            get { return GetValue<byte>(nameof(Speed)); }
             set { SetOrAddValue(nameof(Speed), value); }
         }
     }

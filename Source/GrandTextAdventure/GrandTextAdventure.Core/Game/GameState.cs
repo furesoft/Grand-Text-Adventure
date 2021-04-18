@@ -16,9 +16,13 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.Exits.West = new Room { Name = "Ball Street", Exits = new RoomExits { East = CurrentMap } };
 
             Player.Position = new(0, 0);
+
+            ObjectLayer = new GameObject[,] { { new Vehicle() { Name = "Lambo" }, new Charackter() { Name = "Man" } }, { new Vehicle { Name = "Fiat" }, new Charackter() { Name = "Woman" } } };
         }
 
         public Room CurrentMap { get; set; }
         public PlayerCharackter Player { get; set; } = new();
+
+        public GameObject[,] ObjectLayer { get; set; } // used for Vehicles/NPCs/Items
     }
 }
