@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{29D1AE5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandTextAdventure.Messages", "GrandTextAdventure.Messages\GrandTextAdventure.Messages.csproj", "{CD873BE6-BB55-4985-BA05-96B992EA76EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityConsole", "EntityConsole\EntityConsole.csproj", "{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{CD873BE6-BB55-4985-BA05-96B992EA76EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD873BE6-BB55-4985-BA05-96B992EA76EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD873BE6-BB55-4985-BA05-96B992EA76EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
