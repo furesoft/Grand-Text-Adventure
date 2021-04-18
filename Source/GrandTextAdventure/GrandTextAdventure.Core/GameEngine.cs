@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Actress;
+using GrandTextAdventure.Core;
+using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
@@ -13,6 +15,8 @@ namespace GrandTextAdventure
         private GameState _state = new();
 
         private MailboxProcessor<GameMessage> _mailbox;
+
+        private MailboxProcessor<GameMessage> _npcMailbox;
 
         public GameState GetState()
         {
@@ -39,6 +43,7 @@ namespace GrandTextAdventure
         public void Start()
         {
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+            _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
 
             CommandHandler.Collect();
 
@@ -53,6 +58,39 @@ namespace GrandTextAdventure
                 ReadLine.AddHistory(input);
 
                 CommandHandler.Invoke(input);
+            }
+        }
+
+        private async Task NpcProcessor(MailboxProcessor<GameMessage> arg)
+        {
+            while (true)
+            {
+                var msg = await arg.Receive();
+                var gameState = Instance.GetState();
+
+                switch (msg)
+                {
+                    case MoveNpcMessage movMsg:
+
+                        var npc = gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y];
+                        if (npc is Charackter c)
+                        {
+                            var newPos = Position.ApplyDirection(movMsg.OldPosition, movMsg.Direction);
+                            var newNpc = gameState.ObjectLayer[newPos.X, newPos.Y];
+
+                            if (newNpc == null)
+                            {
+                                c.Position = newPos;
+
+                                gameState.ObjectLayer[newPos.X, newPos.Y] = c;
+                                gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y] = null;
+
+                                SetState(gameState);
+                            }
+                        }
+
+                        break;
+                }
             }
         }
 
