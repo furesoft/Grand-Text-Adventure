@@ -1,4 +1,5 @@
-﻿using GrandTextAdventure.Core.Entities;
+﻿using System;
+using GrandTextAdventure.Core.Entities;
 
 namespace GrandTextAdventure.Core.Game
 {
@@ -16,6 +17,12 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.Exits.West = new Room { Name = "Ball Street", Exits = new RoomExits { East = CurrentMap } };
 
             Player.Position = new(0, 0);
+            Player.OnDead += (p, v) =>
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Wasted");
+                Console.ResetColor();
+            };
 
             ObjectLayer = new GameObject[,] { { new Vehicle() { Name = "Lambo" }, new Charackter() { Name = "Man" } }, { new Vehicle { Name = "Fiat" }, new Charackter() { Name = "Woman" } } };
 
