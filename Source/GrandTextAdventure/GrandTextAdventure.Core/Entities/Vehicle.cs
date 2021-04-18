@@ -19,5 +19,11 @@
             get { return GetValue<bool>(nameof(IsDriving)); }
             set { SetOrAddValue(nameof(IsDriving), value); }
         }
+
+        public bool Speed
+        {
+            get { return GetValue<bool>(nameof(Speed)); }
+            set { SetOrAddValue(nameof(Speed), value); }
+        }
     }
 }
