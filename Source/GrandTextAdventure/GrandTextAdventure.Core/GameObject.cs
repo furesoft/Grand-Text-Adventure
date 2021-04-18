@@ -6,11 +6,15 @@ namespace GrandTextAdventure.Core
 {
     public class GameObject : DynamicObject
     {
+        public delegate void GameObjectEventHandler(string property, object value);
+
         public int ID
         {
             get { return GetValue<int>("ID"); }
             set { SetOrAddValue("ID", value); }
         }
+
+        public event GameObjectEventHandler OnPropertyChanged;
 
         public string Name { get => GetValue<string>(nameof(Name)); set => SetOrAddValue(nameof(Name), value); }
 
@@ -46,6 +50,8 @@ namespace GrandTextAdventure.Core
             {
                 Properties.Add(name.ToLower(), value);
             }
+
+            OnPropertyChanged?.Invoke(name, value);
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
