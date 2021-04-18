@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using GrandTextAdventure.Core.Entities;
-using GrandTextAdventure.Core.TextProcessing;
+﻿using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
 using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
