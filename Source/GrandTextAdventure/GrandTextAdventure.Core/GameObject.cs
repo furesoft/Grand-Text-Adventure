@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GrandTextAdventure.Core
@@ -15,6 +15,23 @@ namespace GrandTextAdventure.Core
         }
 
         public virtual void Init() { }
+
+        public virtual void Deinit()
+        {
+            OnPropertyChanged = null;
+            Properties = null;
+        }
+
+        public void ObserverProperty<T>(string name, Action<T> handler)
+        {
+            OnPropertyChanged += (prop, val) =>
+            {
+                if (prop.Equals(name))
+                {
+                    handler?.Invoke((T)val);
+                }
+            };
+        }
 
         public event GameObjectEventHandler OnPropertyChanged;
 
