@@ -13,6 +13,11 @@ namespace GrandTextAdventure.Core
                 Direction.West => new Position(pos.X - speed, pos.Y),
                 Direction.East => new Position(pos.X + speed, pos.Y),
                 Direction.South => new Position(pos.X, pos.Y + speed),
+
+                Direction.NorthEast => new Position(pos.X + speed, pos.Y - speed),
+                Direction.NorthWest => new Position(pos.X - speed, pos.Y - speed),
+                Direction.SouthWest => new Position(pos.X - speed, pos.Y + speed),
+                Direction.SouthEast => new Position(pos.X + speed, pos.Y + speed),
                 _ => pos,
             };
         }
