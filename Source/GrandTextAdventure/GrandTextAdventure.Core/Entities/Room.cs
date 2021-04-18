@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GrandTextAdventure.Core.Entities
 {
     public class Room : GameObject
     {
-        public GameObject[] Entries { get; set; }
+        public GameObject[,] Entries { get; set; }
         public RoomExits Exits { get; set; } = new();
 
         public int Heigth
@@ -25,21 +26,29 @@ namespace GrandTextAdventure.Core.Entities
                  && newPos.Y >= 0 && newPos.Y < Heigth;
         }
 
-        public Dictionary<Position, GameObject> PlacingItems { get; set; }
+        public Dictionary<Position, GameObject> PlacingItems { get; init; } = new();
 
         public override void Init()
         {
+            var state = GameEngine.Instance.GetState();
+
+            Entries = new GameObject[Width, Heigth];
+            state.ObjectLayer = new GameObject[Width, Heigth];
+
             foreach (var entry in Entries)
             {
-                entry.Init();
+                entry?.Init();
             }
-
-            var state = GameEngine.Instance.GetState();
 
             foreach (var item in PlacingItems)
             {
-                //ToDo: implement init ObjectLayer from room.placingitems
+                if (IsInBounds(item.Key))
+                {
+                    state.ObjectLayer[item.Key.X, item.Key.Y] = item.Value;
+                }
             }
+
+            GameEngine.Instance.SetState(state);
         }
 
         public override void Deinit()

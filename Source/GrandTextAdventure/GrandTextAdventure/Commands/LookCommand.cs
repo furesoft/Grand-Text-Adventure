@@ -19,7 +19,14 @@ namespace GrandTextAdventure.Commands
 
             var obj = GetObject(gameState, newPos);
 
-            System.Console.WriteLine("It is a {0}", obj.Name ?? obj.GetType().Name);
+            if (obj != null)
+            {
+                Console.WriteLine("It is a {0}", obj.Name ?? obj.GetType().Name);
+            }
+            else
+            {
+                Console.WriteLine("There is nothing");
+            }
         }
 
         private static GameObject GetObject(GameState gameState, Position newPos)

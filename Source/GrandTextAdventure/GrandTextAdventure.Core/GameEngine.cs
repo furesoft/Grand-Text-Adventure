@@ -44,6 +44,8 @@ namespace GrandTextAdventure
 
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
+            _state.CurrentMap.Init();
+
             while (true)
             {
                 var input = ReadLine.Read("> ");
