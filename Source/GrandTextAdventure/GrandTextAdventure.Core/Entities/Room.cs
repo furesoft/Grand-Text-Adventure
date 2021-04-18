@@ -29,12 +29,28 @@ namespace GrandTextAdventure.Core.Entities
 
         public override void Init()
         {
+            foreach (var entry in Entries)
+            {
+                entry.Init();
+            }
+
             var state = GameEngine.Instance.GetState();
 
             foreach (var item in PlacingItems)
             {
-
+                //ToDo: implement init ObjectLayer from room.placingitems
             }
+        }
+
+        public override void Deinit()
+        {
+            foreach (var entry in Entries)
+            {
+                entry.Deinit();
+            }
+
+            Entries = null;
+            Exits = null;
         }
     }
 }
