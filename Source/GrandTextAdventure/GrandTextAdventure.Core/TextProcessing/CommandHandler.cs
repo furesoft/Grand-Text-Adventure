@@ -28,8 +28,8 @@ namespace GrandTextAdventure.Core.TextProcessing
 
         public static void Invoke(string command)
         {
-            var parser = new GrandTextAdventure.Core.TextProcessing.Parser();
-            var cmd = (Command)parser.ParseCommand(command);
+            var parser = new Parser();
+            var cmd = parser.ParseCommand(command);
 
             if (s_handlers.ContainsKey(cmd.Verb))
             {
@@ -37,11 +37,6 @@ namespace GrandTextAdventure.Core.TextProcessing
             }
             else
             {
-                // Why can't I use TextEngine.AddMessage here?
-                // using Geten.Core can't be added?
-                // because Geten.Core references Geten.TextProcessing, if you would add it as reference there will be a infinite loop of references and the runtime cant start the program
-                // we need a different assembly or we design the api new. this could be easily done
-                //TextEngine.AddMessage($"You don't know how to {cmd.Verb}");
                 throw new Exception($"No Handler for Verb '{cmd.Verb}' found");
             }
         }
