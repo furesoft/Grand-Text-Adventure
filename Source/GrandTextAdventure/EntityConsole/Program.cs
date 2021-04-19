@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Entities;
@@ -8,16 +7,6 @@ namespace EntityConsole
 {
     class Program
     {
-        // load-file
-        // create-file
-        // save file
-
-        // add-object (vehicle|npc|weapon)
-        // delete-object
-        // add-property
-        // delete-property
-        // change-property
-
         static void Main(string[] args)
         {
             while (true)
@@ -29,6 +18,12 @@ namespace EntityConsole
                 var cmd = Command.FromString(input);
                 switch (cmd.Name)
                 {
+                    case "list":
+                        foreach (var obj in GameObjectTable.GetAll())
+                        {
+                            System.Console.WriteLine(obj.Name);
+                        }
+                        break;
                     case "load":
                         var gor = new GameObjectReader(File.OpenRead(cmd.Args[0]));
 
