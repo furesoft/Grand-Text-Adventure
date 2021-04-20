@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Timers;
+using System.Linq;
 using Actress;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace GrandTextAdventure
 {
@@ -45,6 +50,11 @@ namespace GrandTextAdventure
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
             _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
 
+            var npcTimer = new Timer();
+            npcTimer.Interval = 5000;
+            npcTimer.Elapsed += npcTimer_ellapsed;
+            npcTimer.Start();
+
             CommandHandler.Collect();
 
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
@@ -59,6 +69,40 @@ namespace GrandTextAdventure
 
                 CommandHandler.Invoke(input);
             }
+        }
+
+        private void npcTimer_ellapsed(object sender, ElapsedEventArgs e)
+        {
+            var layer = GetState().ObjectLayer;
+            var npcs = GetNpcs(layer);
+
+            if (npcs.Any())
+            {
+                foreach (var npc in npcs)
+                {
+                    _npcMailbox.Post(new MoveNpcMessage { Direction = Direction.North, OldPosition = npc.Position });
+                }
+            }
+        }
+
+        private IEnumerable<NPC> GetNpcs(GameObject[,] layer)
+        {
+            var result = new List<NPC>();
+
+            for (var i = 0; i < layer.GetLength(0); i++)
+            {
+                for (var j = 0; j < layer.GetLength(1); j++)
+                {
+                    var obj = layer[i, j];
+
+                    if (obj is NPC npc)
+                    {
+                        result.Add(npc);
+                    }
+                }
+            }
+
+            return result;
         }
 
         private async Task NpcProcessor(MailboxProcessor<GameMessage> arg)
