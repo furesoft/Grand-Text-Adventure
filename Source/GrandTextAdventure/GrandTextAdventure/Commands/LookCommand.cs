@@ -17,11 +17,19 @@ namespace GrandTextAdventure.Commands
             var pos = gameState.Player.Position;
             var newPos = Position.ApplyDirection(pos, direction);
 
-            var obj = GetObject(gameState, newPos);
-
-            if (obj != null)
+            if (gameState.CurrentMap.IsInBounds(newPos))
             {
-                Console.WriteLine("It is a {0}", obj.Name ?? obj.GetType().Name);
+
+                var obj = GetObject(gameState, newPos);
+
+                if (obj != null)
+                {
+                    Console.WriteLine("It is a {0}", obj.Name ?? obj.GetType().Name);
+                }
+                else
+                {
+                    Console.WriteLine("There is nothing");
+                }
             }
             else
             {
