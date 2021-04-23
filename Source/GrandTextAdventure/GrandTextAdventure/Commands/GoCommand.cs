@@ -30,6 +30,18 @@ namespace GrandTextAdventure.Commands
 
             if (currentRoom.IsInBounds(newPos))
             {
+                var newObj = gameState.ObjectLayer[newPos.X, newPos.Y];
+
+                if (newObj is IBlockable blockObj)
+                {
+                    if (blockObj.IsBlocked)
+                    {
+                        Console.WriteLine("You cannot go there. " + newObj.Name + " is blocking you"); //ToDo add new entity type for Blockable
+
+                        return;
+                    }
+                }
+
                 gameState.Player.Position = newPos;
             }
             else
