@@ -28,7 +28,7 @@ namespace GrandTextAdventure.Core.TextProcessing
 
         public static void Invoke(string command)
         {
-            var parser = new Parser();
+            var parser = new Parser(new VerbSynonyms(), new NounSynonyms(), new PrepositionMapping());
             var cmd = parser.ParseCommand(command);
 
             if (s_handlers.ContainsKey(cmd.Verb))
