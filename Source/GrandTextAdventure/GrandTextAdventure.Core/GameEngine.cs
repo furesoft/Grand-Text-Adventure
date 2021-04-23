@@ -45,6 +45,13 @@ namespace GrandTextAdventure
             _mailbox.Post(new ChangeStateMessage { State = state });
         }
 
+        public bool Wait(int milliseconds)
+        {
+            var msg = (WaitMessage)_mailbox.PostAndReply<GameMessage>((channel) => new WaitMessage(channel, milliseconds));
+
+            return msg.IsDone;
+        }
+
         public void Start()
         {
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
@@ -152,6 +159,14 @@ namespace GrandTextAdventure
                         await Task.Delay(2000);
 
                         Environment.Exit(0);
+                        break;
+                    case WaitMessage waitMsg:
+
+                        await Task.Delay(waitMsg.WaitTime);
+                        waitMsg.IsDone = true;
+
+                        waitMsg.Channel.Reply(waitMsg);
+
                         break;
 
                     case LoadMessage:

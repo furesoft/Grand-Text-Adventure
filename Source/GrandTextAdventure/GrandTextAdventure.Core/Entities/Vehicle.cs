@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace GrandTextAdventure.Core.Entities
 {
@@ -34,6 +35,16 @@ namespace GrandTextAdventure.Core.Entities
 
             state.Player.Position = pos;
             state.Player.Vehicle = this;
+            state.ObjectLayer[pos.X, pos.Y] = null; //Delete Vehicle from Layer to avoud problems
+
+            if (IsLocked)
+            {
+                Console.WriteLine(Name + " is locked. You are cracking it...");
+                if (GameEngine.Instance.Wait(2000))
+                {
+                    System.Console.WriteLine("The door is cracked");
+                }
+            }
 
             Console.WriteLine("You now drive with " + Name);
 
@@ -44,8 +55,11 @@ namespace GrandTextAdventure.Core.Entities
         {
             var state = GameEngine.Instance.GetState();
 
-            state.Player.Vehicle = null;
             state.Player.Position = Position.ApplyDirection(state.Player.Position, Game.Direction.Left);
+
+            state.ObjectLayer[pos.X, pos.Y] = state.Player.Vehicle; //drop vehicle to object layer
+
+            state.Player.Vehicle = null;
 
             GameEngine.Instance.SetState(state);
         }

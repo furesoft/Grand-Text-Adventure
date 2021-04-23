@@ -25,7 +25,7 @@ namespace GrandTextAdventure.Core.Game
                 Console.ResetColor();
             };
 
-            CurrentMap.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo" });
+            CurrentMap.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo", IsLocked = true });
             CurrentMap.PlacingItems.Add(new Position(0, 1), new Charackter() { Name = "Man" });
             CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
             CurrentMap.PlacingItems.Add(new Position(1, 1), new Charackter() { Name = "Woman" });

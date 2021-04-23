@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Metadata;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.TextProcessing;
@@ -16,7 +17,14 @@ namespace GrandTextAdventure.Commands
 
             var gameState = GameEngine.Instance.GetState();
             var pos = gameState.Player.Position;
-            var newPos = Position.ApplyDirection(pos, direction);
+            byte speed = 1;
+
+            if (gameState.Player.Vehicle != null)
+            {
+                speed = gameState.Player.Vehicle.Speed;
+            }
+
+            var newPos = Position.ApplyDirection(pos, direction, speed);
 
             var currentRoom = gameState.CurrentMap;
 
