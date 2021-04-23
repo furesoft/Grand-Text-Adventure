@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GrandTextAdventure.Core.Entities;
 
 namespace GrandTextAdventure.Core.Game
@@ -29,6 +30,39 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
             CurrentMap.PlacingItems.Add(new Position(1, 1), new Charackter() { Name = "Woman" });
 
+        }
+
+        public static IEnumerable<(Direction, GameObject)> GetAroundObjects(GameState gameState, Position pos)
+        {
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.North)))
+            {
+                yield return (Direction.North, GetObject(gameState, Position.ApplyDirection(pos, Direction.North)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.South)))
+            {
+                yield return (Direction.South, GetObject(gameState, Position.ApplyDirection(pos, Direction.South)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.West)))
+            {
+                yield return (Direction.West, GetObject(gameState, Position.ApplyDirection(pos, Direction.West)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.East)))
+            {
+                yield return (Direction.East, GetObject(gameState, Position.ApplyDirection(pos, Direction.East)));
+            }
+
+            //ToDo: implement GetAroundObjects for combined directions
+        }
+
+        public static GameObject GetObject(GameState gameState, Position newPos)
+        {
+            if (newPos.Y < 0 || newPos.Y >= gameState.ObjectLayer.GetLength(0) || newPos.X < 0 || newPos.X >= gameState.ObjectLayer.GetLength(1))
+            {
+                throw new IndexOutOfRangeException("Out of Bounds: " + newPos);
+
+            }
+
+            return gameState.ObjectLayer[newPos.X, newPos.Y];
         }
 
         public Room CurrentMap { get; set; }
