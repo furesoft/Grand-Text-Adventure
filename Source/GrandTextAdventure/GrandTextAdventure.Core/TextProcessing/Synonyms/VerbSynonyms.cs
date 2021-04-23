@@ -146,6 +146,9 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
             Add("dollar", VerbCodes.Money);
 
             Add("location", VerbCodes.Location);
+
+            Add("enter", VerbCodes.Enter);
+            Add("drive", VerbCodes.Enter);
         }
 
         /// <summary>

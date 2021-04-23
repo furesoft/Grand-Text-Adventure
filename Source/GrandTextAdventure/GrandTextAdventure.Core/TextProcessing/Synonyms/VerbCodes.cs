@@ -15,6 +15,7 @@
         Eat = 9,
         Quit = 10,
         Money = 11,
-        Location = 12
+        Location = 12,
+        Enter = 13
     }
 }
