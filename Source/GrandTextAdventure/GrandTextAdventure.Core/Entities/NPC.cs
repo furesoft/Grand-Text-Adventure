@@ -15,6 +15,7 @@ namespace GrandTextAdventure.Core.Entities
             var inventory = GameEngine.Instance.GetState().Player.Inventory;
 
             Inventory.Transfer(inventory);
+            
         }
     }
 }

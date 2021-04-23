@@ -10,6 +10,7 @@ namespace GrandTextAdventure.Core.Entities
     }
     public class Charackter : GameObject
     {
+
         public Charackter()
         {
             Type = GameObjectType.Charackter;
@@ -27,12 +28,19 @@ namespace GrandTextAdventure.Core.Entities
         public event GameObjectEventHandler OnDead;
 
         public Inventory Inventory { get; } = new();
+        public Vehicle Vehicle { get; set; }
         public bool IsDead => GetValue<int>("Health") <= 0;
 
         public Position Position
         {
             get { return GetValue<Position>(nameof(Position)); }
             set { SetOrAddValue(nameof(Position), value); }
+        }
+
+        public Money Money
+        {
+            get { return GetValue<Money>(nameof(Money)); }
+            set { SetOrAddValue(nameof(Money), value); }
         }
 
         public Gender Gender

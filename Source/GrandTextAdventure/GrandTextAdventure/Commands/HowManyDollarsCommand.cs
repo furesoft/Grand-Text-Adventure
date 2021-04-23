@@ -10,7 +10,7 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Command cmd)
         {
-            var money = GameEngine.Instance.GetState().Player.GetValue<Money>("Money");
+            var money = GameEngine.Instance.GetState().Player.Money;
 
             System.Console.WriteLine("You have {0} $ and {1} Pilzschaf-Coins", money.Dollar, money.PilzschafCoins);
         }
