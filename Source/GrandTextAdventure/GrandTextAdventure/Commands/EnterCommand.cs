@@ -38,11 +38,11 @@ namespace GrandTextAdventure.Commands
                     foreach (var obj in aroundObjects)
                     {
 
-                        if (obj.Item2.Name.ToLower() == cmd.Noun)
+                        if (obj.GameObject.Name.ToLower() == cmd.Noun)
                         {
-                            if (obj.Item2 is IEnterable enterableObj)
+                            if (obj.GameObject is IEnterable enterableObj)
                             {
-                                var newPos = Position.ApplyDirection(pos, obj.Item1);
+                                var newPos = Position.ApplyDirection(pos, obj.Direction);
 
                                 enterableObj.OnEnter(newPos);
                             }
