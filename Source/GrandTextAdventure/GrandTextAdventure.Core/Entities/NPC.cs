@@ -6,6 +6,8 @@ namespace GrandTextAdventure.Core.Entities
     {
         public override void Init() => OnDead += OnDeadHandler;
 
+        public int AgressionLevel { get; set; }
+
         private void OnDeadHandler(string property, object value)
         {
             Console.WriteLine("NPC is Dead");
