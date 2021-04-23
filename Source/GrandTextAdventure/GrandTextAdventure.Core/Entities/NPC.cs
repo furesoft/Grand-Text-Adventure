@@ -1,4 +1,5 @@
 using System;
+using GrandTextAdventure.Core.Game;
 
 namespace GrandTextAdventure.Core.Entities
 {
@@ -12,10 +13,16 @@ namespace GrandTextAdventure.Core.Entities
         {
             Console.WriteLine((Gender == Gender.Male ? "He" : "She") + " is Dead");
 
-            var inventory = GameEngine.Instance.GetState().Player.Inventory;
+            var gameState = GameEngine.Instance.GetState();
+            var player = gameState.Player;
+            var inventory = player.Inventory;
 
             Inventory.Transfer(inventory);
-            
+            player.Money += Money;
+
+            gameState.ObjectLayer[Position.X, Position.Y] = null;
+
+            GameEngine.Instance.SetState(gameState);
         }
     }
 }

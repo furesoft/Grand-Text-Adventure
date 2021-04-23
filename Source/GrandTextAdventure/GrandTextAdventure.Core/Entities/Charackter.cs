@@ -21,15 +21,15 @@ namespace GrandTextAdventure.Core.Entities
         {
             if (health >= 0)
             {
-                OnDead?.Invoke("Health", health);
+                OnDead?.Invoke(health);
             }
         }
 
-        public event GameObjectEventHandler OnDead;
+        public event Action<uint> OnDead;
 
         public Inventory Inventory { get; } = new();
         public Vehicle Vehicle { get; set; }
-        public bool IsDead => GetValue<int>("Health") <= 0;
+        public bool IsDead => GetValue<uint>("Health") <= 0;
 
         public Position Position
         {
