@@ -24,9 +24,11 @@ namespace GrandTextAdventure.Core.Game
                 Console.ResetColor();
             };
 
-            ObjectLayer = new GameObject[,] { { new Vehicle() { Name = "Lambo" }, new Charackter() { Name = "Man" } }, { new Vehicle { Name = "Fiat" }, new Charackter() { Name = "Woman" } } };
+            CurrentMap.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo" });
+            CurrentMap.PlacingItems.Add(new Position(0, 1), new Charackter() { Name = "Man" });
+            CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
+            CurrentMap.PlacingItems.Add(new Position(1, 1), new Charackter() { Name = "Woman" });
 
-            
         }
 
         public Room CurrentMap { get; set; }
