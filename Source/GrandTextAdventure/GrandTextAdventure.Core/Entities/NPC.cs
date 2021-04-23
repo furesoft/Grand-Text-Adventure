@@ -10,7 +10,7 @@ namespace GrandTextAdventure.Core.Entities
 
         private void OnDeadHandler(string property, object value)
         {
-            Console.WriteLine("NPC is Dead");
+            Console.WriteLine((Gender == Gender.Male ? "He" : "She") + " is Dead");
 
             var inventory = GameEngine.Instance.GetState().Player.Inventory;
 
