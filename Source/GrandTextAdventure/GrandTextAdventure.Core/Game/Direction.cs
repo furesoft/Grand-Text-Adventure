@@ -18,5 +18,6 @@
         SouthEast = 0x40,
 
         SouthWest = 0x80,
+        Around = 0x100,
     }
 }

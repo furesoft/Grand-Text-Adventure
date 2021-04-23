@@ -50,6 +50,7 @@ namespace GrandTextAdventure
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
             _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
 
+
             var npcTimer = new Timer();
             npcTimer.Interval = 5000;
             npcTimer.Elapsed += npcTimer_ellapsed;

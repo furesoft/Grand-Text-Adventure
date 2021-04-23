@@ -26,7 +26,7 @@ namespace GrandTextAdventure.Core.Game
 
             ObjectLayer = new GameObject[,] { { new Vehicle() { Name = "Lambo" }, new Charackter() { Name = "Man" } }, { new Vehicle { Name = "Fiat" }, new Charackter() { Name = "Woman" } } };
 
-            CurrentMap.PlacingItems.Add(new Position(0, 2), new Vehicle() { Name = "testing" });
+            
         }
 
         public Room CurrentMap { get; set; }
