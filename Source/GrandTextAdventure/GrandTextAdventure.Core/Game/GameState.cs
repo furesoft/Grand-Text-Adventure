@@ -32,7 +32,7 @@ namespace GrandTextAdventure.Core.Game
 
         }
 
-        public static IEnumerable<(Direction, GameObject)> GetAroundObjects(GameState gameState, Position pos)
+        public static IEnumerable<(Direction Direction, GameObject GameObject)> GetAroundObjects(GameState gameState, Position pos)
         {
             if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.North)))
             {

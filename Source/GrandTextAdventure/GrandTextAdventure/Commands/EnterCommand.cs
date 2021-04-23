@@ -15,7 +15,7 @@ namespace GrandTextAdventure.Commands
             var gameState = GameEngine.Instance.GetState();
             var pos = gameState.Player.Position;
 
-            var aroundObjects = GameState.GetAroundObjects(gameState, pos).Where(_ => _.Item2 != null);
+            var aroundObjects = GameState.GetAroundObjects(gameState, pos).Where(_ => _.GameObject != null);
 
             if (aroundObjects.Any())
             {
@@ -24,9 +24,9 @@ namespace GrandTextAdventure.Commands
                     // search for any enterable object and enter it
                     foreach (var obj in aroundObjects)
                     {
-                        if (obj.Item2 is IEnterable enterableObj)
+                        if (obj.GameObject is IEnterable enterableObj)
                         {
-                            var newPos = Position.ApplyDirection(pos, obj.Item1);
+                            var newPos = Position.ApplyDirection(pos, obj.Direction);
 
                             enterableObj.OnEnter(newPos);
                         }

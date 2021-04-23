@@ -26,7 +26,7 @@ namespace GrandTextAdventure.Commands
                 {
                     foreach (var item in aroundObjects)
                     {
-                        Console.WriteLine(item.Item1 + ": " + item.Item2.Name);
+                        Console.WriteLine(item.Direction + ": " + item.GameObject.Name);
                     }
                 }
                 else
