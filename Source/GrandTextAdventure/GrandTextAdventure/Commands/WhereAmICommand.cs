@@ -1,4 +1,5 @@
-﻿using GrandTextAdventure.Core.TextProcessing;
+﻿using System;
+using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
 using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
@@ -9,9 +10,17 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Command cmd)
         {
-            var value = GameEngine.Instance.GetState().CurrentMap;
+            var gameState = GameEngine.Instance.GetState();
+            var room = gameState.CurrentMap;
 
-            System.Console.WriteLine("You are at " + value.Name);
+            if (gameState.Player.Vehicle != null)
+            {
+                Console.WriteLine("You are driving with " + gameState.Player.Vehicle.Name + " in " + room.Name);
+            }
+            else
+            {
+                Console.WriteLine("You are at " + room.Name);
+            }
         }
     }
 }
