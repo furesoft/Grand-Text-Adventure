@@ -121,7 +121,7 @@ namespace GrandTextAdventure.Core.TextProcessing
             return VerbCodes.NoCommand;
         }
 
-        protected string RemovePunctuation(string s)
+        protected static string RemovePunctuation(string s)
         {
             var result = new StringBuilder();
 
@@ -129,7 +129,7 @@ namespace GrandTextAdventure.Core.TextProcessing
             {
                 if (char.IsWhiteSpace(s[i]))
                 {
-                    result.Append(" ");
+                    result.Append(' ');
                 }
                 else if (char.IsLetter(s[i]) || char.IsNumber(s[i]))
                 {

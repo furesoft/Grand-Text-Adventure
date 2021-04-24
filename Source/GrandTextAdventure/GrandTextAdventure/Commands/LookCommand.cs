@@ -20,7 +20,7 @@ namespace GrandTextAdventure.Commands
 
             if (direction == Direction.Around)
             {
-                var aroundObjects = GameState.GetAroundObjects(gameState, pos).Where(_ => _.Item2 != null);
+                var aroundObjects = GameState.GetAroundObjects(gameState, pos).Where(_ => _.GameObject != null);
 
                 if (aroundObjects.Any())
                 {

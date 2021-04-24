@@ -57,11 +57,12 @@ namespace GrandTextAdventure
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
             _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
 
-
-            var npcTimer = new Timer();
-            npcTimer.Interval = 5000;
-            npcTimer.Elapsed += npcTimer_ellapsed;
-            //npcTimer.Start();
+            var npcTimer = new Timer
+            {
+                Interval = 5000
+            };
+            npcTimer.Elapsed += NpcTimer_ellapsed;
+            npcTimer.Start();
 
             CommandHandler.Collect();
 
@@ -79,7 +80,7 @@ namespace GrandTextAdventure
             }
         }
 
-        private void npcTimer_ellapsed(object sender, ElapsedEventArgs e)
+        private void NpcTimer_ellapsed(object sender, ElapsedEventArgs e)
         {
             var layer = GetState().ObjectLayer;
             var npcs = GetNpcs(layer);
@@ -93,7 +94,7 @@ namespace GrandTextAdventure
             }
         }
 
-        private IEnumerable<NPC> GetNpcs(GameObject[,] layer)
+        private static IEnumerable<NPC> GetNpcs(GameObject[,] layer)
         {
             var result = new List<NPC>();
 

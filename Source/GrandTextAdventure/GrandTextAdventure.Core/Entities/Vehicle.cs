@@ -55,7 +55,7 @@ namespace GrandTextAdventure.Core.Entities
         {
             var state = GameEngine.Instance.GetState();
 
-            state.Player.Position = Position.ApplyDirection(state.Player.Position, Game.Direction.Left);
+            state.Player.Position = Position.ApplyDirection(state.Player.Position, Game.Direction.West);
 
             state.ObjectLayer[pos.X, pos.Y] = state.Player.Vehicle; //drop vehicle to object layer
 
