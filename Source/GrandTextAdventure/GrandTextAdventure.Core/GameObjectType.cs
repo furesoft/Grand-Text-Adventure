@@ -5,6 +5,7 @@
         Building,
         Charackter,
         Vehicle,
-        Weapon
+        Weapon,
+        Blocking
     }
 }
