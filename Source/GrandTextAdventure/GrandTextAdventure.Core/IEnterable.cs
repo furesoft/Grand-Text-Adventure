@@ -4,5 +4,6 @@ namespace GrandTextAdventure.Core
     {
         void OnEnter(Position pos);
         void OnExit(Position pos);
+        bool IsEnterable();
     }
 }

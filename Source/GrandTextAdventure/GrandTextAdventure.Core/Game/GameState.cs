@@ -26,9 +26,9 @@ namespace GrandTextAdventure.Core.Game
             };
 
             CurrentMap.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo", IsLocked = true });
-            CurrentMap.PlacingItems.Add(new Position(0, 1), new Charackter() { Name = "Man" });
+            CurrentMap.PlacingItems.Add(new Position(0, 1), new NPC() { Name = "Man", Vehicle = new Vehicle { Name = "Bycicle" } });
             CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
-            CurrentMap.PlacingItems.Add(new Position(1, 1), new Charackter() { Name = "Woman" });
+            CurrentMap.PlacingItems.Add(new Position(1, 1), new NPC() { Name = "Woman" });
 
         }
 
@@ -77,7 +77,16 @@ namespace GrandTextAdventure.Core.Game
 
             }
 
-            return gameState.ObjectLayer[newPos.X, newPos.Y];
+            var obj = gameState.ObjectLayer[newPos.X, newPos.Y];
+            if (obj is NPC npc)
+            {
+                if (npc.Vehicle != null)
+                {
+                    return npc.Vehicle;
+                }
+            }
+
+            return obj;
         }
 
         public Room CurrentMap { get; set; }

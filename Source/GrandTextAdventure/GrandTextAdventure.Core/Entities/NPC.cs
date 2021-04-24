@@ -3,7 +3,7 @@ using GrandTextAdventure.Core.Game;
 
 namespace GrandTextAdventure.Core.Entities
 {
-    public class NPC : Charackter
+    public class NPC : Charackter, IEnterable
     {
         public override void Init() => OnDead += OnDeadHandler;
 
@@ -23,6 +23,20 @@ namespace GrandTextAdventure.Core.Entities
             gameState.ObjectLayer[Position.X, Position.Y] = null;
 
             GameEngine.Instance.SetState(gameState);
+        }
+
+        public bool IsEnterable() => Vehicle != null;
+
+        public void OnEnter(Position pos)
+        {
+            Console.WriteLine("Stealing Car");
+
+            Vehicle.OnEnter(pos);
+        }
+
+        public void OnExit(Position pos)
+        {
+            Vehicle.OnExit(pos);
         }
     }
 }

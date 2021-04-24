@@ -27,9 +27,12 @@ namespace GrandTextAdventure.Commands
                     {
                         if (obj.GameObject is IEnterable enterableObj)
                         {
-                            var newPos = Position.ApplyDirection(pos, obj.Direction);
+                            if (enterableObj.IsEnterable())
+                            {
+                                var newPos = Position.ApplyDirection(pos, obj.Direction);
 
-                            enterableObj.OnEnter(newPos);
+                                enterableObj.OnEnter(newPos);
+                            }
                         }
                     }
                 }

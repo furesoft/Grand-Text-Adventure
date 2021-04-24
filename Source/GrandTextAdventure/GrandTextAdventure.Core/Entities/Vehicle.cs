@@ -29,6 +29,8 @@ namespace GrandTextAdventure.Core.Entities
             set { SetOrAddValue(nameof(Speed), value); }
         }
 
+        public bool IsEnterable() => true;
+
         public void OnEnter(Position pos)
         {
             var state = GameEngine.Instance.GetState();
