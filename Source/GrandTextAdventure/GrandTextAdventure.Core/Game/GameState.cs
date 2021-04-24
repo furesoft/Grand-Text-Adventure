@@ -51,7 +51,22 @@ namespace GrandTextAdventure.Core.Game
                 yield return (Direction.East, GetObject(gameState, Position.ApplyDirection(pos, Direction.East)));
             }
 
-            //ToDo: implement GetAroundObjects for combined directions
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.NorthEast)))
+            {
+                yield return (Direction.NorthEast, GetObject(gameState, Position.ApplyDirection(pos, Direction.NorthEast)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.NorthWest)))
+            {
+                yield return (Direction.NorthWest, GetObject(gameState, Position.ApplyDirection(pos, Direction.NorthWest)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.SouthEast)))
+            {
+                yield return (Direction.SouthEast, GetObject(gameState, Position.ApplyDirection(pos, Direction.SouthEast)));
+            }
+            if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.SouthWest)))
+            {
+                yield return (Direction.SouthWest, GetObject(gameState, Position.ApplyDirection(pos, Direction.SouthWest)));
+            }
         }
 
         public static GameObject GetObject(GameState gameState, Position newPos)
