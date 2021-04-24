@@ -139,7 +139,7 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
             Add("quit", VerbCodes.Quit);
             Add("exit", VerbCodes.Quit);
 
-            // Add("look", VerbCodes.Look);
+            Add("suicide", VerbCodes.Suicide);
 
             Add("money", VerbCodes.Money);
             Add("coins", VerbCodes.Money);

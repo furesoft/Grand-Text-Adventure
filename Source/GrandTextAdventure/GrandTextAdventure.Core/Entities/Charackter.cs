@@ -37,6 +37,12 @@ namespace GrandTextAdventure.Core.Entities
             set { SetOrAddValue(nameof(Position), value); }
         }
 
+        public uint Health
+        {
+            get { return GetValue<uint>(nameof(Health)); }
+            set { SetOrAddValue(nameof(Health), value); }
+        }
+
         public Money Money
         {
             get { return GetValue<Money>(nameof(Money)); }

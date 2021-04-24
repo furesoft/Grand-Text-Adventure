@@ -16,6 +16,7 @@
         Quit = 10,
         Money = 11,
         Location = 12,
-        Enter = 13
+        Enter = 13,
+        Suicide = 14
     }
 }
