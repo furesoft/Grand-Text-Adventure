@@ -9,7 +9,7 @@ namespace GrandTextAdventure.Core.Game
         public GameState()
         {
             Player.Name = "Michael";
-            Player.SetOrAddValue("Money", new Money { PilzschafCoins = 1, Dollar = 500 });
+            Player.SetOrAddValue("Money", new Money(500, 1));
 
             CurrentMap = new Room { Name = "Baker Street", Width = 10, Heigth = 10 };
             CurrentMap.Exits.North = new Room { Name = "Suffer Street", Exits = new RoomExits { South = CurrentMap } };
@@ -18,7 +18,7 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.Exits.West = new Room { Name = "Ball Street", Exits = new RoomExits { East = CurrentMap } };
 
             Player.Position = new(0, 0);
-            Player.OnDead += (p, v) =>
+            Player.OnDead += (v) =>
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wasted");

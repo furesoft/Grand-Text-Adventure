@@ -9,7 +9,7 @@ namespace GrandTextAdventure.Core.Entities
 
         public int AgressionLevel { get; set; }
 
-        private void OnDeadHandler(string property, object value)
+        private void OnDeadHandler(uint value)
         {
             Console.WriteLine((Gender == Gender.Male ? "He" : "She") + " is Dead");
 

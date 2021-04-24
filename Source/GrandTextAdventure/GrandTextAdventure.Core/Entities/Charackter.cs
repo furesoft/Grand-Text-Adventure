@@ -14,10 +14,10 @@ namespace GrandTextAdventure.Core.Entities
         public Charackter()
         {
             Type = GameObjectType.Charackter;
-            ObserverProperty<int>("Health", HealthDeadHandler);
+            ObserverProperty<uint>("Health", HealthDeadHandler);
         }
 
-        private void HealthDeadHandler(int health)
+        private void HealthDeadHandler(uint health)
         {
             if (health >= 0)
             {
