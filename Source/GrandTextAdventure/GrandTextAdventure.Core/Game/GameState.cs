@@ -29,6 +29,7 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.PlacingItems.Add(new Position(0, 1), new NPC() { Name = "Man", Vehicle = new Vehicle { Name = "Bycicle" } });
             CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
             CurrentMap.PlacingItems.Add(new Position(1, 1), new NPC() { Name = "Woman" });
+            CurrentMap.PlacingItems.Add(new Position(2, 1), new BlockingEntity() { Name = "Wall" });
 
         }
 
