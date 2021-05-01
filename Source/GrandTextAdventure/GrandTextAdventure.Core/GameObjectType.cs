@@ -6,6 +6,7 @@
         Charackter,
         Vehicle,
         Weapon,
-        Blocking
+        Blocking,
+        Door
     }
 }
