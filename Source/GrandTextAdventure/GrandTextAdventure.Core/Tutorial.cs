@@ -1,10 +1,12 @@
 using System;
+using GrandTextAdventure.Core.TextProcessing;
+using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
 namespace GrandTextAdventure.Core
 {
     public class Tutorial
     {
-        public static TutorialLine[] TutorialLines { get; set; }
+        public static TutorialLine[] TutorialLines { get; set; } = new[] { new TutorialLine("Lets go to north by typing 'north' or 'go north'", new Command { Verb = VerbCodes.Go, Noun = "north" }, "Thank you") };
 
         public static void Start()
         {
@@ -16,7 +18,7 @@ namespace GrandTextAdventure.Core
                 var p = new TextProcessing.Parser();
                 var cmd = p.ParseCommand(input);
 
-                if (cmd.Equals(line.ExpectedCommand))
+                if (cmd.Equals(line.ExpectedCommand)) // ToDo need to fix
                 {
                     Console.WriteLine(line.Output);
                     Settings.Instance.TutorialIndex++;

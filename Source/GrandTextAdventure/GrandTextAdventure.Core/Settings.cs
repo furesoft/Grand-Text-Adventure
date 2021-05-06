@@ -20,5 +20,6 @@ namespace GrandTextAdventure.Core
         public bool TutorialDone { get; set; }
 
         public int TutorialIndex { get; set; }
+        public bool IsFirstStart { get; set; } = true;
     }
 }
