@@ -11,6 +11,15 @@ namespace GrandTextAdventure
 
             EntitiyPreloader.PreLoad(Environment.CurrentDirectory);
 
+            if (Tutorial.IsTutorialStarted())
+            {
+                Tutorial.Start();
+            }
+            else
+            {
+
+            }
+
             GameEngine.Instance.Start();
         }
     }

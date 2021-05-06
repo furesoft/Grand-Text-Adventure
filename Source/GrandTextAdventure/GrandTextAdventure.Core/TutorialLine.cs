@@ -1,6 +1,7 @@
 namespace GrandTextAdventure.Core
 {
-    public record TutorialLine(string Description, Command ExpectedCommand) {
+    public record TutorialLine(string Description, Command ExpectedCommand, string Output)
+    {
 
     }
 }
