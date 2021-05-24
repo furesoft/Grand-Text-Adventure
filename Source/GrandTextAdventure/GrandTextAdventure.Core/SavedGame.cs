@@ -21,6 +21,8 @@ namespace GrandTextAdventure.Core
 
             var state = GameEngine.Instance.GetState();
             state.Player = item.Player;
+            state.CurrentMap = RoomManager.GetRoom(item.CurrentRoom);
+
 
         }
     }
