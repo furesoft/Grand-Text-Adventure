@@ -11,13 +11,17 @@ namespace GrandTextAdventure
 
             EntitiyPreloader.PreLoad(Environment.CurrentDirectory);
 
-            if (Settings.Instance.IsFirstStart)
+            Settings.Load();
+
+            if (!Settings.Instance.IsFirstStart)
             {
                 Console.Write("Do you want to play an tutorial to learn how to use this game? (y|n)");
                 var wantTut = Console.ReadKey().Key;
 
                 Settings.Instance.WantPlayTutorial = wantTut == ConsoleKey.Y;
-                Settings.Instance.IsFirstStart = false;
+                Settings.Instance.IsFirstStart = true;
+
+                Settings.Save();
             }
 
             if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial)
