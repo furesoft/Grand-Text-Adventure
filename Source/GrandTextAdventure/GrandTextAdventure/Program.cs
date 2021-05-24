@@ -29,7 +29,6 @@ namespace GrandTextAdventure
                 Console.WriteLine();
 
                 Tutorial.Start();
-
             }
 
             GameEngine.Instance.Start();

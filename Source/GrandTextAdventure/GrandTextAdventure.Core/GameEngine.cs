@@ -70,6 +70,16 @@ namespace GrandTextAdventure
 
             _state.CurrentMap.Init();
 
+            var rootDialog = new DialogItem("Simon", new string[]{
+                "Hey Michael.",
+                "Nice to see ya. The plan is going. How was your flight?",
+
+            }, new("Michael", new string[]{
+                "It was fine. But please let me go at home. I will sleep and tomorrow we can continue our plan.", null, null
+            }, new("", new[] { "<wait>", "The next day...", "<wait>" }, null)), null);
+
+            Dialog.Start(rootDialog);
+
             while (true)
             {
                 var input = ReadLine.Read("> ");
