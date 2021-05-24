@@ -20,7 +20,6 @@ namespace GrandTextAdventure
 
             Console.WriteLine("* Credits *");
             Console.WriteLine("Chris Anders (Furesoft) -> Developer");
-            Console.WriteLine("Lasse (CJ) -> Support");
             Console.WriteLine("Cortex -> Idea");
             Console.WriteLine();
         }

@@ -30,7 +30,6 @@ namespace GrandTextAdventure
             {
                 GameEngine.Instance.Start();
             }
-
         }
     }
 }
