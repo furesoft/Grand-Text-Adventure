@@ -52,6 +52,14 @@ namespace GrandTextAdventure
             return msg.IsDone;
         }
 
+        public static void Hint(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("<Hint>");
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
         public void Start()
         {
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
@@ -69,6 +77,18 @@ namespace GrandTextAdventure
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
             _state.CurrentMap.Init();
+
+            //ToDo: load dialogs from files
+            var rootDialog = new DialogItem("Simon", new string[]{
+                "Hey Michael.",
+                "Nice to see ya. The plan is going. How was your flight?",
+
+            }, new("Michael", new string[]{
+                "It was fine. But please let me go at home. I will sleep and tomorrow we can continue our plan.", null, null
+            }, new("", new[] { "<wait>", "The next day...", "<wait>", "It is a sunny day in Los Santos.", "<wait>", "Knock Knock..", "<wait>", "Knock Knock..", "<wait>", "Michael, are you awake?", "We need to go!" }, null)), null);
+
+            Dialog.Start(rootDialog);
+            Hint("Leave your House and follow the Instructions from Simon");
 
             while (true)
             {

@@ -17,6 +17,7 @@
         Money = 11,
         Location = 12,
         Enter = 13,
-        Suicide = 14
+        Suicide = 14,
+        Leave = 15
     }
 }
