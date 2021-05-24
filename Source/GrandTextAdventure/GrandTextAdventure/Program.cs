@@ -29,11 +29,10 @@ namespace GrandTextAdventure
                 Console.WriteLine();
 
                 Tutorial.Start();
+
             }
-            else
-            {
-                GameEngine.Instance.Start();
-            }
+
+            GameEngine.Instance.Start();
         }
     }
 }
