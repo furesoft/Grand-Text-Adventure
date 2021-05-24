@@ -1,0 +1,27 @@
+entitymodel "baseVehicle"
+
+    property speed = 100
+    property protection = 50
+
+end
+
+
+entity "Lamborghini" is vehicle
+    applymodel "baseVehicle"
+
+    property speed = 150
+    property wrap = 3.14
+    property something = "hello world"
+    property canExplode = true
+
+end
+
+entity "Ford Fiesta" is vehicle 
+    applymodel "baseVehicle""
+end
+
+entity "MG11" is weapon 
+
+    property power = 10
+
+end

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "GrandTextAdventure"
+		},
+		{
+			"path": "GrandTextAdventure.Core"
+		},
+		{
+			"path": "EntityConsole"
+		}
+	],
+	"settings": {}
+}
