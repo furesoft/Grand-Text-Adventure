@@ -17,6 +17,7 @@ namespace GrandTextAdventure.Core
             {
                 var line = TutorialLines[Settings.Instance.TutorialIndex];
                 Console.WriteLine(line.Description);
+
                 var input = Console.ReadLine();
                 var p = new TextProcessing.Parser();
                 var cmd = p.ParseCommand(input);
