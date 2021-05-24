@@ -6,7 +6,10 @@ namespace GrandTextAdventure.Core
 {
     public class Tutorial
     {
-        public static TutorialLine[] TutorialLines { get; set; } = new[] { new TutorialLine("Lets go to north by typing 'north' or 'go north'", new Command { Verb = VerbCodes.Go, Noun = "north" }, "Thank you") };
+        public static TutorialLine[] TutorialLines { get; set; } = new TutorialLine[] {
+            new ("Lets go to north by typing 'north' or 'go north'", "go north", "Thank you"),
+            new("Try to look around", "look around", "There is a Bycicle in south direction"),
+            new("Use the Bycicle by entering", "enter Bycicle", "You are riding the Bicycle now") };
 
         public static void Start()
         {
@@ -17,8 +20,9 @@ namespace GrandTextAdventure.Core
                 var input = Console.ReadLine();
                 var p = new TextProcessing.Parser();
                 var cmd = p.ParseCommand(input);
+                var expected = p.ParseCommand(line.ExpectedCommand);
 
-                if (cmd.Equals(line.ExpectedCommand)) // ToDo need to fix
+                if (cmd.Noun == expected.Noun && cmd.Verb == expected.Verb) // ToDo need to fix
                 {
                     Console.WriteLine(line.Output);
                     Settings.Instance.TutorialIndex++;
