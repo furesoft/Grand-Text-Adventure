@@ -22,12 +22,15 @@ namespace GrandTextAdventure
 
             if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial)
             {
+                Console.WriteLine();
+
                 Tutorial.Start();
             }
             else
             {
                 GameEngine.Instance.Start();
             }
+
         }
     }
 }
