@@ -13,7 +13,7 @@ namespace GrandTextAdventure.Core
             new("See the Car behind you? Crack it by entering", "enter car", "You are awesome"),
             new("Now you can use your MG11 Weapon, shoot it and don't die!", "shoot MG11", "NPC died. You got 250 $."),
             new("You got money, so why not let show how much you actually have? Type dollars and you'll find it out.", "dollars", "You have 733 $ and 2 Pilzschafcoins"),
-            new("Now you know how to play. You can type what you want, the specific keywords must be present, like you learned before. Type play to start the game.", "play", "") };
+            new("Now you know how to play. You can type what you want, the specific keywords must be present, like you learned before. Take a suizide to start the game.", "suicize", null) };
 
         public static void Start()
         {
@@ -29,8 +29,11 @@ namespace GrandTextAdventure.Core
 
                 if (cmd.Noun == expected.Noun && cmd.Verb == expected.Verb) // ToDo need to fix
                 {
-                    Console.WriteLine(line.Output);
-                    Settings.Instance.TutorialIndex++;
+                    if (!string.IsNullOrEmpty(line.Output))
+                    {
+                        Console.WriteLine(line.Output);
+                        Settings.Instance.TutorialIndex++;
+                    }
                 }
                 else
                 {

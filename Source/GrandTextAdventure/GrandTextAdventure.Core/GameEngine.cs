@@ -79,13 +79,15 @@ namespace GrandTextAdventure
             _state.CurrentMap.Init();
 
             //ToDo: load dialogs from files
-            var rootDialog = new DialogItem("Simon", new string[]{
+            var startConv = new DialogItem("Simon", new string[]{
                 "Hey Michael.",
                 "Nice to see ya. The plan is going. How was your flight?",
 
             }, new("Michael", new string[]{
-                "It was fine. But please let me go at home. I will sleep and tomorrow we can continue our plan.", null, null
+                "It was fine. But please let me go at home.", "<wait>", "I will sleep and tomorrow we can continue our plan."
             }, new("", new[] { "<wait>", "The next day...", "<wait>", "It is a sunny day in Los Santos.", "<wait>", "Knock Knock..", "<wait>", "Knock Knock..", "<wait>", "Michael, are you awake?", "We need to go!" }, null)), null);
+
+            var rootDialog = new DialogItem("", new string[] { "Monday, 17:30 at Los Santos Airport", "<wait>", "<wait>" }, startConv, null);
 
             Dialog.Start(rootDialog);
             Hint("Leave your House and follow the Instructions from Simon");
