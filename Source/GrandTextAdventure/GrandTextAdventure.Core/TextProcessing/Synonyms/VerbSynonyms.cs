@@ -61,7 +61,6 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
             Add("abandon", VerbCodes.Drop);
             Add("release", VerbCodes.Drop);
             Add("discard", VerbCodes.Drop);
-            Add("leave", VerbCodes.Drop);
             Add("desert", VerbCodes.Drop);
             Add("dismiss", VerbCodes.Drop);
             Add("reject", VerbCodes.Drop);
@@ -149,6 +148,8 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
 
             Add("enter", VerbCodes.Enter);
             Add("drive", VerbCodes.Enter);
+
+            Add("leave", VerbCodes.Leave);
         }
 
         /// <summary>
