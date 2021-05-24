@@ -24,7 +24,7 @@ namespace GrandTextAdventure
                 Settings.Save();
             }
 
-            if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial)
+            if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial && !Settings.Instance.TutorialDone)
             {
                 Console.WriteLine();
 

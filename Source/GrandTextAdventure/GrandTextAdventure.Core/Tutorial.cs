@@ -33,6 +33,10 @@ namespace GrandTextAdventure.Core
                 }
 
             }
+
+            Settings.Instance.TutorialDone = true;
+
+            Settings.Save();
         }
 
         public static bool IsTutorialStarted()
