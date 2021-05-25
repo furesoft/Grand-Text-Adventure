@@ -7,7 +7,6 @@ using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
 namespace GrandTextAdventure.Commands
 {
-
     [CommandHandler(VerbCodes.Enter)]
     public class EnterCommand : ICommandHandler
     {

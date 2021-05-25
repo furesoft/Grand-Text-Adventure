@@ -11,11 +11,11 @@ namespace GrandTextAdventure.Core.Game
             Player.Name = "Michael";
             Player.SetOrAddValue("Money", new Money(500, 1));
 
-            CurrentMap = new Room { Name = "Baker Street", Width = 10, Heigth = 10 };
-            CurrentMap.Exits.North = new Room { Name = "Suffer Street", Exits = new RoomExits { South = CurrentMap } };
-            CurrentMap.Exits.South = new Room { Name = "London Street", Exits = new RoomExits { North = CurrentMap } };
-            CurrentMap.Exits.East = new Room { Name = "Hospital Street", Exits = new RoomExits { West = CurrentMap } };
-            CurrentMap.Exits.West = new Room { Name = "Ball Street", Exits = new RoomExits { East = CurrentMap } };
+            var outside = new Room { Name = "Baker Street", Width = 10, Heigth = 10 };
+            outside.Exits.NorthID = new RoomID { ID = "Suffer Street" };
+            outside.Exits.SouthID = new RoomID { ID = "London Street", };
+            outside.Exits.EastID = new RoomID { ID = "Hospital Street" };
+            outside.Exits.WestID = new RoomID { ID = "Ball Street" };
 
             Player.Position = new(0, 0);
             Player.OnDead += (v) =>
@@ -25,12 +25,18 @@ namespace GrandTextAdventure.Core.Game
                 Console.ResetColor();
             };
 
-            CurrentMap.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo", IsLocked = true });
-            CurrentMap.PlacingItems.Add(new Position(0, 1), new NPC() { Name = "Man", Vehicle = new Vehicle { Name = "Bycicle" } });
-            CurrentMap.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
-            CurrentMap.PlacingItems.Add(new Position(1, 1), new NPC() { Name = "Woman" });
-            CurrentMap.PlacingItems.Add(new Position(2, 1), new BlockingEntity() { Name = "Wall" });
+            outside.PlacingItems.Add(new Position(0, 0), new Vehicle() { Name = "Lambo", IsLocked = true });
+            outside.PlacingItems.Add(new Position(0, 1), new NPC() { Name = "Man", Vehicle = new Vehicle { Name = "Bycicle" } });
+            outside.PlacingItems.Add(new Position(1, 2), new Vehicle { Name = "Fiat" });
+            outside.PlacingItems.Add(new Position(1, 1), new NPC() { Name = "Woman" });
+            outside.PlacingItems.Add(new Position(2, 1), new BlockingEntity() { Name = "Wall" });
 
+            CurrentMap = new Building
+            {
+                Name = "Michael's Home"
+            };
+            CurrentMap.Width = 10;
+            CurrentMap.Heigth = 5;
         }
 
         public static IEnumerable<(Direction Direction, GameObject GameObject)> GetAroundObjects(GameState gameState, Position pos)

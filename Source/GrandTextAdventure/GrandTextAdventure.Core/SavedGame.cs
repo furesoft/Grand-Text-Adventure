@@ -9,7 +9,7 @@ namespace GrandTextAdventure.Core
         public RoomID CurrentRoom { get; set; }
         public PlayerCharackter Player { get; set; }
 
-        public void Load()
+        public static void Load()
         {
             // ToDo load SavedGame from LiteDB Entity
             // Apply to GameState
@@ -21,7 +21,7 @@ namespace GrandTextAdventure.Core
 
             var state = GameEngine.Instance.GetState();
             state.Player = item.Player;
-
+            state.CurrentMap = RoomManager.GetRoom(item.CurrentRoom);
         }
     }
 }
