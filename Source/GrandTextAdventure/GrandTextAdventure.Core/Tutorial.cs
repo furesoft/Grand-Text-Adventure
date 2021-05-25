@@ -27,13 +27,13 @@ namespace GrandTextAdventure.Core
                 var cmd = p.ParseCommand(input);
                 var expected = p.ParseCommand(line.ExpectedCommand);
 
-                if (cmd.Noun == expected.Noun && cmd.Verb == expected.Verb) // ToDo need to fix
+                if (cmd.Noun.Equals(expected.Noun) && cmd.Verb == expected.Verb) // ToDo need to fix
                 {
                     if (!string.IsNullOrEmpty(line.Output))
                     {
                         Console.WriteLine(line.Output);
-                        Settings.Instance.TutorialIndex++;
                     }
+                    Settings.Instance.TutorialIndex++;
                 }
                 else
                 {
