@@ -85,7 +85,7 @@ namespace GrandTextAdventure
 
             }, new("Michael", new string[]{
                 "It was fine. But please let me go at home.", "<wait>", "I will sleep and tomorrow we can continue our plan."
-            }, new("", new[] { "<wait>", "The next day...", "<wait>", "It is a sunny day in Los Santos.", "<wait>", "Knock Knock..", "<wait>", "Knock Knock..", "<wait>", "Michael, are you awake?", "We need to go!" }, null)), null);
+            }, new("", new[] { "<wait>", "The next day...", "<wait>", "It is a sunny day in Los Santos.", "<wait>", "Knock Knock..", "<wait>", "Knock Knock..", "<wait>" }, new("Simon", new[] { "Michael, are you awake?", "We need to go!" }, null, null))), null);
 
             var rootDialog = new DialogItem("", new string[] { "Monday, 17:30 at Los Santos Airport", "<wait>", "<wait>" }, startConv, null);
 
