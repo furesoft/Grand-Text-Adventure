@@ -1,3 +1,4 @@
+using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
 using GrandTextAdventure.Core.TextProcessing.Synonyms;
@@ -10,7 +11,15 @@ namespace GrandTextAdventure.Commands
     {
         public void Invoke(Command cmd)
         {
-            throw new System.NotImplementedException();
+            var gameState = GameEngine.Instance.GetState();
+            gameState.CurrentMap = RoomManager.GetRoom(gameState.CurrentMap.Exits.NorthID);
+
+            if (gameState.CurrentMap is IEnterable enterable)
+            {
+                enterable.OnExit(gameState.Player.Position);
+            }
+
+            GameEngine.Instance.SetState(gameState);
         }
     }
 }
