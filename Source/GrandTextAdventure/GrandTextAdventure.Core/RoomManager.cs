@@ -7,18 +7,18 @@ namespace GrandTextAdventure.Core
     public static class RoomManager
     {
 
-        private static ConcurrentDictionary<RoomID, Room> _cache = new();
+        private static ConcurrentDictionary<RoomID, Room> s_cache = new();
 
         public static bool IsRoomLoaded(RoomID id)
         {
-            return _cache.ContainsKey(id);
+            return s_cache.ContainsKey(id);
         }
 
         public static Room GetRoom(RoomID id)
         {
             var loaded = LoadRoom(id);
 
-            _cache.AddOrUpdate(id, (_) => loaded, (_, __) => __);
+            s_cache.AddOrUpdate(id, (_) => loaded, (_, __) => __);
 
             return loaded;
         }
@@ -27,7 +27,7 @@ namespace GrandTextAdventure.Core
         {
             var filename = id.ID + ".rdef";
 
-            return new Room { Name = id.ID }; // ToDo: Replace with real room data
+            return new Room { Name = id.ID, Exits = new RoomExits() { NorthID = new RoomID("Basic Street") } }; // ToDo: Replace with real room data
         }
     }
 }
