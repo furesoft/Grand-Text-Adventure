@@ -26,10 +26,10 @@ namespace GrandTextAdventure
 
             if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial && !Settings.Instance.TutorialDone)
             {
-                Console.WriteLine();
-
                 Tutorial.Start();
             }
+
+            Console.WriteLine();
 
             GameEngine.Instance.Start();
         }
