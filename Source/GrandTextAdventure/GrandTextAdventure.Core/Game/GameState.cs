@@ -31,9 +31,12 @@ namespace GrandTextAdventure.Core.Game
             outside.PlacingItems.Add(new Position(1, 1), new NPC() { Name = "Woman" });
             outside.PlacingItems.Add(new Position(2, 1), new BlockingEntity() { Name = "Wall" });
 
+            RoomManager.AddRoom(new RoomID("Baker Street"), outside);
+
             CurrentMap = new Building
             {
-                Name = "Michael's Home"
+                Name = "Michael's Home",
+                Exits = new RoomExits() { NorthID = new RoomID("Baker Street") }
             };
             CurrentMap.Width = 10;
             CurrentMap.Heigth = 5;

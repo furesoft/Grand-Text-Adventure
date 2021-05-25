@@ -14,6 +14,11 @@ namespace GrandTextAdventure.Core
             return s_cache.ContainsKey(id);
         }
 
+        public static void AddRoom(RoomID id, Room room)
+        {
+            s_cache.AddOrUpdate(id, (_) => room, (_, __) => __);
+        }
+
         public static Room GetRoom(RoomID id)
         {
             var loaded = LoadRoom(id);
