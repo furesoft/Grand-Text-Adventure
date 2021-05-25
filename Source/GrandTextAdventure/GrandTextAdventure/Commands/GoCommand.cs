@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection.Metadata;
 using GrandTextAdventure.Core;
+using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
@@ -46,7 +47,14 @@ namespace GrandTextAdventure.Commands
             }
             else
             {
-                GameEngine.Instance.Navigate(direction);
+                if (currentRoom is not Building)
+                {
+                    GameEngine.Instance.Navigate(direction);
+                }
+                else
+                {
+                    Console.WriteLine("There is a wall. Use 'leave' to leave the building");
+                }
             }
         }
     }

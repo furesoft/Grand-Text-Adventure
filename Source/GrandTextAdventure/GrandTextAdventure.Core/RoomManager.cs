@@ -7,7 +7,7 @@ namespace GrandTextAdventure.Core
     public static class RoomManager
     {
 
-        private static ConcurrentDictionary<RoomID, Room> s_cache = new();
+        private static readonly ConcurrentDictionary<RoomID, Room> s_cache = new();
 
         public static bool IsRoomLoaded(RoomID id)
         {
