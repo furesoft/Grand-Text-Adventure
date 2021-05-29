@@ -14,6 +14,8 @@ namespace GrandTextAdventure.Commands
             state.Player.Health = 0;
 
             GameEngine.Instance.SetState(state);
+
+            System.Console.WriteLine("You commited suicide");
         }
     }
 }

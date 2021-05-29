@@ -16,14 +16,14 @@ namespace GrandTextAdventure.Core
 
         public static void AddRoom(RoomID id, Room room)
         {
-            s_cache.AddOrUpdate(id, (_) => room, (_, __) => __);
+            s_cache.AddOrUpdate(id, (_) => room, (_, old) => old);
         }
 
         public static Room GetRoom(RoomID id)
         {
             var loaded = LoadRoom(id);
 
-            s_cache.AddOrUpdate(id, (_) => loaded, (_, __) => __);
+            s_cache.AddOrUpdate(id, (_) => loaded, (_, old) => old);
 
             return loaded;
         }

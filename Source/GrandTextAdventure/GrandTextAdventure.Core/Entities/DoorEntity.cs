@@ -17,7 +17,7 @@ namespace GrandTextAdventure.Core.Entities
 
         public void OnExit(Position pos)
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

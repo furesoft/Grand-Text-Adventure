@@ -19,8 +19,8 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
         Behind = 10,
         At = 11,
         Up = 12,
-        From = 12,
-        With = 13
+        From = 13,
+        With = 14
     }
 
     /// <summary>

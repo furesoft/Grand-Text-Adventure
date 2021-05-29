@@ -8,9 +8,7 @@ using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace GrandTextAdventure
 {

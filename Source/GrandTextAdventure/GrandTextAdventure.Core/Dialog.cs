@@ -1,5 +1,4 @@
 using System;
-using System.Net.WebSockets;
 
 namespace GrandTextAdventure.Core
 {
@@ -34,7 +33,7 @@ namespace GrandTextAdventure.Core
                     }
                 }
 
-                if (current.chooseLines != null)
+                if (current.ChooseLines != null)
                 {
                     // ToDo: Implement choosing option from dialog
                 }

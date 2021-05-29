@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GrandTextAdventure.Core.Entities;
 
 namespace GrandTextAdventure.Core.Game
@@ -42,6 +43,8 @@ namespace GrandTextAdventure.Core.Game
             CurrentMap.Heigth = 5;
         }
 
+
+        //ToDo Refeactor GetAroundObjects
         public static IEnumerable<(Direction Direction, GameObject GameObject)> GetAroundObjects(GameState gameState, Position pos)
         {
             if (gameState.CurrentMap.IsInBounds(Position.ApplyDirection(pos, Direction.North)))
@@ -88,12 +91,9 @@ namespace GrandTextAdventure.Core.Game
             }
 
             var obj = gameState.ObjectLayer[newPos.X, newPos.Y];
-            if (obj is NPC npc)
+            if (obj is NPC npc && npc.Vehicle is not null)
             {
-                if (npc.Vehicle != null)
-                {
-                    return npc.Vehicle;
-                }
+                return npc.Vehicle;
             }
 
             return obj;
