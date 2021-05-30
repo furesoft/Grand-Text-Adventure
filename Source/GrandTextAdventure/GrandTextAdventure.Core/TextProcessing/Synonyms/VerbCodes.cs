@@ -18,6 +18,7 @@
         Location = 12,
         Enter = 13,
         Suicide = 14,
-        Leave = 15
+        Leave = 15,
+        Call = 16
     }
 }

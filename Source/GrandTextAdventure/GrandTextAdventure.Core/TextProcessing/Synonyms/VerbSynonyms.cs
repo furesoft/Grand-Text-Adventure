@@ -150,6 +150,8 @@ namespace GrandTextAdventure.Core.TextProcessing.Synonyms
             Add("drive", VerbCodes.Enter);
 
             Add("leave", VerbCodes.Leave);
+
+            Add("call", VerbCodes.Call);
         }
 
         /// <summary>
