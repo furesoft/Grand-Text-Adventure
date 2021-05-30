@@ -4,4 +4,5 @@
 - .Net 5
 
 ## Running
-Just go to the GrandTextAdventure/GrandTextAdventure Folder and type in the terminal: dotnet run
+1. Download the Develop branch
+2. Just go to the GrandTextAdventure/GrandTextAdventure Folder and type in the terminal: dotnet run
