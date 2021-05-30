@@ -77,7 +77,7 @@ namespace GrandTextAdventure
 
             _state.CurrentMap.Init();
 
-            if (Settings.Instance.IsFirstStart)
+            if (!Settings.Instance.IsFirstStart)
             {
                 var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
                 Dialog.Start(rootDialog);
