@@ -12,6 +12,7 @@ namespace GrandTextAdventure.Core
             new("Drive the Bycicle", "drive Bycicle", "You are riding the Bicycle now"),
             new("See the Car behind you? Crack it by entering", "enter car", "You are awesome"),
             new("Now you can use your MG11 Weapon, shoot it and don't die!", "shoot MG11", "NPC died. You got 250 $."),
+            new("Call the emergency with 911", "call 911", "The emergency is on the way"),
             new("You got money, so why not let show how much you actually have? Type dollars and you'll find it out.", "dollars", "You have 733 $ and 2 Pilzschafcoins"),
             new("Now you know how to play. You can type what you want, the specific keywords must be present, like you learned before. Take a suicide to start the game.", "suicide", null) };
 
