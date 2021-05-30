@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using GrandTextAdventure.Ressources;
 
 namespace GrandTextAdventure.Core
 {
@@ -13,6 +14,11 @@ namespace GrandTextAdventure.Core
                 var fileStrm = File.OpenRead(file);
                 PreLoad(fileStrm);
             }
+        }
+
+        public static void PreLoad()
+        {
+            PreLoad(RessourceManager.SampleEntities);
         }
 
         public static void PreLoad(Stream strm)

@@ -9,7 +9,7 @@ namespace GrandTextAdventure
         {
             ConsoleBanner.Display();
 
-            EntitiyPreloader.PreLoad(Environment.CurrentDirectory);
+            EntitiyPreloader.PreLoad();
 
             Settings.Load();
 
