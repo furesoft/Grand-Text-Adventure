@@ -1,12 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace GrandTextAdventure.Core
 {
     public class GameObject
     {
         public delegate void GameObjectEventHandler(string property, object value);
+
+        private readonly Dictionary<string, Delegate> _subscriptions = new();
+
+
+        public void Subscribe(string eventName, Delegate handler)
+        {
+            if (_subscriptions.ContainsKey(eventName))
+            {
+                var old = _subscriptions[eventName];
+                var combined = Delegate.Combine(old, handler);
+
+                _subscriptions[eventName] = combined;
+            }
+            else
+            {
+                _subscriptions.Add(eventName, handler);
+            }
+        }
+
+        public void Invoke(string eventName, object[] args)
+        {
+            if (_subscriptions.ContainsKey(eventName))
+            {
+                _subscriptions[eventName].DynamicInvoke(args);
+            }
+        }
 
         public int ID
         {
@@ -20,6 +47,7 @@ namespace GrandTextAdventure.Core
         {
             OnPropertyChanged = null;
             Properties = null;
+            _subscriptions.Clear();
         }
 
         public void ObserverProperty<T>(string name, Action<T> handler)
