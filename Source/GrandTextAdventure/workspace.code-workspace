@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "EntityConsole"
+		},
+		{
+			"path": "GrandTextAdventure.Ressources"
 		}
 	],
 	"settings": {}

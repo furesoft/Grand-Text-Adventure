@@ -1,0 +1,50 @@
+{
+    "Name":"",
+    "Lines":[
+        "Monday, 17:30 at Los Santos Airport",
+        "<wait>",
+        "<wait>"
+        ],
+    "Next":{
+        "Name":"Simon",
+        "Lines":[
+            "Hey Michael.",
+            "Nice to see ya. The plan is going. How was your flight?"
+            ],
+        "Next":{
+            "Name":"Michael",
+            "Lines":[
+                "It was fine. But please let me go at home.",
+                "<wait>",
+                "I will sleep and tomorrow we can continue our plan."
+                ],
+            "Next":{
+                "Name":"",
+                "Lines":[
+                    "<wait>",
+                    "The next day...",
+                    "<wait>",
+                    "It is a sunny day in Los Santos.",
+                    "<wait>",
+                    "Knock Knock..",
+                    "<wait>",
+                    "Knock Knock..",
+                    "<wait>"
+                ],
+                "Next":{
+                    "Name":"Simon",
+                    "Lines":[
+                        "Michael, are you awake?",
+                        "We need to go!"
+                        ],
+                    "Next":null,
+                    "ChooseLines":null
+                },
+                "ChooseLines":null
+            },
+            "ChooseLines":null
+        },
+        "ChooseLines":null
+    },
+    "ChooseLines":null
+}

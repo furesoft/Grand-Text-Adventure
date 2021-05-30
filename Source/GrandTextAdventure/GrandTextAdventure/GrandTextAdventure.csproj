@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GrandTextAdventure.Core\GrandTextAdventure.Core.csproj" />
+    <ProjectReference Include="..\GrandTextAdventure.Ressources\GrandTextAdventure.Ressources.csproj" />
   </ItemGroup>
 
   <ItemGroup>
