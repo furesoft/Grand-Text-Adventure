@@ -11,6 +11,11 @@ namespace GrandTextAdventure.Core
 
         public static void Dial(string number)
         {
+            if (s_contacts.ContainsKey(number))
+            {
+                number = s_contacts[number]; // use number from contact list
+            }
+
             if (s_numberHandlers.ContainsKey(number))
             {
                 s_numberHandlers[number]();

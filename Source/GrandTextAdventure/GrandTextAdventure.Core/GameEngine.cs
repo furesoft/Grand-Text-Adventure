@@ -72,6 +72,11 @@ namespace GrandTextAdventure
             npcTimer.Start();
 
             CommandHandler.Collect();
+            Phone.AddContact("emergency", "911");
+            Phone.AddNumberHandler("911", delegate
+            {
+                Console.WriteLine("How can I Help?");
+            });
 
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
