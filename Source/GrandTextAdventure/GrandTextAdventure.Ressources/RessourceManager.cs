@@ -7,6 +7,13 @@ namespace GrandTextAdventure.Ressources
     public static class RessourceManager
     {
         public static Stream StartSequenceDialog =>
-                    typeof(RessourceManager).Assembly.GetManifestResourceStream("GrandTextAdventure.Ressources." + nameof(StartSequenceDialog) + ".json");
+                    LoadStream(nameof(StartSequenceDialog) + ".json");
+
+        public static Stream SampleEntities => LoadStream("samples.ced");
+
+        private static Stream LoadStream(string name)
+        {
+            return typeof(RessourceManager).Assembly.GetManifestResourceStream("GrandTextAdventure.Ressources." + name);
+        }
     }
 }
