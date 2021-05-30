@@ -77,10 +77,13 @@ namespace GrandTextAdventure
 
             _state.CurrentMap.Init();
 
-            var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
-            Dialog.Start(rootDialog);
+            if (Settings.Instance.IsFirstStart)
+            {
+                var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
+                Dialog.Start(rootDialog);
 
-            Hint("Leave your House and follow the Instructions from Simon");
+                Hint("Leave your House and follow the Instructions from Simon");
+            }
 
             while (true)
             {
