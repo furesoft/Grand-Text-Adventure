@@ -10,7 +10,7 @@ namespace GrandTextAdventure.Core
             new ("Lets go to north by typing 'north' or 'go north'", "go north", "Thank you"),
             new("Try to look around", "look around", "There is a Bycicle in south direction"),
             new("Drive the Bycicle", "drive Bycicle", "You are riding the Bicycle now"),
-            new("See the Car behind you? Crack it by entering", "enter car", "You are awesome"),
+            new("See the Car behind you? Crack it by entering with the car name", "enter car", "You are awesome"),
             new("Now you can use your MG11 Weapon, shoot it and don't die!", "shoot MG11", "NPC died. You got 250 $."),
             new("Call the emergency with 911", "call 911", "The emergency is on the way"),
             new("You got money, so why not let show how much you actually have? Type dollars and you'll find it out.", "dollars", "You have 733 $ and 2 Pilzschafcoins"),
