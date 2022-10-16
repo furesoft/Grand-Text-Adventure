@@ -1,27 +1,33 @@
-entitymodel "baseVehicle"
+(define baseVehicle (entity-model (list
+        (property "speed" 100)
+        (property "protection" 50)
+    )
+))
 
-    property speed = 100
-    property protection = 50
+(define lambo (vehicle "Lamborghini"
+    (list 
+        (applymodel baseVehicle)
 
-end
+        (property "speed" 150)
+        (property "wrap" 3.14)
+        (property "canExplode" true)
+        (property "something" "Hello World")
+    )
+))
 
 
-entity "Lamborghini" is vehicle
-    applymodel "baseVehicle"
+(define ford (vehicle "Ford Fiesta"
+    (list 
+        (applymodel baseVehicle)
 
-    property speed = 150
-    property wrap = 3.14
-    property something = "hello world"
-    property canExplode = true
+        (property "power" 10)
+    )
+))
 
-end
+(define mg11 (weapon "MG11" 
+    (list 
+        (property "power" 10)
+    )
+))
 
-entity "Ford Fiesta" is vehicle 
-    applymodel "baseVehicle""
-end
-
-entity "MG11" is weapon 
-
-    property power = 10
-
-end
+(export-entities mg11 ford lambo)
