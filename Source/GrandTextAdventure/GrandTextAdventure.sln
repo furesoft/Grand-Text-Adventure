@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31105.61
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandTextAdventure", "GrandTextAdventure\GrandTextAdventure.csproj", "{58970F8F-EDB8-4E6F-8AE7-8CB32A282A85}"
 EndProject
@@ -11,16 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		sampleEntity.efl = sampleEntity.efl
-		EflCompiler\bin\Debug\net5.0\samples.ced = EflCompiler\bin\Debug\net5.0\samples.ced
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{C0BEA652-1EF4-47A1-8136-2B983F407413}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EflCompiler", "EflCompiler\EflCompiler.csproj", "{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{29D1AE5C-F0ED-479A-A275-A17058E90051}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityConsole", "EntityConsole\EntityConsole.csproj", "{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,20 +33,9 @@ Global
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BEA652-1EF4-47A1-8136-2B983F407413}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DD19875-AB7C-43B4-9D3B-FC01DE86C317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C89184AF-BA80-4AC4-90AC-EC0DE05B9189} = {29D1AE5C-F0ED-479A-A275-A17058E90051}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401ADFFB-CCD0-48D5-9202-608812851A12}
