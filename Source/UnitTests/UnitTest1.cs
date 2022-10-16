@@ -1,29 +1,25 @@
-using GrandTextAdventure.Core.Parser;
-using GrandTextAdventure.Core.Parser.Visitors;
+using Darlek.Core.RuntimeLibrary;
+using GrandTextAdventure.Core.Scripting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace UnitTests
 {
     [TestClass]
-    public class ParserTests
+    public class ScriptTests
     {
-        private readonly EflDefinitionParser _parser = new();
-        private readonly string modelSrc = "entitymodel \"baseVehicle\" property key = 3.14 property awsner = 42 property str = \"hello\" end entity \"hello\" is vehicle applymodel \"baseVehicle\" end";
-
         [TestMethod]
         public void ParseEntityModel_Should_Pass()
         {
-            var ast = _parser.Parse(modelSrc);
+            var script = new GrandTextAdventure.Core.Script
+            {
+                Source =
+                "(define baseVehicle (entity-model (list (property \"speed\" 100)(property \"protection\" 50)))) (vehicle \"lambo\" (list (applymodel baseVehicle) (property \"speed\" 150)))"
+            };
+            SchemeCliLoader.Apply(typeof(EntityFunctions).Assembly, script.interpreter);
 
-            var visitor = new EntityDefinitionVisitor();
-            ast.Accept(visitor);
+            var result = script.Execute();
 
-            var textVisitor = new PrintVisitor();
-            ast.Accept(textVisitor);
-
-            Assert.IsNotNull(ast);
-            Assert.IsFalse(_parser.Diagnostics.Any());
+            Assert.IsNotNull(script);
         }
     }
 }
