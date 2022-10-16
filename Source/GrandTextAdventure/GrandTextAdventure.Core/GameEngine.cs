@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Linq;
 using Actress;
 using GrandTextAdventure.Core;
 using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace GrandTextAdventure
 {
@@ -21,6 +20,14 @@ namespace GrandTextAdventure
         private MailboxProcessor<GameMessage> _mailbox;
 
         private MailboxProcessor<GameMessage> _npcMailbox;
+
+        public static void Hint(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("<Hint>");
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
 
         public GameState GetState()
         {
@@ -51,14 +58,6 @@ namespace GrandTextAdventure
             return msg.IsDone;
         }
 
-        public static void Hint(string message)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("<Hint>");
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
         public void Start()
         {
             _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
@@ -84,10 +83,10 @@ namespace GrandTextAdventure
 
             if (!Settings.Instance.IsFirstStart)
             {
-                var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
-                Dialog.Start(rootDialog);
+                // var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
+                //Dialog.Start(rootDialog);
 
-                Hint("Leave your House and follow the Instructions from Simon");
+                //Hint("Leave your House and follow the Instructions from Simon");
             }
 
             while (true)
@@ -97,20 +96,6 @@ namespace GrandTextAdventure
                 ReadLine.AddHistory(input);
 
                 CommandHandler.Invoke(input);
-            }
-        }
-
-        private void NpcTimer_ellapsed(object sender, ElapsedEventArgs e)
-        {
-            var layer = GetState().ObjectLayer;
-            var npcs = GetNpcs(layer);
-
-            if (npcs.Any())
-            {
-                foreach (var npc in npcs)
-                {
-                    _npcMailbox.Post(new MoveNpcMessage { Direction = Direction.North, OldPosition = npc.Position });
-                }
             }
         }
 
@@ -132,6 +117,20 @@ namespace GrandTextAdventure
             }
 
             return result;
+        }
+
+        private void NpcTimer_ellapsed(object sender, ElapsedEventArgs e)
+        {
+            var layer = GetState().ObjectLayer;
+            var npcs = GetNpcs(layer);
+
+            if (npcs.Any())
+            {
+                foreach (var npc in npcs)
+                {
+                    _npcMailbox.Post(new MoveNpcMessage { Direction = Direction.North, OldPosition = npc.Position });
+                }
+            }
         }
 
         private async Task NpcProcessor(MailboxProcessor<GameMessage> arg)
@@ -181,6 +180,7 @@ namespace GrandTextAdventure
 
                         Environment.Exit(0);
                         break;
+
                     case WaitMessage waitMsg:
 
                         await Task.Delay(waitMsg.WaitTime);

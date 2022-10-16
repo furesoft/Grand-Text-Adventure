@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using GrandTextAdventure.Ressources;
 
 namespace GrandTextAdventure.Core
 {
@@ -18,7 +17,7 @@ namespace GrandTextAdventure.Core
 
         public static void PreLoad()
         {
-            PreLoad(RessourceManager.SampleEntities);
+            // PreLoad(RessourceManager.SampleEntities);
         }
 
         public static void PreLoad(Stream strm)
