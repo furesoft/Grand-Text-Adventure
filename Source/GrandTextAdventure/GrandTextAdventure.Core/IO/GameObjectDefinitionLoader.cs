@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GrandTextAdventure.Core.Parser;
-using GrandTextAdventure.Core.Parser.Visitors;
+﻿using System.Collections.Generic;
 
 namespace GrandTextAdventure.Core
 {
@@ -26,14 +23,8 @@ namespace GrandTextAdventure.Core
 
         public static IEnumerable<GameObject> LoadDefinitions(string entityConfiguration)
         {
-            var entityParser = new EflDefinitionParser();
-
-            var entityDefinitionAST = entityParser.Parse(entityConfiguration);
-            var entityDefinitionVisitor = new EntityDefinitionVisitor();
-
-            entityDefinitionAST.Accept(entityDefinitionVisitor);
-
-            return entityDefinitionVisitor.Result;
+            //ToDo: implement loading entitiy definitions from script file
+            return null;
         }
     }
 }

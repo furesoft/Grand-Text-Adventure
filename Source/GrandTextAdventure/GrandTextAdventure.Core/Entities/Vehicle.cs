@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace GrandTextAdventure.Core.Entities
 {
@@ -44,7 +43,7 @@ namespace GrandTextAdventure.Core.Entities
                 Console.WriteLine(Name + " is locked. You are cracking it...");
                 if (GameEngine.Instance.Wait(2000))
                 {
-                    System.Console.WriteLine("The door is cracked");
+                    Console.WriteLine("The door is cracked");
                 }
             }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Darlek.Core.RuntimeLibrary;
+using GrandTextAdventure.Core.Entities;
 
 namespace GrandTextAdventure.Core.Scripting
 {
@@ -22,25 +23,25 @@ namespace GrandTextAdventure.Core.Scripting
         [RuntimeMethod("vehicle")]
         public static GameObject Vehicle(string name, List<object> args)
         {
-            var entity = Entity(name, args);
-            entity.Type = GameObjectType.Vehicle;
-
-            return entity;
+            return Entity<Vehicle>(name, args);
         }
 
         [RuntimeMethod("weapon")]
         public static GameObject Weapon(string name, List<object> args)
         {
-            var entity = Entity(name, args);
-            entity.Type = GameObjectType.Weapon;
-
-            return entity;
+            return Entity<Weapon>(name, args);
         }
 
-        [RuntimeMethod("entity")]
-        public static GameObject Entity(string name, List<object> args)
+        [RuntimeMethod("applymodel")]
+        public static ApplyModelContainer ApplyModel(EntityModel model)
         {
-            var go = new GameObject();
+            return new ApplyModelContainer { Model = model };
+        }
+
+        private static T Entity<T>(string name, List<object> args)
+                    where T : GameObject, new()
+        {
+            var go = new T();
             go.Name = name;
 
             foreach (var item in args)
@@ -66,12 +67,6 @@ namespace GrandTextAdventure.Core.Scripting
             }
 
             return go;
-        }
-
-        [RuntimeMethod("applymodel")]
-        public static ApplyModelContainer ApplyModel(EntityModel model)
-        {
-            return new ApplyModelContainer { Model = model };
         }
 
         public class ApplyModelContainer
