@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using GrandTextAdventure.Core.TextProcessing;
-using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
 namespace GrandTextAdventure.Core
 {
@@ -24,7 +23,7 @@ namespace GrandTextAdventure.Core
                 Console.WriteLine(line.Description);
 
                 var input = Console.ReadLine();
-                var p = new TextProcessing.Parser();
+                var p = new Parser();
                 var cmd = p.ParseCommand(input);
                 var expected = p.ParseCommand(line.ExpectedCommand);
 
@@ -40,7 +39,6 @@ namespace GrandTextAdventure.Core
                 {
                     Console.WriteLine("That was wrong, give it a new try");
                 }
-
             }
 
             Settings.Instance.TutorialDone = true;
@@ -57,6 +55,5 @@ namespace GrandTextAdventure.Core
         {
             return Settings.Instance.TutorialDone || Settings.Instance.TutorialIndex < TutorialLines.Length;
         }
-
     }
 }
