@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace GrandTextAdventure
 {
-    class AutoCompletionHandler : IAutoCompleteHandler
+    internal class AutoCompletionHandler : IAutoCompleteHandler
     {
-        // characters to start completion from
         public char[] Separators { get; set; } = new char[] { ' ', '.', '/' };
 
-        // text - The current text entered in the console
-        // index - The index of the terminal cursor within {text}
         public string[] GetSuggestions(string text, int index)
         {
-            return Array.Empty<string>();
+            return new[] { "north", "south", "suicide", "west", "east", "enter", "leave", "go", "look", "around" };
         }
     }
 }
