@@ -13,7 +13,7 @@ public class ScriptTests
         var script = new GrandTextAdventure.Core.Script
         {
             Source =
-            "(define baseVehicle (entity-model (list (property \"speed\" 100)(property \"protection\" 50)))) (define lambo (vehicle \"lambo\" (list (applymodel baseVehicle) (property \"speed\" 150)))) (export-entities (list lambo))"
+            "(start-dialog nil)"
         };
         SchemeCliLoader.Apply(typeof(EntityFunctions).Assembly, script.interpreter);
 

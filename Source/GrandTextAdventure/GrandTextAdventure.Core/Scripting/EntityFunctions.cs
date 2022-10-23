@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Darlek.Core.RuntimeLibrary;
-using Darlek.Scheme;
 using GrandTextAdventure.Core.Entities;
 
 namespace GrandTextAdventure.Core.Scripting;
@@ -40,7 +39,7 @@ public static class EntityFunctions
     }
 
     [RuntimeMethod("export-entities")]
-    public static object ExportEntities(List<object> entities)
+    public static void ExportEntities(List<object> entities)
     {
         foreach (var entity in entities)
         {
@@ -48,8 +47,6 @@ public static class EntityFunctions
 
             GameObjectTable.Add(go);
         }
-
-        return None.Instance;
     }
 
     private static T Entity<T>(string name, List<object> args)

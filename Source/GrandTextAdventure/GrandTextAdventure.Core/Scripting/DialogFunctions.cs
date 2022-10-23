@@ -1,5 +1,4 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Scheme;
 
 namespace GrandTextAdventure.Core.Scripting;
 
@@ -7,10 +6,8 @@ namespace GrandTextAdventure.Core.Scripting;
 public class DialogFunctions
 {
     [RuntimeMethod("start-dialog")]
-    public static object StartDialog(DialogItem dialog)
+    public static void StartDialog(DialogItem dialog)
     {
         Dialog.Start(dialog);
-
-        return None.Instance;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Scheme;
 using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 
@@ -24,13 +23,5 @@ public class StateFunctions
     public static GameState GetState()
     {
         return GameEngine.Instance.GetState();
-    }
-
-    [RuntimeMethod("start-dialog")]
-    public static object StartDialog(DialogItem dialog)
-    {
-        Dialog.Start(dialog);
-
-        return None.Instance;
     }
 }
