@@ -1,65 +1,64 @@
 ﻿using System;
 
-namespace GrandTextAdventure.Core.Entities
+namespace GrandTextAdventure.Core.Entities;
+
+public enum Gender
 {
-    public enum Gender
+    Male,
+    Female,
+    Divers,
+}
+public class Charackter : GameObject
+{
+
+    public Charackter()
     {
-        Male,
-        Female,
-        Divers,
+        Type = GameObjectType.Charackter;
+        ObserverProperty<uint>("Health", HealthDeadHandler);
     }
-    public class Charackter : GameObject
+
+    private void HealthDeadHandler(uint health)
     {
-
-        public Charackter()
+        if (health >= 0)
         {
-            Type = GameObjectType.Charackter;
-            ObserverProperty<uint>("Health", HealthDeadHandler);
+            OnDead?.Invoke(health);
         }
+    }
 
-        private void HealthDeadHandler(uint health)
-        {
-            if (health >= 0)
-            {
-                OnDead?.Invoke(health);
-            }
-        }
+    public event Action<uint> OnDead;
 
-        public event Action<uint> OnDead;
+    public Inventory Inventory { get; } = new();
+    public Vehicle Vehicle { get; set; }
+    public bool IsDead => GetValue<uint>("Health") <= 0;
 
-        public Inventory Inventory { get; } = new();
-        public Vehicle Vehicle { get; set; }
-        public bool IsDead => GetValue<uint>("Health") <= 0;
+    public Position Position
+    {
+        get { return GetValue<Position>(nameof(Position)); }
+        set { SetOrAddValue(nameof(Position), value); }
+    }
 
-        public Position Position
-        {
-            get { return GetValue<Position>(nameof(Position)); }
-            set { SetOrAddValue(nameof(Position), value); }
-        }
+    public uint Health
+    {
+        get { return GetValue<uint>(nameof(Health)); }
+        set { SetOrAddValue(nameof(Health), value); }
+    }
 
-        public uint Health
-        {
-            get { return GetValue<uint>(nameof(Health)); }
-            set { SetOrAddValue(nameof(Health), value); }
-        }
+    public Money Money
+    {
+        get { return GetValue<Money>(nameof(Money)); }
+        set { SetOrAddValue(nameof(Money), value); }
+    }
 
-        public Money Money
-        {
-            get { return GetValue<Money>(nameof(Money)); }
-            set { SetOrAddValue(nameof(Money), value); }
-        }
+    public Gender Gender
+    {
+        get { return GetValue<Gender>(nameof(Gender)); }
+        set { SetOrAddValue(nameof(Gender), value); }
+    }
 
-        public Gender Gender
-        {
-            get { return GetValue<Gender>(nameof(Gender)); }
-            set { SetOrAddValue(nameof(Gender), value); }
-        }
+    public override void Deinit()
+    {
+        base.Deinit();
 
-        public override void Deinit()
-        {
-            base.Deinit();
-
-            OnDead = null;
-        }
+        OnDead = null;
     }
 }

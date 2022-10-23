@@ -1,9 +1,8 @@
-﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces
-{
-    public interface INounSynonyms
-    {
-        void Add(string synonym, string noun);
+﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces;
 
-        string GetNounForSynonym(string synonym);
-    }
+public interface INounSynonyms
+{
+    void Add(string synonym, string noun);
+
+    string GetNounForSynonym(string synonym);
 }

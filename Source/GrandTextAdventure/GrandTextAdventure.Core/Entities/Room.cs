@@ -1,65 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GrandTextAdventure.Core.Entities
+namespace GrandTextAdventure.Core.Entities;
+
+public class Room : GameObject
 {
-    public class Room : GameObject
+    public GameObject[,] Entries { get; set; }
+    public RoomExits Exits { get; set; } = new();
+
+    public int Heigth
     {
-        public GameObject[,] Entries { get; set; }
-        public RoomExits Exits { get; set; } = new();
+        get { return GetValue<int>(nameof(Heigth)); }
+        set { SetOrAddValue(nameof(Heigth), value); }
+    }
 
-        public int Heigth
+    public int Width
+    {
+        get { return GetValue<int>(nameof(Width)); }
+        set { SetOrAddValue(nameof(Width), value); }
+    }
+
+    public bool IsInBounds(Position newPos)
+    {
+        return newPos.X >= 0 && newPos.X < Width
+             && newPos.Y >= 0 && newPos.Y < Heigth;
+    }
+
+    public Dictionary<Position, GameObject> PlacingItems { get; init; } = new();
+
+    public override void Init()
+    {
+        var state = GameEngine.Instance.GetState();
+
+        Entries = new GameObject[Width, Heigth];
+        state.ObjectLayer = new GameObject[Width, Heigth];
+
+        foreach (var entry in Entries)
         {
-            get { return GetValue<int>(nameof(Heigth)); }
-            set { SetOrAddValue(nameof(Heigth), value); }
+            entry?.Init();
         }
 
-        public int Width
+        foreach (var item in PlacingItems)
         {
-            get { return GetValue<int>(nameof(Width)); }
-            set { SetOrAddValue(nameof(Width), value); }
-        }
-
-        public bool IsInBounds(Position newPos)
-        {
-            return newPos.X >= 0 && newPos.X < Width
-                 && newPos.Y >= 0 && newPos.Y < Heigth;
-        }
-
-        public Dictionary<Position, GameObject> PlacingItems { get; init; } = new();
-
-        public override void Init()
-        {
-            var state = GameEngine.Instance.GetState();
-
-            Entries = new GameObject[Width, Heigth];
-            state.ObjectLayer = new GameObject[Width, Heigth];
-
-            foreach (var entry in Entries)
+            if (IsInBounds(item.Key))
             {
-                entry?.Init();
+                state.ObjectLayer[item.Key.X, item.Key.Y] = item.Value;
             }
-
-            foreach (var item in PlacingItems)
-            {
-                if (IsInBounds(item.Key))
-                {
-                    state.ObjectLayer[item.Key.X, item.Key.Y] = item.Value;
-                }
-            }
-
-            GameEngine.Instance.SetState(state);
         }
 
-        public override void Deinit()
+        GameEngine.Instance.SetState(state);
+    }
+
+    public override void Deinit()
+    {
+        foreach (var entry in Entries)
         {
-            foreach (var entry in Entries)
-            {
-                entry.Deinit();
-            }
-
-            Entries = null;
-            Exits = null;
+            entry.Deinit();
         }
+
+        Entries = null;
+        Exits = null;
     }
 }

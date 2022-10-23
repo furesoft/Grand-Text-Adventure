@@ -7,54 +7,53 @@ using GrandTextAdventure.Core.TextProcessing;
 using GrandTextAdventure.Core.TextProcessing.Interfaces;
 using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
-namespace GrandTextAdventure.Commands
+namespace GrandTextAdventure.Commands;
+
+[CommandHandler(VerbCodes.Go)]
+public class GoCommand : ICommandHandler
 {
-    [CommandHandler(VerbCodes.Go)]
-    public class GoCommand : ICommandHandler
+    public void Invoke(Command cmd)
     {
-        public void Invoke(Command cmd)
+        var direction = Enum.Parse<Direction>(cmd.Noun, true);
+
+        var gameState = GameEngine.Instance.GetState();
+        var pos = gameState.Player.Position;
+        byte speed = 1;
+
+        if (gameState.Player.Vehicle != null)
         {
-            var direction = Enum.Parse<Direction>(cmd.Noun, true);
+            speed = gameState.Player.Vehicle.Speed;
+        }
 
-            var gameState = GameEngine.Instance.GetState();
-            var pos = gameState.Player.Position;
-            byte speed = 1;
+        var newPos = Position.ApplyDirection(pos, direction, speed);
 
-            if (gameState.Player.Vehicle != null)
+        var currentRoom = gameState.CurrentMap;
+
+        if (currentRoom.IsInBounds(newPos))
+        {
+            var newObj = gameState.ObjectLayer[newPos.X, newPos.Y];
+
+            if (newObj is IBlockable blockObj)
             {
-                speed = gameState.Player.Vehicle.Speed;
+                if (blockObj.IsBlocked)
+                {
+                    Console.WriteLine("You cannot go there. " + newObj.Name + " is blocking you"); //ToDo add new entity type for Blockable
+
+                    return;
+                }
             }
 
-            var newPos = Position.ApplyDirection(pos, direction, speed);
-
-            var currentRoom = gameState.CurrentMap;
-
-            if (currentRoom.IsInBounds(newPos))
+            gameState.Player.Position = newPos;
+        }
+        else
+        {
+            if (currentRoom is not Building)
             {
-                var newObj = gameState.ObjectLayer[newPos.X, newPos.Y];
-
-                if (newObj is IBlockable blockObj)
-                {
-                    if (blockObj.IsBlocked)
-                    {
-                        Console.WriteLine("You cannot go there. " + newObj.Name + " is blocking you"); //ToDo add new entity type for Blockable
-
-                        return;
-                    }
-                }
-
-                gameState.Player.Position = newPos;
+                GameEngine.Instance.Navigate(direction);
             }
             else
             {
-                if (currentRoom is not Building)
-                {
-                    GameEngine.Instance.Navigate(direction);
-                }
-                else
-                {
-                    Console.WriteLine("There is a wall. Use 'leave' to leave the building");
-                }
+                Console.WriteLine("There is a wall. Use 'leave' to leave the building");
             }
         }
     }

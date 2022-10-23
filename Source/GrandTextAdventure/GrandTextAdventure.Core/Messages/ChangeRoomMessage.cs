@@ -1,9 +1,8 @@
 ﻿using GrandTextAdventure.Core.Game;
 
-namespace GrandTextAdventure.Core.Messages
+namespace GrandTextAdventure.Core.Messages;
+
+public class ChangeRoomMessage : GameMessage
 {
-    public class ChangeRoomMessage : GameMessage
-    {
-        public Direction Direction { get; set; }
-    }
+    public Direction Direction { get; set; }
 }

@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace GrandTextAdventure.Core.TextProcessing.Interfaces
+namespace GrandTextAdventure.Core.TextProcessing.Interfaces;
+
+public interface IProfanityFilter
 {
-    public interface IProfanityFilter
-    {
-        ReadOnlyCollection<string> DetectAllProfanities(string sentence);
+    ReadOnlyCollection<string> DetectAllProfanities(string sentence);
 
-        bool IsProfanity(string word);
+    bool IsProfanity(string word);
 
-        string StringContainsFirstProfanity(string sentence);
-    }
+    string StringContainsFirstProfanity(string sentence);
 }

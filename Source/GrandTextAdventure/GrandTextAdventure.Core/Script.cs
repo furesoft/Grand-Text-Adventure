@@ -2,22 +2,21 @@
 using System.Reflection;
 using Darlek.Core.RuntimeLibrary;
 
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public class Script
 {
-    public class Script
+    public Darlek.Scheme.Interpreter interpreter = new();
+
+    public Script()
     {
-        public Darlek.Scheme.Interpreter interpreter = new();
+        SchemeCliLoader.Apply(Assembly.GetEntryAssembly(), interpreter);
+    }
 
-        public Script()
-        {
-            SchemeCliLoader.Apply(Assembly.GetEntryAssembly(), interpreter);
-        }
+    public string Source { get; set; }
 
-        public string Source { get; set; }
-
-        public object Execute()
-        {
-            return interpreter.Evaluate(new StringReader(Source));
-        }
+    public object Execute()
+    {
+        return interpreter.Evaluate(new StringReader(Source));
     }
 }

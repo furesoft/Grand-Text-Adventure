@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class EntityInstance : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class EntityInstance : Attribute
-    {
-    }
 }

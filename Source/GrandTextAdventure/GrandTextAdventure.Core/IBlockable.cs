@@ -1,7 +1,6 @@
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public interface IBlockable
 {
-    public interface IBlockable
-    {
-        bool IsBlocked { get; }
-    }
+    bool IsBlocked { get; }
 }

@@ -1,6 +1,5 @@
-﻿namespace GrandTextAdventure.Core.Messages
+﻿namespace GrandTextAdventure.Core.Messages;
+
+public abstract class GameMessage
 {
-    public abstract class GameMessage
-    {
-    }
 }

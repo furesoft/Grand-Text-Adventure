@@ -10,256 +10,255 @@ using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
 using GrandTextAdventure.Core.TextProcessing;
 
-namespace GrandTextAdventure
+namespace GrandTextAdventure;
+
+public class GameEngine
 {
-    public class GameEngine
+    public static readonly GameEngine Instance = new();
+    private GameState _state = new();
+
+    private MailboxProcessor<GameMessage> _mailbox;
+
+    private MailboxProcessor<GameMessage> _npcMailbox;
+
+    public static void Hint(string message)
     {
-        public static readonly GameEngine Instance = new();
-        private GameState _state = new();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("<Hint>");
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
 
-        private MailboxProcessor<GameMessage> _mailbox;
+    public GameState GetState()
+    {
+        var msg = (GetStateMessage)_mailbox.PostAndReply<GameMessage>((channel) => new GetStateMessage(channel));
 
-        private MailboxProcessor<GameMessage> _npcMailbox;
+        return msg.State;
+    }
 
-        public static void Hint(string message)
+    public void Navigate(Direction direction)
+    {
+        _mailbox.Post(new ChangeRoomMessage { Direction = direction });
+    }
+
+    public void Post(GameMessage msg)
+    {
+        _mailbox.Post(msg);
+    }
+
+    public void SetState(GameState state)
+    {
+        _mailbox.Post(new ChangeStateMessage { State = state });
+    }
+
+    public bool Wait(int milliseconds)
+    {
+        var msg = (WaitMessage)_mailbox.PostAndReply<GameMessage>((channel) => new WaitMessage(channel, milliseconds));
+
+        return msg.IsDone;
+    }
+
+    public void Start()
+    {
+        _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
+        _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
+
+        var npcTimer = new Timer
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("<Hint>");
-            Console.WriteLine(message);
-            Console.ResetColor();
+            Interval = 5000
+        };
+        npcTimer.Elapsed += NpcTimer_ellapsed;
+        npcTimer.Start();
+
+        CommandHandler.Collect();
+        Phone.AddContact("emergency", "911");
+        Phone.AddNumberHandler("911", delegate
+        {
+            Console.WriteLine("How can I Help?");
+        });
+
+        ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
+
+        _state.CurrentMap.Init();
+
+        if (!Settings.Instance.IsFirstStart)
+        {
+            // var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
+            //Dialog.Start(rootDialog);
+
+            //Hint("Leave your House and follow the Instructions from Simon");
         }
 
-        public GameState GetState()
+        while (true)
         {
-            var msg = (GetStateMessage)_mailbox.PostAndReply<GameMessage>((channel) => new GetStateMessage(channel));
+            var input = ReadLine.Read("> ");
 
-            return msg.State;
+            ReadLine.AddHistory(input);
+
+            CommandHandler.Invoke(input);
         }
+    }
 
-        public void Navigate(Direction direction)
+    private static IEnumerable<NPC> GetNpcs(GameObject[,] layer)
+    {
+        var result = new List<NPC>();
+
+        for (var i = 0; i < layer.GetLength(0); i++)
         {
-            _mailbox.Post(new ChangeRoomMessage { Direction = direction });
-        }
-
-        public void Post(GameMessage msg)
-        {
-            _mailbox.Post(msg);
-        }
-
-        public void SetState(GameState state)
-        {
-            _mailbox.Post(new ChangeStateMessage { State = state });
-        }
-
-        public bool Wait(int milliseconds)
-        {
-            var msg = (WaitMessage)_mailbox.PostAndReply<GameMessage>((channel) => new WaitMessage(channel, milliseconds));
-
-            return msg.IsDone;
-        }
-
-        public void Start()
-        {
-            _mailbox = MailboxProcessor.Start<GameMessage>(CommandProcessor);
-            _npcMailbox = MailboxProcessor.Start<GameMessage>(NpcProcessor);
-
-            var npcTimer = new Timer
+            for (var j = 0; j < layer.GetLength(1); j++)
             {
-                Interval = 5000
-            };
-            npcTimer.Elapsed += NpcTimer_ellapsed;
-            npcTimer.Start();
+                var obj = layer[i, j];
 
-            CommandHandler.Collect();
-            Phone.AddContact("emergency", "911");
-            Phone.AddNumberHandler("911", delegate
-            {
-                Console.WriteLine("How can I Help?");
-            });
-
-            ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
-
-            _state.CurrentMap.Init();
-
-            if (!Settings.Instance.IsFirstStart)
-            {
-                // var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
-                //Dialog.Start(rootDialog);
-
-                //Hint("Leave your House and follow the Instructions from Simon");
-            }
-
-            while (true)
-            {
-                var input = ReadLine.Read("> ");
-
-                ReadLine.AddHistory(input);
-
-                CommandHandler.Invoke(input);
-            }
-        }
-
-        private static IEnumerable<NPC> GetNpcs(GameObject[,] layer)
-        {
-            var result = new List<NPC>();
-
-            for (var i = 0; i < layer.GetLength(0); i++)
-            {
-                for (var j = 0; j < layer.GetLength(1); j++)
+                if (obj is NPC npc)
                 {
-                    var obj = layer[i, j];
+                    result.Add(npc);
+                }
+            }
+        }
 
-                    if (obj is NPC npc)
+        return result;
+    }
+
+    private void NpcTimer_ellapsed(object sender, ElapsedEventArgs e)
+    {
+        var layer = GetState().ObjectLayer;
+        var npcs = GetNpcs(layer);
+
+        if (npcs.Any())
+        {
+            foreach (var npc in npcs)
+            {
+                _npcMailbox.Post(new MoveNpcMessage { Direction = Direction.North, OldPosition = npc.Position });
+            }
+        }
+    }
+
+    private async Task NpcProcessor(MailboxProcessor<GameMessage> arg)
+    {
+        while (true)
+        {
+            var msg = await arg.Receive();
+            var gameState = Instance.GetState();
+
+            switch (msg)
+            {
+                case MoveNpcMessage movMsg:
+
+                    var npc = gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y];
+                    if (npc is Charackter c)
                     {
-                        result.Add(npc);
+                        var newPos = Position.ApplyDirection(movMsg.OldPosition, movMsg.Direction);
+                        var newNpc = gameState.ObjectLayer[newPos.X, newPos.Y];
+
+                        if (newNpc == null)
+                        {
+                            c.Position = newPos;
+
+                            gameState.ObjectLayer[newPos.X, newPos.Y] = c;
+                            gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y] = null;
+
+                            SetState(gameState);
+                        }
                     }
-                }
-            }
 
-            return result;
-        }
-
-        private void NpcTimer_ellapsed(object sender, ElapsedEventArgs e)
-        {
-            var layer = GetState().ObjectLayer;
-            var npcs = GetNpcs(layer);
-
-            if (npcs.Any())
-            {
-                foreach (var npc in npcs)
-                {
-                    _npcMailbox.Post(new MoveNpcMessage { Direction = Direction.North, OldPosition = npc.Position });
-                }
+                    break;
             }
         }
+    }
 
-        private async Task NpcProcessor(MailboxProcessor<GameMessage> arg)
+    private async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
+    {
+        while (true)
         {
-            while (true)
+            var msg = await inbox.Receive();
+
+            switch (msg)
             {
-                var msg = await arg.Receive();
-                var gameState = Instance.GetState();
+                case EndGameMessage:
+                    Console.WriteLine("The Game will exit soon...");
+                    await Task.Delay(2000);
 
-                switch (msg)
-                {
-                    case MoveNpcMessage movMsg:
+                    Environment.Exit(0);
+                    break;
 
-                        var npc = gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y];
-                        if (npc is Charackter c)
-                        {
-                            var newPos = Position.ApplyDirection(movMsg.OldPosition, movMsg.Direction);
-                            var newNpc = gameState.ObjectLayer[newPos.X, newPos.Y];
+                case WaitMessage waitMsg:
 
-                            if (newNpc == null)
+                    await Task.Delay(waitMsg.WaitTime);
+                    waitMsg.IsDone = true;
+
+                    waitMsg.Channel.Reply(waitMsg);
+
+                    break;
+
+                case LoadMessage:
+                    Console.WriteLine("Game loaded");
+                    break;
+
+                case SaveMessage:
+                    Console.WriteLine("Game saved");
+                    break;
+
+                case ChangeStateMessage csMsg:
+                    _state = csMsg.State;
+                    break;
+
+                case GetStateMessage gsMsg:
+                    {
+                        gsMsg.State = _state;
+
+                        gsMsg.Channel.Reply(gsMsg);
+                        break;
+                    }
+                case ChangeRoomMessage crMsg:
+                    switch (crMsg.Direction)
+                    {
+                        case Direction.North:
+                            if (_state.CurrentMap.Exits.North != null)
                             {
-                                c.Position = newPos;
-
-                                gameState.ObjectLayer[newPos.X, newPos.Y] = c;
-                                gameState.ObjectLayer[movMsg.OldPosition.X, movMsg.OldPosition.Y] = null;
-
-                                SetState(gameState);
+                                _state.CurrentMap = _state.CurrentMap.Exits.North;
                             }
-                        }
+                            else
+                            {
+                                Console.WriteLine("You are at the End of the World");
+                            }
 
-                        break;
-                }
-            }
-        }
-
-        private async Task CommandProcessor(MailboxProcessor<GameMessage> inbox)
-        {
-            while (true)
-            {
-                var msg = await inbox.Receive();
-
-                switch (msg)
-                {
-                    case EndGameMessage:
-                        Console.WriteLine("The Game will exit soon...");
-                        await Task.Delay(2000);
-
-                        Environment.Exit(0);
-                        break;
-
-                    case WaitMessage waitMsg:
-
-                        await Task.Delay(waitMsg.WaitTime);
-                        waitMsg.IsDone = true;
-
-                        waitMsg.Channel.Reply(waitMsg);
-
-                        break;
-
-                    case LoadMessage:
-                        Console.WriteLine("Game loaded");
-                        break;
-
-                    case SaveMessage:
-                        Console.WriteLine("Game saved");
-                        break;
-
-                    case ChangeStateMessage csMsg:
-                        _state = csMsg.State;
-                        break;
-
-                    case GetStateMessage gsMsg:
-                        {
-                            gsMsg.State = _state;
-
-                            gsMsg.Channel.Reply(gsMsg);
                             break;
-                        }
-                    case ChangeRoomMessage crMsg:
-                        switch (crMsg.Direction)
-                        {
-                            case Direction.North:
-                                if (_state.CurrentMap.Exits.North != null)
-                                {
-                                    _state.CurrentMap = _state.CurrentMap.Exits.North;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You are at the End of the World");
-                                }
 
-                                break;
+                        case Direction.West:
+                            if (_state.CurrentMap.Exits.West != null)
+                            {
+                                _state.CurrentMap = _state.CurrentMap.Exits.West;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You are at the End of the World");
+                            }
+                            break;
 
-                            case Direction.West:
-                                if (_state.CurrentMap.Exits.West != null)
-                                {
-                                    _state.CurrentMap = _state.CurrentMap.Exits.West;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You are at the End of the World");
-                                }
-                                break;
+                        case Direction.East:
+                            if (_state.CurrentMap.Exits.East != null)
+                            {
+                                _state.CurrentMap = _state.CurrentMap.Exits.East;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You are at the End of the World");
+                            }
+                            break;
 
-                            case Direction.East:
-                                if (_state.CurrentMap.Exits.East != null)
-                                {
-                                    _state.CurrentMap = _state.CurrentMap.Exits.East;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You are at the End of the World");
-                                }
-                                break;
+                        case Direction.South:
+                            if (_state.CurrentMap.Exits.South != null)
+                            {
+                                _state.CurrentMap = _state.CurrentMap.Exits.South;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You are at the End of the World");
+                            }
+                            break;
+                    }
 
-                            case Direction.South:
-                                if (_state.CurrentMap.Exits.South != null)
-                                {
-                                    _state.CurrentMap = _state.CurrentMap.Exits.South;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You are at the End of the World");
-                                }
-                                break;
-                        }
-
-                        break;
-                }
+                    break;
             }
         }
     }

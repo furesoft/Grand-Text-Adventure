@@ -1,9 +1,8 @@
-﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces
-{
-    public interface IAdjectiveMapping
-    {
-        void Add(string adjective);
+﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces;
 
-        bool CheckAdjectiveExists(string adjective);
-    }
+public interface IAdjectiveMapping
+{
+    void Add(string adjective);
+
+    bool CheckAdjectiveExists(string adjective);
 }

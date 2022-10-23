@@ -1,30 +1,29 @@
 ﻿using System.Collections.Generic;
 
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public static class GameObjectDefinitionLoader
 {
-    public static class GameObjectDefinitionLoader
+    private static readonly Dictionary<string, EntityModel> s_models = new();
+
+    public static void AddModel(EntityModel model)
     {
-        private static readonly Dictionary<string, EntityModel> s_models = new();
+        s_models.Add(model.Name, model);
+    }
 
-        public static void AddModel(EntityModel model)
+    public static EntityModel GetModel(string name)
+    {
+        if (s_models.ContainsKey(name))
         {
-            s_models.Add(model.Name, model);
+            return s_models[name];
         }
 
-        public static EntityModel GetModel(string name)
-        {
-            if (s_models.ContainsKey(name))
-            {
-                return s_models[name];
-            }
+        return null;
+    }
 
-            return null;
-        }
-
-        public static IEnumerable<GameObject> LoadDefinitions(string entityConfiguration)
-        {
-            //ToDo: implement loading entitiy definitions from script file
-            return null;
-        }
+    public static IEnumerable<GameObject> LoadDefinitions(string entityConfiguration)
+    {
+        //ToDo: implement loading entitiy definitions from script file
+        return null;
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces
+﻿namespace GrandTextAdventure.Core.TextProcessing.Interfaces;
+
+public interface ICommandHandler
 {
-    public interface ICommandHandler
-    {
-        void Invoke(Command cmd);
-    }
+    void Invoke(Command cmd);
 }

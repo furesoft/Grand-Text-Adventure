@@ -30,4 +30,4 @@
     )
 ))
 
-(export-entities mg11 ford lambo)
+(export-entities (list mg11 ford lambo))

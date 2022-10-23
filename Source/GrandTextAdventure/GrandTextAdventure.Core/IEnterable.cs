@@ -1,9 +1,8 @@
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public interface IEnterable
 {
-    public interface IEnterable
-    {
-        void OnEnter(Position pos);
-        void OnExit(Position pos);
-        bool IsEnterable();
-    }
+    void OnEnter(Position pos);
+    void OnExit(Position pos);
+    bool IsEnterable();
 }

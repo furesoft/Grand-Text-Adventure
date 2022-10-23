@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace GrandTextAdventure.Core
-{
-    public class EntityModel
-    {
-        public string Name { get; set; }
+namespace GrandTextAdventure.Core;
 
-        public Dictionary<string, object> Properties { get; set; } = new();
-    }
+public class EntityModel
+{
+    public string Name { get; set; }
+
+    public Dictionary<string, object> Properties { get; set; } = new();
 }

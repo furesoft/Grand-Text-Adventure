@@ -1,10 +1,9 @@
 ﻿using System;
 using GrandTextAdventure.Core.Game;
 
-namespace GrandTextAdventure.Core.Messages
+namespace GrandTextAdventure.Core.Messages;
+
+public class ChangeStateMessage : GameMessage
 {
-    public class ChangeStateMessage : GameMessage
-    {
-        public GameState State { get; set; }
-    }
+    public GameState State { get; set; }
 }

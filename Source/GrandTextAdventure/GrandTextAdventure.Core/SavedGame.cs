@@ -2,26 +2,25 @@ using System.Linq;
 using GrandTextAdventure.Core.Entities;
 using LiteDB;
 
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public class SavedGame
 {
-    public class SavedGame
+    public RoomID CurrentRoom { get; set; }
+    public PlayerCharackter Player { get; set; }
+
+    public static void Load()
     {
-        public RoomID CurrentRoom { get; set; }
-        public PlayerCharackter Player { get; set; }
+        // ToDo load SavedGame from LiteDB Entity
+        // Apply to GameState
 
-        public static void Load()
-        {
-            // ToDo load SavedGame from LiteDB Entity
-            // Apply to GameState
+        using LiteDatabase db = new("gta.conf");
+        var sg = db.GetCollection<SavedGame>("SavedGame");
 
-            using LiteDatabase db = new("gta.conf");
-            var sg = db.GetCollection<SavedGame>("SavedGame");
+        var item = sg.FindAll().First();
 
-            var item = sg.FindAll().First();
-
-            var state = GameEngine.Instance.GetState();
-            state.Player = item.Player;
-            state.CurrentMap = RoomManager.GetRoom(item.CurrentRoom);
-        }
+        var state = GameEngine.Instance.GetState();
+        state.Player = item.Player;
+        state.CurrentMap = RoomManager.GetRoom(item.CurrentRoom);
     }
 }

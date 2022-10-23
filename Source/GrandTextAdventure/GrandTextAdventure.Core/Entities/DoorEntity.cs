@@ -1,23 +1,22 @@
-namespace GrandTextAdventure.Core.Entities
+namespace GrandTextAdventure.Core.Entities;
+
+[EntityInstance]
+public class DoorEntity : GameObject, IEnterable
 {
-    [EntityInstance]
-    public class DoorEntity : GameObject, IEnterable
+    public DoorEntity()
     {
-        public DoorEntity()
-        {
-            Type = GameObjectType.Door;
-        }
+        Type = GameObjectType.Door;
+    }
 
-        public bool IsEnterable() => true;
+    public bool IsEnterable() => true;
 
-        public void OnEnter(Position pos)
-        {
-            throw new System.NotImplementedException();
-        }
+    public void OnEnter(Position pos)
+    {
+        throw new System.NotImplementedException();
+    }
 
-        public void OnExit(Position pos)
-        {
+    public void OnExit(Position pos)
+    {
 
-        }
     }
 }

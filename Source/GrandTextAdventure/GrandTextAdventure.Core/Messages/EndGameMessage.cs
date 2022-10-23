@@ -1,6 +1,5 @@
-﻿namespace GrandTextAdventure.Core.Messages
+﻿namespace GrandTextAdventure.Core.Messages;
+
+public class EndGameMessage : GameMessage
 {
-    public class EndGameMessage : GameMessage
-    {
-    }
 }

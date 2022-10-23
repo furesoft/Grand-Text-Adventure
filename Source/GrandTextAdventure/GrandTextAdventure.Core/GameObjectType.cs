@@ -1,12 +1,11 @@
-﻿namespace GrandTextAdventure.Core
+﻿namespace GrandTextAdventure.Core;
+
+public enum GameObjectType
 {
-    public enum GameObjectType
-    {
-        Building,
-        Charackter,
-        Vehicle,
-        Weapon,
-        Blocking,
-        Door
-    }
+    Building,
+    Charackter,
+    Vehicle,
+    Weapon,
+    Blocking,
+    Door
 }

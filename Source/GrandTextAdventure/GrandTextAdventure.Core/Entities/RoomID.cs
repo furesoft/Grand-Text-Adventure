@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace GrandTextAdventure.Core.Entities
+namespace GrandTextAdventure.Core.Entities;
+
+public struct RoomID
 {
-    public struct RoomID
+    public RoomID(string iD)
     {
-        public RoomID(string iD)
-        {
-            ID = iD;
-        }
+        ID = iD;
+    }
 
-        public string ID { get; set; }
+    public string ID { get; set; }
 
-        public Room GetRoom()
-        {
-            throw new NotImplementedException();
-        }
+    public Room GetRoom()
+    {
+        throw new NotImplementedException();
     }
 }

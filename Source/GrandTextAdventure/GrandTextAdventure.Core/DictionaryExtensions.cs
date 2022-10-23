@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace GrandTextAdventure.Core
+namespace GrandTextAdventure.Core;
+
+public static class DictionaryExtensions
 {
-    public static class DictionaryExtensions
+    public static void AddOrUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
     {
-        public static void AddOrUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
+        if (dict.ContainsKey(key))
         {
-            if (dict.ContainsKey(key))
-            {
-                dict[key] = value;
-            }
-            else
-            {
-                dict.Add(key, value);
-            }
+            dict[key] = value;
+        }
+        else
+        {
+            dict.Add(key, value);
         }
     }
 }

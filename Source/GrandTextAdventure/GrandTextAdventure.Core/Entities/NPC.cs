@@ -1,42 +1,41 @@
 using System;
 using GrandTextAdventure.Core.Game;
 
-namespace GrandTextAdventure.Core.Entities
+namespace GrandTextAdventure.Core.Entities;
+
+public class NPC : Charackter, IEnterable
 {
-    public class NPC : Charackter, IEnterable
+    public override void Init() => OnDead += OnDeadHandler;
+
+    public int AgressionLevel { get; set; }
+
+    private void OnDeadHandler(uint value)
     {
-        public override void Init() => OnDead += OnDeadHandler;
+        Console.WriteLine((Gender == Gender.Male ? "He" : "She") + " is Dead");
 
-        public int AgressionLevel { get; set; }
+        var gameState = GameEngine.Instance.GetState();
+        var player = gameState.Player;
+        var inventory = player.Inventory;
 
-        private void OnDeadHandler(uint value)
-        {
-            Console.WriteLine((Gender == Gender.Male ? "He" : "She") + " is Dead");
+        Inventory.Transfer(inventory);
+        player.Money += Money;
 
-            var gameState = GameEngine.Instance.GetState();
-            var player = gameState.Player;
-            var inventory = player.Inventory;
+        gameState.ObjectLayer[Position.X, Position.Y] = null;
 
-            Inventory.Transfer(inventory);
-            player.Money += Money;
+        GameEngine.Instance.SetState(gameState);
+    }
 
-            gameState.ObjectLayer[Position.X, Position.Y] = null;
+    public bool IsEnterable() => Vehicle != null;
 
-            GameEngine.Instance.SetState(gameState);
-        }
+    public void OnEnter(Position pos)
+    {
+        Console.WriteLine("Stealing Car");
 
-        public bool IsEnterable() => Vehicle != null;
+        Vehicle.OnEnter(pos);
+    }
 
-        public void OnEnter(Position pos)
-        {
-            Console.WriteLine("Stealing Car");
-
-            Vehicle.OnEnter(pos);
-        }
-
-        public void OnExit(Position pos)
-        {
-            Vehicle.OnExit(pos);
-        }
+    public void OnExit(Position pos)
+    {
+        Vehicle.OnExit(pos);
     }
 }

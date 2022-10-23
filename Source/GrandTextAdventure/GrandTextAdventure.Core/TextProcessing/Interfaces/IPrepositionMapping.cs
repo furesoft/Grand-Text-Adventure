@@ -1,11 +1,10 @@
 ﻿using GrandTextAdventure.Core.TextProcessing.Synonyms;
 
-namespace GrandTextAdventure.Core.TextProcessing.Interfaces
-{
-    public interface IPrepositionMapping
-    {
-        void Add(string inputProposition, PropositionEnum preposition);
+namespace GrandTextAdventure.Core.TextProcessing.Interfaces;
 
-        PropositionEnum GetPreposition(string preposition);
-    }
+public interface IPrepositionMapping
+{
+    void Add(string inputProposition, PropositionEnum preposition);
+
+    PropositionEnum GetPreposition(string preposition);
 }

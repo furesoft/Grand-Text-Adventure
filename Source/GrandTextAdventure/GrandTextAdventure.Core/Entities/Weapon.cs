@@ -1,11 +1,10 @@
-﻿namespace GrandTextAdventure.Core.Entities
+﻿namespace GrandTextAdventure.Core.Entities;
+
+[EntityInstance]
+public class Weapon : GameObject
 {
-    [EntityInstance]
-    public class Weapon : GameObject
+    public Weapon()
     {
-        public Weapon()
-        {
-            Type = GameObjectType.Weapon;
-        }
+        Type = GameObjectType.Weapon;
     }
 }

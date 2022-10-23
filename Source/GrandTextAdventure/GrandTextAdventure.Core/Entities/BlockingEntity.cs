@@ -1,13 +1,12 @@
-namespace GrandTextAdventure.Core.Entities
-{
-    [EntityInstance]
-    public class BlockingEntity : GameObject, IBlockable
-    {
-        public BlockingEntity()
-        {
-            Type = GameObjectType.Blocking;
-        }
+namespace GrandTextAdventure.Core.Entities;
 
-        public bool IsBlocked => true;
+[EntityInstance]
+public class BlockingEntity : GameObject, IBlockable
+{
+    public BlockingEntity()
+    {
+        Type = GameObjectType.Blocking;
     }
+
+    public bool IsBlocked => true;
 }

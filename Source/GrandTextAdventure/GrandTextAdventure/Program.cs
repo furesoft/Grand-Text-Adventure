@@ -1,37 +1,36 @@
 ﻿using System;
 using GrandTextAdventure.Core;
 
-namespace GrandTextAdventure
+namespace GrandTextAdventure;
+
+internal class Program
 {
-    internal class Program
+    private static void Main()
     {
-        private static void Main()
+        ConsoleBanner.Display();
+
+        EntitiyPreloader.PreLoad();
+
+        Settings.Load();
+
+        if (!Settings.Instance.IsFirstStart)
         {
-            ConsoleBanner.Display();
+            Console.Write("Do you want to play an tutorial to learn how to use this game? (y|n)");
+            var wantTut = Console.ReadKey().Key;
 
-            EntitiyPreloader.PreLoad();
+            Settings.Instance.WantPlayTutorial = wantTut == ConsoleKey.Y;
+            Settings.Instance.IsFirstStart = true;
 
-            Settings.Load();
-
-            if (!Settings.Instance.IsFirstStart)
-            {
-                Console.Write("Do you want to play an tutorial to learn how to use this game? (y|n)");
-                var wantTut = Console.ReadKey().Key;
-
-                Settings.Instance.WantPlayTutorial = wantTut == ConsoleKey.Y;
-                Settings.Instance.IsFirstStart = true;
-
-                Settings.Save();
-            }
-
-            if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial && !Settings.Instance.TutorialDone)
-            {
-                Tutorial.Start();
-            }
-
-            Console.WriteLine();
-
-            GameEngine.Instance.Start();
+            Settings.Save();
         }
+
+        if (Tutorial.IsTutorialStarted() || Settings.Instance.WantPlayTutorial && !Settings.Instance.TutorialDone)
+        {
+            Tutorial.Start();
+        }
+
+        Console.WriteLine();
+
+        GameEngine.Instance.Start();
     }
 }
