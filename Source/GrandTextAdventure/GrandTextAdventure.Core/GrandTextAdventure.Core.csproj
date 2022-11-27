@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Darlek.Scheme" Version="1.0.0" />
-    <PackageReference Include="LibObjectFile" Version="0.3.5" />
+    <PackageReference Include="Darlek.Scheme" Version="1.0.1" />
+    <PackageReference Include="LibObjectFile" Version="0.4.0" />
     <PackageReference Include="Actress" Version="0.2.1" />
-    <PackageReference Include="LiteDB" Version="5.0.10" />
+    <PackageReference Include="LiteDB" Version="5.0.12" />
     <PackageReference Include="ReadLine" Version="2.0.1" />
   </ItemGroup>
 
