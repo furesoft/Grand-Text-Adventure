@@ -83,14 +83,16 @@ public class GameEngine
 
         if (Settings.Instance.IsFirstStart)
         {
+            var dd = Dialog.Load("(dialog-choose nil (list \"Möchtest du gewinnen?\") (list (dialog-action \"Ja\" (lambda args (display \"juhu\\n\"))) (dialog-action \"Nein\" (lambda args (display \"bad\\n\")))))");
+
             var d = new ChooseDialogItem("Kannst du diese Aufgabe übernehmen?", new[] { "Aufgabe annehmen?" }, new[] {
                 new TestActionDialogItem("Annehmen", new TextDialogItem("Danke")),
                 new TestActionDialogItem("Ablehnen", new TextDialogItem("Du monster!!")),
             });
 
-            Dialog.Start(d);
+            Dialog.Start(dd);
 
-            Hint("Leave your House and follow the Instructions from Simon");
+            //Hint("Leave your House and follow the Instructions from Simon");
         }
 
         while (true)
