@@ -1,5 +1,6 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using Darlek.Scheme;
 using Spectre.Console;
 
@@ -7,10 +8,10 @@ namespace GrandTextAdventure.Core;
 
 public static class Dialog
 {
-    public static DialogItem Load(string filename)
+    public static DialogItem Load(string content)
     {
         var s = new Script();
-        s.Source = File.ReadAllText(filename);
+        s.Source = content;
 
         s.interpreter.DefineGlobal(Symbol.FromString("dialog-text"), new NativeProcedure(_ =>
         {
@@ -28,7 +29,7 @@ public static class Dialog
             return new TextDialogItem(text) { Next = next };
         }));
 
-        s.interpreter.DefineGlobal(Symbol.FromString("dialog-text"), new NativeProcedure(_ =>
+        s.interpreter.DefineGlobal(Symbol.FromString("dialog-action"), new NativeProcedure(_ =>
         {
             var text = _[0].ToString();
             var callback = _[1] as ICallable;
@@ -45,9 +46,19 @@ public static class Dialog
             return new CallableActionDialogItem(text, callback, next);
         }));
 
-        //ToDo: add choosedialogitem to interpreter
+        s.interpreter.DefineGlobal(Symbol.FromString("dialog-choose"), new NativeProcedure(_ =>
+        {
+            var text = _[0]?.ToString();
+            var introductionLines = (_[1] as List<object>)?.Cast<string>().ToArray();
 
-        return (DialogItem)s.Execute();
+            DialogItem[] items = (_[2] as List<object>).Cast<DialogItem>().ToArray();
+
+            return new ChooseDialogItem(text, introductionLines, items);
+        }));
+
+        var evaluationResult = s.Execute();
+
+        return (DialogItem)evaluationResult.Result;
     }
 
     public static void Start(DialogItem root)
@@ -56,19 +67,22 @@ public static class Dialog
         {
             var current = cdi;
 
-            foreach (var item in current.IntroductionLines)
+            if (current.IntroductionLines != null)
             {
-                if (!string.IsNullOrEmpty(item))
+                foreach (var item in current.IntroductionLines)
                 {
-                    if (item == "<wait>")
+                    if (!string.IsNullOrEmpty(item))
                     {
-                        GameEngine.Instance.Wait(2000);
-                    }
-                    else
-                    {
-                        GameEngine.Instance.Wait(2000);
+                        if (item == "<wait>")
+                        {
+                            GameEngine.Instance.Wait(2000);
+                        }
+                        else
+                        {
+                            GameEngine.Instance.Wait(2000);
 
-                        Console.WriteLine(item);
+                            Console.WriteLine(item);
+                        }
                     }
                 }
             }
