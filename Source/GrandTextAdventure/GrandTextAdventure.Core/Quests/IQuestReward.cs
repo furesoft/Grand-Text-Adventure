@@ -2,5 +2,5 @@
 
 public interface IQuestReward
 {
-
+    void Invoke();
 }
