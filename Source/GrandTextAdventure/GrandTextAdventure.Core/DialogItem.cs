@@ -1,22 +1,59 @@
-using System.IO;
-using System.Text.Json;
+﻿using Darlek.Scheme;
 
 namespace GrandTextAdventure.Core;
 
-public record DialogItem(string Name, string[] Lines, DialogItem Next, string[] ChooseLines = null)
+public abstract class DialogItem
 {
-    public static DialogItem FromJsonStream(Stream strm)
+    protected DialogItem(string title, DialogItem next = null)
     {
-        var reader = new StreamReader(strm);
-        var result = JsonSerializer.Deserialize<DialogItem>(reader.ReadToEnd());
-
-        reader.Close();
-
-        return result;
+        Title = title;
+        Next = next;
     }
 
-    public string ToJson()
+    public DialogItem Parent { get; set; }
+    public string Title { get; set; }
+    public DialogItem Next { get; set; }
+}
+
+public class TextDialogItem : DialogItem
+{
+    public TextDialogItem(string title) : base(title)
     {
-        return JsonSerializer.Serialize(this);
+    }
+}
+
+public class ChooseDialogItem : DialogItem
+{
+    public ChooseDialogItem(string title, string[] introductionLines, DialogItem[] children) : base(title)
+    {
+        IntroductionLines = introductionLines;
+        Children = children;
+    }
+
+    public string[] IntroductionLines { get; set; }
+    public DialogItem[] Children { get; set; }
+}
+
+public abstract class ActionDialogItem : DialogItem
+{
+    protected ActionDialogItem(string title, DialogItem next = null) : base(title, next)
+    {
+    }
+
+    public abstract void Invoke();
+}
+
+public class CallableActionDialogItem : ActionDialogItem
+{
+    public CallableActionDialogItem(string title, ICallable callback, DialogItem next = null) : base(title, next)
+    {
+        Callback = callback;
+    }
+
+    public ICallable Callback { get; set; }
+
+    public override void Invoke()
+    {
+        Callback.Call(new() { Parent });
     }
 }

@@ -81,12 +81,16 @@ public class GameEngine
 
         _state.CurrentMap.Init();
 
-        if (!Settings.Instance.IsFirstStart)
+        if (Settings.Instance.IsFirstStart)
         {
-            // var rootDialog = DialogItem.FromJsonStream(Ressources.RessourceManager.StartSequenceDialog);
-            //Dialog.Start(rootDialog);
+            var d = new ChooseDialogItem("Kannst du diese Aufgabe übernehmen?", new[] { "Aufgabe annehmen?" }, new[] {
+                new TestActionDialogItem("Annehmen", new TextDialogItem("Danke")),
+                new TestActionDialogItem("Ablehnen", new TextDialogItem("Du monster!!")),
+            });
 
-            //Hint("Leave your House and follow the Instructions from Simon");
+            Dialog.Start(d);
+
+            Hint("Leave your House and follow the Instructions from Simon");
         }
 
         while (true)
@@ -260,6 +264,18 @@ public class GameEngine
 
                     break;
             }
+        }
+    }
+
+    private class TestActionDialogItem : ActionDialogItem
+    {
+        public TestActionDialogItem(string title, DialogItem next = null) : base(title, next)
+        {
+        }
+
+        public override void Invoke()
+        {
+            Console.WriteLine("Action Invoked");
         }
     }
 }
