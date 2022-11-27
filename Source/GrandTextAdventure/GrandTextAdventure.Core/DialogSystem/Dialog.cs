@@ -4,7 +4,7 @@ using System.Linq;
 using Darlek.Scheme;
 using Spectre.Console;
 
-namespace GrandTextAdventure.Core;
+namespace GrandTextAdventure.Core.DialogSystem;
 
 public static class Dialog
 {
@@ -51,7 +51,7 @@ public static class Dialog
             var text = _[0]?.ToString();
             var introductionLines = (_[1] as List<object>)?.Cast<string>().ToArray();
 
-            DialogItem[] items = (_[2] as List<object>).Cast<DialogItem>().ToArray();
+            var items = (_[2] as List<object>).Cast<DialogItem>().ToArray();
 
             return new ChooseDialogItem(text, introductionLines, items);
         }));

@@ -1,4 +1,5 @@
 ﻿using Darlek.Core.RuntimeLibrary;
+using GrandTextAdventure.Core.Dialogs;
 
 namespace GrandTextAdventure.Core.Scripting;
 

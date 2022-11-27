@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Actress;
 using GrandTextAdventure.Core;
+using GrandTextAdventure.Core.DialogSystem;
 using GrandTextAdventure.Core.Entities;
 using GrandTextAdventure.Core.Game;
 using GrandTextAdventure.Core.Messages;
